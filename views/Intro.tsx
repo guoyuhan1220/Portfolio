@@ -311,20 +311,15 @@ const Intro: React.FC = () => {
                 
                 <div className="space-y-5 font-serif text-base md:text-lg leading-relaxed text-zinc-600">
                   <p>
-                    Thank you for dropping by. I'm <span className="text-zinc-900 font-medium">Yuhan Guo</span>, 
-                    and I design digital products that actually feel good to use.
+                    I’m <span className="text-zinc-900 font-medium">Yuhan Guo</span>, a
+                    <span className="text-zinc-900 font-medium"> Principal Product Designer</span> leading
+                    <span className="text-zinc-900 font-medium"> enterprise AI products at AWS</span>.
                   </p>
-                  
                   <p>
-                    I view UX design a lot like the postal service: it's all about ensuring the 
-                    <span className="text-zinc-900 font-medium italic"> right information </span> 
-                    gets to the right person, at the right time, without getting lost along the way.
-                  </p>
-
-                  <p>
-                    Whether I'm designing <span className="text-zinc-900">complex AI platforms</span> or 
-                    streamlining <span className="text-zinc-900">agentic workflows</span>, I focus on the 
-                    little details that make the journey delightful.
+                    I specialize in designing
+                    <span className="text-zinc-900 font-medium"> interaction models for AI systems</span>—where
+                    <span className="text-zinc-900 font-medium"> chat, agents, data, and actions converge</span>—so complex capabilities feel
+                    <span className="text-zinc-900 font-medium"> simple, usable, and decisive</span>.
                   </p>
                 </div>
 

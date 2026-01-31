@@ -3,6 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const stamps = [
   {
+    id: 'I-001',
+    title: 'INKLING',
+    subtitle: 'Idea Workspace',
+    date: 'MAY 2025',
+    fullDate: 'May 2025',
+    color: '#2f2f2f',
+    icon: '✦',
+    rotation: 1,
+    description: 'reflect on each day, with daily journal entries',
+    link: 'https://inkling-119225638578.us-west1.run.app/',
+    imageUrl: '/inking logo.png'
+  },
+  {
     id: 'A-220',
     title: 'LLM_DYNAMICS',
     subtitle: 'Interaction Models',
@@ -43,7 +56,7 @@ const Stamp: React.FC<{ data: typeof stamps[0] }> = ({ data }) => {
   // Magnifying glass cursor as data URL
   const magnifyingGlassCursor = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='1.5'%3E%3Ccircle cx='11' cy='11' r='6'/%3E%3Cline x1='16' y1='16' x2='20' y2='20'/%3E%3C/svg%3E") 12 12, pointer`;
 
-  return (
+  const card = (
     <motion.div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -89,12 +102,20 @@ const Stamp: React.FC<{ data: typeof stamps[0] }> = ({ data }) => {
         <div 
           className="flex-1 border-2 border-dashed border-zinc-100 flex items-center justify-center relative bg-zinc-50/50 group-hover:bg-zinc-100/50 transition-colors duration-300"
         >
-          <div 
-            className="text-5xl opacity-20 group-hover:scale-110 group-hover:opacity-30 transition-all duration-500" 
-            style={{ color: data.color }}
-          >
-            {data.icon}
-          </div>
+          {data.imageUrl ? (
+            <img
+              src={data.imageUrl}
+              alt={data.title}
+              className="max-h-[70%] max-w-[80%] object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+            />
+          ) : (
+            <div 
+              className="text-5xl opacity-20 group-hover:scale-110 group-hover:opacity-30 transition-all duration-500" 
+              style={{ color: data.color }}
+            >
+              {data.icon}
+            </div>
+          )}
           
           {/* Postmark Cancellation Stamp - Appears on Hover */}
           <AnimatePresence>
@@ -182,6 +203,16 @@ const Stamp: React.FC<{ data: typeof stamps[0] }> = ({ data }) => {
       </AnimatePresence>
     </motion.div>
   );
+
+  if (data.link) {
+    return (
+      <a href={data.link} target="_blank" rel="noopener noreferrer" className="block">
+        {card}
+      </a>
+    );
+  }
+
+  return card;
 };
 
 const SideProjects: React.FC = () => {

@@ -1,13 +1,54 @@
 import React, { useState, useEffect } from 'react';
+import Lenis from 'lenis';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import FloatingNav from './components/FloatingNav';
 import Intro from './views/Intro';
 import Projects from './views/Projects';
+import ProjectsWorkspaceExperiment from './views/ProjectsWorkspaceExperiment';
 import SideProjects from './views/SideProjects';
 import Resume from './views/Resume';
 import Contact from './views/Contact';
+import ArtifactTemplateCaseStudy from './views/ArtifactTemplateCaseStudy';
+import ArtifactTemplateCaseStudyExperiment from './views/ArtifactTemplateCaseStudyExperiment';
+import QuickSuiteCaseStudy from './views/QuickSuiteCaseStudy';
+import QBusinessActionConnectorCaseStudy from './views/QBusinessActionConnectorCaseStudy';
+import GenAIEvaluationCaseStudy from './views/GenAIEvaluationCaseStudy';
+import SageMakerGeospatialCaseStudy from './views/SageMakerGeospatialCaseStudy';
+import DataLabelingCaseStudy from './views/DataLabelingCaseStudy';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('intro');
+
+  const ScrollManager: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const location = useLocation();
+
+    useEffect(() => {
+      if (location.pathname.startsWith('/case-study')) {
+        return;
+      }
+
+      const lenis = new Lenis({
+        duration: 0.9,
+        smoothWheel: true,
+        smoothTouch: false,
+        wheelMultiplier: 1,
+        normalizeWheel: true,
+      });
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      };
+
+      requestAnimationFrame(raf);
+
+      return () => {
+        lenis.destroy();
+      };
+    }, [location.pathname]);
+
+    return <>{children}</>;
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +68,7 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  return (
+  const MainLayout = () => (
     <div className="bg-paper text-zinc-900 min-h-screen font-sans selection:bg-zinc-200 selection:text-black">
       <FloatingNav activeSection={activeSection} />
       <main className="relative">
@@ -62,6 +103,24 @@ const App: React.FC = () => {
         <p className="text-[10px] font-mono opacity-40">{new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
       </div>
     </div>
+  );
+
+  return (
+    <BrowserRouter>
+      <ScrollManager>
+        <Routes>
+          <Route path="/" element={<MainLayout />} />
+          <Route path="/work-experiment" element={<ProjectsWorkspaceExperiment />} />
+          <Route path="/case-study/artifact-lifecycle" element={<ArtifactTemplateCaseStudy />} />
+          <Route path="/case-study/artifact-lifecycle-experiment" element={<ArtifactTemplateCaseStudyExperiment />} />
+          <Route path="/case-study/quick-suite" element={<QuickSuiteCaseStudy />} />
+          <Route path="/case-study/q-business-action-connector" element={<QBusinessActionConnectorCaseStudy />} />
+          <Route path="/case-study/genai-evaluation" element={<GenAIEvaluationCaseStudy />} />
+          <Route path="/case-study/sagemaker-geospatial" element={<SageMakerGeospatialCaseStudy />} />
+          <Route path="/case-study/data-labeling-ground-truth" element={<DataLabelingCaseStudy />} />
+        </Routes>
+      </ScrollManager>
+    </BrowserRouter>
   );
 };
 

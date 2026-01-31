@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowUpRight } from 'lucide-react';
+import { X, ArrowUpRight, Play, Pause } from 'lucide-react';
 
-interface Project {
+export interface Project {
   id: string;
   title: string;
   category: string;
@@ -18,12 +19,35 @@ interface Project {
   impact: string;
 }
 
-const projects: Project[] = [
+const GEOSPATIAL_DEMO_URL = 'https://www.youtube.com/watch?v=TL2HtX-FmiQ&t=2450s';
+
+const renderProjectDescription = (project: Project) => {
+  if (project.id !== '006') {
+    return project.description;
+  }
+
+  return (
+    <>
+      {project.description}{' '}
+      <a
+        href={GEOSPATIAL_DEMO_URL}
+        target="_blank"
+        rel="noreferrer"
+        className="text-zinc-900 underline decoration-zinc-300 hover:decoration-zinc-600"
+      >
+        Watch demo
+      </a>
+      .
+    </>
+  );
+};
+
+export const projects: Project[] = [
   {
     id: '001',
     title: 'Quick chat assistant',
     category: 'Conversational AI',
-    year: '2024',
+    year: '2025',
     tags: ['Agents', 'LLM UX', 'Orchestration'],
     description: 'The centralized agentic interface for AWS. Engineered the interaction model for multi-agent synthesis, allowing seamless transitions between natural language queries and complex cloud infrastructure tasks.',
     imageUrl: '/quick-chat-thumb.svg',
@@ -55,9 +79,9 @@ const projects: Project[] = [
     year: '2024',
     tags: ['FTUX', 'Onboarding', 'Guidance'],
     description: 'First-time user experience for a new product surface. Designed a low-friction onboarding journey with progressive disclosure and clear moments of value.',
-    imageUrl: '/ftux-thumb.svg',
+    imageUrl: '/FTUX video cover.png',
     videoUrl: '/FTUX.mp4',
-    thumbnailUrl: null,
+    thumbnailUrl: '/FTUX video cover.png',
     rotation: 1,
     role: 'Senior Product Designer',
     impact: 'Faster time-to-value • Higher activation'
@@ -66,12 +90,12 @@ const projects: Project[] = [
     id: '004',
     title: 'Q Business action connector',
     category: 'Enterprise Intelligence',
-    year: '2023',
+    year: '2024',
     tags: ['Actions', 'Integration', 'Workflows'],
     description: 'Strategic integration of conversational AI with business application ecosystems. Enabling automated workflows across Slack, Teams, and standard enterprise toolkits.',
-    imageUrl: '/action.png',
+    imageUrl: '/action new.png',
     videoUrl: null,
-    thumbnailUrl: '/action.png',
+    thumbnailUrl: '/action new.png',
     rotation: -2,
     role: 'Senior Product Designer',
     impact: 'Enterprise throughput • Precision 94.2%'
@@ -94,23 +118,67 @@ const projects: Project[] = [
     id: '006',
     title: 'SageMaker Geospatial',
     category: 'Industrial ML',
-    year: '2021',
+    year: '2022',
     tags: ['Mapping', 'ML Ops', 'Visualization'],
     description: 'Founding platform for AWS Geospatial intelligence. Designed the visual interaction layers for satellite imagery processing and large-scale environmental monitoring.',
     imageUrl: '/geospatial.png',
     videoUrl: null,
-    thumbnailUrl: '/geospatial.png',
+    thumbnailUrl: '/map.gif',
     rotation: -1,
     role: 'Senior Product Designer',
     impact: 'Petabyte scale • Sub-meter resolution'
+  },
+  {
+    id: '007',
+    title: 'Data labeling ground truth',
+    category: 'Data Operations',
+    year: '2021',
+    tags: ['Labeling', 'Quality', 'Workflow'],
+    description: 'Built ground-truth pipelines and review workflows to scale high-quality labels for ML training and evaluation.',
+    imageUrl: '/data.avif',
+    videoUrl: null,
+    thumbnailUrl: '/data.avif',
+    rotation: 1,
+    role: 'Senior Product Designer',
+    impact: 'Higher label quality • Faster throughput'
+  },
+  {
+    id: '008',
+    title: 'Okta automation workflow',
+    category: 'Identity Automation',
+    year: '2017',
+    tags: ['Okta', 'Automation', 'Provisioning'],
+    description:
+      'Designed automated identity workflows to streamline provisioning, access changes, and audit readiness for enterprise teams.',
+    imageUrl: '/Okta.png',
+    videoUrl: null,
+    thumbnailUrl: '/Okta.png',
+    rotation: -2,
+    role: 'Senior Product Designer',
+    impact: 'Faster access changes • Reduced admin overhead'
   },
 ];
 
 const ProjectPreview: React.FC<{
   project: Project;
   onMediaError: () => void;
-}> = ({ project, onMediaError }) => {
+  isHovered?: boolean;
+  showOverlay?: boolean;
+}> = ({ project, onMediaError, isHovered = false, showOverlay = true }) => {
   const poster = project.imageUrl ?? undefined;
+  const isGeospatial = project.id === '006';
+  const isFtux = project.id === '003';
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!isFtux || !videoRef.current) return;
+    if (isHovered) {
+      videoRef.current.play().catch(() => undefined);
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isHovered, isFtux]);
 
   return (
     <div className="absolute inset-0 bg-white p-2">
@@ -119,19 +187,20 @@ const ProjectPreview: React.FC<{
           <img
             src={project.thumbnailUrl}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className={`w-full h-full ${isGeospatial ? 'object-contain bg-zinc-900' : 'object-cover'}`}
             onError={onMediaError}
           />
         ) : project.videoUrl ? (
           <video
+            ref={videoRef}
             src={project.videoUrl}
             poster={poster}
             preload="metadata"
-            autoPlay
+            autoPlay={!isFtux}
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            className={`w-full h-full ${isGeospatial ? 'object-contain bg-zinc-900' : 'object-cover'}`}
             onError={onMediaError}
           />
         ) : (
@@ -140,38 +209,66 @@ const ProjectPreview: React.FC<{
           </div>
         )}
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/12 via-transparent to-transparent" />
-
-        <div className="absolute bottom-4 left-4 max-w-[80%]">
-          <div className="inline-block bg-black/40 backdrop-blur-sm px-3 py-2 rounded-sm border border-white/10">
-            <p className="text-[10px] font-mono uppercase tracking-widest text-white/80">Project</p>
-            <p className="text-xl font-serif italic text-white leading-tight">{project.title}</p>
-            <p className="text-[10px] font-mono uppercase tracking-widest text-white/70 mt-1">
-              {project.category}
-            </p>
-          </div>
-        </div>
-
-        {project.videoUrl && (
-          <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-2 py-1 rounded-sm">
-            <span className="text-[9px] font-mono uppercase tracking-wider">Video</span>
-          </div>
+        {showOverlay && (
+          <>
+            <div className="absolute inset-0 bg-gradient-to-t from-white/45 via-white/5 to-transparent" />
+            <div className="absolute bottom-4 left-4 max-w-[80%]">
+              <div className="inline-block bg-black/40 backdrop-blur-sm px-3 py-2 rounded-sm border border-white/10">
+                <p className="text-[10px] font-mono uppercase tracking-widest text-white/80">Project</p>
+                <p className="text-xl font-serif italic text-white leading-tight">{project.title}</p>
+                <p className="text-[10px] font-mono uppercase tracking-widest text-white/70 mt-1">
+                  {project.category}
+                </p>
+              </div>
+            </div>
+          </>
         )}
+
       </div>
     </div>
   );
 };
 
 // Mail Card Component (Version 1): click → morph into big postcard + 180° flip
-const MailCard: React.FC<{
+export const MailCard: React.FC<{
   project: Project;
   index: number;
   onSelect: (project: Project) => void;
   stackOffset: number;
-}> = ({ project, index, onSelect, stackOffset }) => {
+  hoverEffect?: 'lift' | 'tilt';
+  zIndexBase?: number;
+  showShadow?: boolean;
+  disableFlip?: boolean;
+  frontVariant?: 'full' | 'image-top';
+  onCardClick?: (project: Project) => void;
+}> = ({
+  project,
+  index,
+  onSelect,
+  stackOffset,
+  hoverEffect = 'lift',
+  zIndexBase,
+  showShadow = true,
+  disableFlip = false,
+  frontVariant = 'full',
+  onCardClick,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [thumbError, setThumbError] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isTilt = hoverEffect === 'tilt';
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!isTilt || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = event.clientX - rect.left - rect.width / 2;
+    const y = event.clientY - rect.top - rect.height / 2;
+    const rotateX = (-y / rect.height) * 10;
+    const rotateY = (x / rect.width) * 12;
+    setTilt({ x: rotateX, y: rotateY });
+  };
 
   return (
     <motion.div
@@ -180,23 +277,39 @@ const MailCard: React.FC<{
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="relative"
       style={{ 
-        zIndex: 10 - index,
+        zIndex: isHovered && isTilt ? 60 : (zIndexBase ?? 10 - index),
         marginTop: index === 0 ? 0 : -stackOffset
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
         setIsHovered(false);
+        if (isTilt) setTilt({ x: 0, y: 0 });
       }}
     >
       <motion.div
         animate={{ 
-          y: isHovered ? -20 : 0,
-          rotate: isHovered ? 0 : project.rotation,
-          scale: isHovered ? 1.02 : 1
+          y: isHovered ? (isTilt ? -12 : -20) : 0,
+          rotate: isTilt ? project.rotation : (isHovered ? 0 : project.rotation),
+          scale: isHovered ? (isTilt ? 1.04 : 1.02) : 1,
+          rotateX: isTilt ? tilt.x : 0,
+          rotateY: isTilt ? tilt.y : 0,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         className="relative w-full max-w-lg mx-auto cursor-pointer"
-        onClick={() => setIsFlipped((v) => !v)}
+        style={{ transformStyle: 'preserve-3d' }}
+        onMouseMove={handleMouseMove}
+        onClick={() => {
+          if (disableFlip) {
+            (onCardClick ?? onSelect)(project);
+            return;
+          }
+          if (project.id === '003') {
+            onSelect(project);
+            return;
+          }
+          setIsFlipped((v) => !v);
+        }}
+        ref={cardRef}
       >
         {/* Small postcard: two faces, flips on click (Chrome-safe) */}
         <div
@@ -224,12 +337,40 @@ const MailCard: React.FC<{
                 willChange: 'transform',
               }}
             >
-              {thumbError ? (
+              {frontVariant === 'image-top' ? (
+                <div className="absolute inset-0 bg-[#f8f5f0]">
+                  <div className="relative w-full h-full">
+                    {thumbError ? (
+                      <div className="absolute inset-0 bg-gradient-to-br from-zinc-200 to-zinc-300 flex items-center justify-center">
+                        <span className="text-5xl text-zinc-400/30 font-serif italic">{project.id}</span>
+                      </div>
+                    ) : (
+                      <ProjectPreview
+                        project={project}
+                        onMediaError={() => setThumbError(true)}
+                        isHovered={isHovered}
+                        showOverlay={false}
+                      />
+                    )}
+                    <div className="absolute inset-x-0 bottom-0 h-14 bg-[#f8f5f0]/95 border-t border-zinc-200/80" />
+                    <div className="absolute bottom-0 left-0 right-0 h-14 px-4 flex items-center justify-between">
+                      <p className="text-base font-serif text-zinc-900 truncate">{project.title}</p>
+                      <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-zinc-500">
+                        {project.year}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : thumbError ? (
                 <div className="absolute inset-0 bg-gradient-to-br from-zinc-200 to-zinc-300 flex items-center justify-center">
                   <span className="text-6xl text-zinc-400/30 font-serif italic">{project.id}</span>
                 </div>
               ) : (
-                <ProjectPreview project={project} onMediaError={() => setThumbError(true)} />
+                <ProjectPreview
+                  project={project}
+                  onMediaError={() => setThumbError(true)}
+                  isHovered={isHovered}
+                />
               )}
 
               {/* Postcard corner cuts */}
@@ -304,7 +445,7 @@ const MailCard: React.FC<{
 
                 <div className="mt-5">
                   <p className="text-sm text-zinc-600 leading-relaxed font-serif">
-                    {project.description}
+                    {renderProjectDescription(project)}
                   </p>
                 </div>
 
@@ -322,21 +463,43 @@ const MailCard: React.FC<{
         </div>
 
         {/* Card shadow */}
-        <div 
-          className="absolute -bottom-4 left-4 right-4 h-8 bg-black/10 blur-xl -z-10 transition-all duration-300"
-          style={{ opacity: isHovered ? 0.3 : 0.15 }}
-        />
+        {showShadow && (
+          <div
+            className="absolute -bottom-4 left-4 right-4 h-8 bg-black/10 blur-xl -z-10 transition-all duration-300"
+            style={{ opacity: isHovered ? 0.3 : 0.15 }}
+          />
+        )}
       </motion.div>
     </motion.div>
   );
 };
 
 // Project Detail Modal
-const ProjectModal: React.FC<{
+export const ProjectModal: React.FC<{
   project: Project | null;
   onClose: () => void;
 }> = ({ project, onClose }) => {
   if (!project) return null;
+  const navigate = useNavigate();
+  const caseStudyRoute = project ? caseStudyRoutes[project.id] : undefined;
+
+  const isFtux = project.id === '003';
+  const ftuxModalVideo = '/FTUX short.mp4';
+  const ftuxModalPoster = '/FTUX video cover.png';
+  const ftuxVideoRef = useRef<HTMLVideoElement>(null);
+  const [ftuxPlaying, setFtuxPlaying] = useState(false);
+  const [ftuxProgress, setFtuxProgress] = useState(0);
+  const [ftuxDuration, setFtuxDuration] = useState(0);
+
+  const toggleFtuxPlayback = () => {
+    const video = ftuxVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => undefined);
+    } else {
+      video.pause();
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -360,7 +523,7 @@ const ProjectModal: React.FC<{
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.96, opacity: 0, y: 18 }}
           transition={{ type: 'spring', damping: 24, stiffness: 240 }}
-          className="relative w-full max-w-3xl bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60"
+          className={`relative w-full ${isFtux ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -379,54 +542,169 @@ const ProjectModal: React.FC<{
             }}
           />
 
-          <div className="relative p-7 md:p-10 space-y-8">
-            <div className="space-y-2">
-              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
-                Project #{project.id}
-              </p>
-              <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
-              <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
-                {project.category} • {project.year}
-              </p>
-            </div>
+          <div className="relative p-7 md:p-10 space-y-8 overflow-y-auto max-h-[95vh]">
+            {isFtux ? (
+              <div className="grid md:grid-cols-[1.25fr_0.75fr] gap-8 items-start">
+                <div className="space-y-4">
+                  <div className="relative overflow-hidden rounded-sm border border-zinc-200 bg-zinc-900">
+                    <video
+                      ref={ftuxVideoRef}
+                      src={ftuxModalVideo}
+                      poster={ftuxModalPoster}
+                      playsInline
+                      className="w-full h-full object-contain bg-zinc-900"
+                      onLoadedMetadata={(event) => {
+                        const target = event.currentTarget;
+                        setFtuxDuration(target.duration || 0);
+                      }}
+                      onTimeUpdate={(event) => setFtuxProgress(event.currentTarget.currentTime)}
+                      onPlay={() => setFtuxPlaying(true)}
+                      onPause={() => setFtuxPlaying(false)}
+                    />
+                    <button
+                      type="button"
+                      onClick={toggleFtuxPlayback}
+                      className={`absolute inset-0 flex items-center justify-center transition-opacity ${
+                        ftuxPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                      }`}
+                      aria-label={ftuxPlaying ? 'Pause' : 'Play'}
+                    >
+                      <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/90 text-zinc-900 shadow-md border border-white/70">
+                        <Play className="w-5 h-5 ml-0.5" />
+                      </span>
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-3 rounded-sm border border-zinc-200 bg-white/90 px-3 py-2 text-xs text-zinc-600">
+                    <button
+                      type="button"
+                      onClick={toggleFtuxPlayback}
+                      className="w-7 h-7 rounded-full border border-zinc-200 flex items-center justify-center text-zinc-700 hover:text-zinc-900 hover:border-zinc-300 transition-colors"
+                      aria-label={ftuxPlaying ? 'Pause' : 'Play'}
+                    >
+                      {ftuxPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                    </button>
+                    <input
+                      type="range"
+                      min={0}
+                      max={ftuxDuration || 0}
+                      step={0.1}
+                      value={ftuxProgress}
+                      onChange={(event) => {
+                        const value = Number(event.target.value);
+                        setFtuxProgress(value);
+                        if (ftuxVideoRef.current) {
+                          ftuxVideoRef.current.currentTime = value;
+                        }
+                      }}
+                      className="flex-1 accent-zinc-700"
+                    />
+                    <span className="tabular-nums text-[11px] text-zinc-500">
+                      {Math.floor(ftuxProgress / 60)
+                        .toString()
+                        .padStart(2, '0')}
+                      :
+                      {Math.floor(ftuxProgress % 60)
+                        .toString()
+                        .padStart(2, '0')}
+                      /{' '}
+                      {Math.floor(ftuxDuration / 60)
+                        .toString()
+                        .padStart(2, '0')}
+                      :
+                      {Math.floor(ftuxDuration % 60)
+                        .toString()
+                        .padStart(2, '0')}
+                    </span>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
+                      Project #{project.id}
+                    </p>
+                    <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
+                    <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+                      {project.category} • {project.year}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-base text-zinc-600 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="pt-4 border-t border-zinc-200/60 space-y-2">
+                    <p className="text-[10px] font-mono text-zinc-500">
+                      Impact: <span className="text-zinc-800">{project.impact}</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="space-y-2">
+                  <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
+                    Project #{project.id}
+                  </p>
+                  <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
+                  <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+                    {project.category} • {project.year}
+                  </p>
+                </div>
 
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
-            <div className="prose prose-zinc max-w-none">
-              <p className="text-base text-zinc-600 leading-relaxed">
-                {project.description}
-              </p>
-            </div>
+                <div className="prose prose-zinc max-w-none">
+                  <p className="text-base text-zinc-600 leading-relaxed">
+                    {renderProjectDescription(project)}
+                  </p>
+                </div>
 
-            <div className="pt-6 border-t border-zinc-200/60 space-y-3">
-              <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
-                Role: <span className="text-zinc-800">{project.role}</span>
-              </p>
-              <p className="text-[10px] font-mono text-zinc-500">
-                Impact: <span className="text-zinc-800">{project.impact}</span>
-              </p>
-            </div>
+                <div className="pt-6 border-t border-zinc-200/60 space-y-3">
+                  <p className="text-[10px] font-mono text-zinc-500">
+                    Impact: <span className="text-zinc-800">{project.impact}</span>
+                  </p>
+                </div>
 
-            <div className="pt-2">
-              <button
-                className="w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors"
-              >
-                Request Secure Briefing
-              </button>
-              <p className="text-[9px] font-mono text-center text-zinc-300 uppercase tracking-[0.4em] leading-relaxed mt-4">
-                Archive Registry: AWS-AI-{project.id}<br/>
-                Verification: {project.year} // Seattle_HQ
-              </p>
-            </div>
+                <div className="pt-2">
+                  {caseStudyRoute ? (
+                    <button
+                      onClick={() => {
+                        onClose();
+                        navigate(caseStudyRoute);
+                      }}
+                      className="w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors"
+                    >
+                      Open Case Study
+                    </button>
+                  ) : (
+                    <button className="w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors">
+                      Request Secure Briefing
+                    </button>
+                  )}
+                  <p className="text-[9px] font-mono text-center text-zinc-300 uppercase tracking-[0.4em] leading-relaxed mt-4">
+                    Archive Registry: AWS-AI-{project.id}<br/>
+                    Verification: {project.year} // Seattle_HQ
+                  </p>
+                </div>
+              </>
+            )}
           </div>
         </motion.div>
       </motion.div>
@@ -434,9 +712,37 @@ const ProjectModal: React.FC<{
   );
 };
 
+const caseStudyRoutes: Record<string, string> = {
+  '001': '/case-study/quick-suite',
+  '002': '/case-study/artifact-lifecycle',
+  '004': '/case-study/q-business-action-connector',
+  '005': '/case-study/genai-evaluation',
+  '006': '/case-study/sagemaker-geospatial',
+  '007': '/case-study/data-labeling-ground-truth',
+};
+
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const primaryIds = new Set(['001', '002', '004']);
+  const primaryProjects = projects.filter((project) => primaryIds.has(project.id));
+  const secondaryProjects = projects.filter((project) => !primaryIds.has(project.id));
+  const workspaceLayout = [
+    { top: '8%', left: '2%', width: '28%', rotate: -8 },
+    { top: '6%', left: '30%', width: '34%', rotate: 3 },
+    { top: '10%', left: '62%', width: '26%', rotate: -5 },
+    { top: '40%', left: '12%', width: '32%', rotate: 5 },
+    { top: '44%', left: '54%', width: '30%', rotate: -3 },
+  ];
+  const handleScatterClick = (project: Project) => {
+    const route = caseStudyRoutes[project.id];
+    if (route) {
+      navigate(route);
+      return;
+    }
+    setSelectedProject(project);
+  };
 
   return (
     <div className="py-16 px-6 md:px-12 max-w-5xl mx-auto" ref={containerRef}>
@@ -476,15 +782,61 @@ const Projects: React.FC = () => {
 
       {/* Stacked Mail Cards */}
       <div className="relative space-y-6">
-        {projects.map((project, i) => (
+        {primaryProjects.map((project, i) => (
           <MailCard
             key={project.id}
             project={project}
             index={i}
             onSelect={setSelectedProject}
             stackOffset={0}
+            showShadow={false}
+            disableFlip={project.id === '002'}
+            onCardClick={project.id === '002' ? handleScatterClick : undefined}
           />
         ))}
+      </div>
+
+      {/* Workspace scatter */}
+      <div
+        className="relative mt-16 min-h-[740px] p-6 md:p-10"
+        style={{ perspective: '1600px' }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            transform: 'rotateX(10deg)',
+            transformOrigin: 'top center',
+          }}
+        />
+
+        {secondaryProjects.map((project, index) => {
+          const layout = workspaceLayout[index % workspaceLayout.length];
+          return (
+            <div
+              key={project.id}
+              className="absolute"
+              style={{
+                top: layout.top,
+                left: layout.left,
+                width: layout.width,
+                transform: 'rotateX(10deg)',
+                transformOrigin: 'top center',
+              }}
+            >
+              <MailCard
+                project={{ ...project, rotation: layout.rotate }}
+                index={index}
+                onSelect={setSelectedProject}
+                stackOffset={0}
+                hoverEffect="tilt"
+                zIndexBase={index + 20}
+                disableFlip
+                frontVariant="image-top"
+                onCardClick={handleScatterClick}
+              />
+            </div>
+          );
+        })}
       </div>
 
       {/* Decorative footer */}
