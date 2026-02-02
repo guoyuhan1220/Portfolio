@@ -65,9 +65,9 @@ export const projects: Project[] = [
     year: '2024',
     tags: ['Governance', 'Provenance', 'NDA'],
     description: 'End-to-end management of artifacts with provenance tracking, human-in-the-loop verification, and automated lifecycle policies. (Placeholder — visuals coming soon.)',
-    imageUrl: '/artifact-placeholder.svg',
+    imageUrl: '/Artifact/library.png',
     videoUrl: null,
-    thumbnailUrl: '/artifact-placeholder.svg',
+    thumbnailUrl: '/Artifact/library.png',
     rotation: -1,
     role: 'Senior Product Designer',
     impact: 'Policy-driven lifecycle • Audit-ready metadata'
@@ -798,7 +798,7 @@ const Projects: React.FC = () => {
 
       {/* Workspace scatter */}
       <div
-        className="relative mt-16 min-h-[740px] p-6 md:p-10"
+        className="relative mt-[60px] min-h-[740px] p-[40px]"
         style={{ perspective: '1600px' }}
       >
         <div
