@@ -8,93 +8,97 @@ const SageMakerGeospatialCaseStudy: React.FC = () => {
   const accentBorder = '#bfe8df';
 
   return (
-    <div className="min-h-screen bg-[#f8f7f3] py-24 md:py-28 px-6 md:px-12 font-sans text-zinc-700">
-      <div className="max-w-6xl mx-auto space-y-24">
+    <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-[80px] font-sans text-[#666666]">
+      <div className="max-w-[1440px] mx-auto space-y-[40px]">
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em] hover:text-zinc-900 transition-colors"
+            className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
             ← Back to Portfolio
           </Link>
-          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em]">
+          <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
             Case Study // SageMaker Geospatial
           </span>
         </div>
 
-        <section className="space-y-10">
+        <section className="space-y-[40px]">
+          <div className="inline-block px-4 py-2 border border-[#E5E5E5] rounded-[20px] bg-[#0D6E6E10] text-[#0D6E6E] text-[11px] font-mono font-semibold uppercase tracking-[1.5px] mb-6">
+            CASE STUDY
+          </div>
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-6xl font-serif text-zinc-900 tracking-tight"
+            className="text-[56px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
+            style={{ fontFamily: 'Newsreader, serif' }}
           >
             SageMaker Geospatial
           </motion.h1>
-          <p className="text-zinc-700 text-lg md:text-xl font-serif italic max-w-3xl leading-8">
+          <p className="text-[18px] font-sans font-normal text-[#666666] leading-[1.5] max-w-[700px]">
             Build, train, and deploy ML models faster using geospatial data.
           </p>
           <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-10">
             <div className="space-y-4">
               <div
-                className="text-[10px] font-mono uppercase tracking-[0.35em]"
+                className="text-[11px] font-mono uppercase tracking-[1.5px]"
                 style={{ color: accent }}
               >
                 About the project
               </div>
-              <h2 className="text-2xl font-serif text-zinc-900">Unlocking geospatial ML</h2>
-              <p className="leading-8">
+              <h2 className="text-[20px] font-serif font-medium text-[#1A1A1A]">Unlocking geospatial ML</h2>
+              <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                 Over 60% of data collected daily contains geospatial signals, but only 3% is used in ML.
                 The mission was to simplify geospatial workflows across data query, visualization, and
                 model development.
               </p>
-              <div className="pl-4 border-l-2 text-sm" style={{ borderColor: accent }}>
+              <div className="pl-4 border-l-2 text-[14px] font-sans text-[#666666] leading-[1.5]" style={{ borderColor: accent }}>
                 Tier‑1 GA launch with 6 Tier‑2 features and 76 usability issues addressed.
               </div>
             </div>
             <div
-              className="border border-dashed p-6 text-sm text-zinc-500 h-64 flex items-center justify-center"
+              className="border border-dashed p-6 text-sm text-[#666666] h-64 flex items-center justify-center rounded-[16px]"
               style={{ borderColor: accentBorder, backgroundColor: accentSoft }}
             >
               Hero mock placeholder (Geospatial)
             </div>
           </div>
-          <div className="grid md:grid-cols-4 gap-6 text-sm">
+          <div className="grid md:grid-cols-4 gap-[24px] text-sm">
             {[
               ['Role', 'Tier‑1 GA launch owner'],
               ['Time', '2022 Q4 – 2023 Q4'],
               ['Partners', 'Foursquare • Planet • Arup'],
               ['Teams', 'SageMaker • Amazon Location • Axis'],
             ].map(([label, value]) => (
-              <div key={label} className="p-4 border border-zinc-200/80 bg-white/80">
-                <p className="text-[10px] font-mono uppercase tracking-[0.3em]" style={{ color: accent }}>
+              <div key={label} className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+                <p className="text-[11px] font-mono uppercase tracking-[1.5px]" style={{ color: accent }}>
                   {label}
                 </p>
-                <p className="text-zinc-800 mt-2">{value}</p>
+                <p className="text-[#1A1A1A] mt-2">{value}</p>
               </div>
             ))}
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-10">
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
           <div
-            className="text-[10px] font-mono uppercase tracking-[0.35em]"
+            className="text-[11px] font-mono uppercase tracking-[1.5px]"
             style={{ color: accent }}
           >
             Section 01
           </div>
-          <h2 className="text-3xl font-serif text-zinc-900">Challenges</h2>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
-            <div>
-              <p className="font-medium text-zinc-800">Specialized domain</p>
-              <p className="mt-2">80% of data scientists struggled with geospatial data.</p>
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Challenges</h2>
+          <div className="grid md:grid-cols-3 gap-[24px] text-sm">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Specialized domain</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">80% of data scientists struggled with geospatial data.</p>
             </div>
-            <div>
-              <p className="font-medium text-zinc-800">Fragmented vision</p>
-              <p className="mt-2">3 PRDs, 4 PM turnovers, no cohesive roadmap.</p>
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Fragmented vision</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">3 PRDs, 4 PM turnovers, no cohesive roadmap.</p>
             </div>
-            <div>
-              <p className="font-medium text-zinc-800">Scattered tooling</p>
-              <p className="mt-2">Notebook usability, data catalog, visualization gaps.</p>
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Scattered tooling</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">Notebook usability, data catalog, visualization gaps.</p>
             </div>
           </div>
         </section>
@@ -132,51 +136,51 @@ const SageMakerGeospatialCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-10">
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
           <div
-            className="text-[10px] font-mono uppercase tracking-[0.35em]"
+            className="text-[11px] font-mono uppercase tracking-[1.5px]"
             style={{ color: accent }}
           >
             Section 03
           </div>
-          <h2 className="text-3xl font-serif text-zinc-900">Vision & redesigned architecture</h2>
-          <p>Simplify the geospatial ML workflow across data query, pre‑trained models, notebooks, and visualization.</p>
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Vision & redesigned architecture</h2>
+          <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">Simplify the geospatial ML workflow across data query, pre‑trained models, notebooks, and visualization.</p>
           <div
-            className="border border-dashed p-6 h-48 flex items-center justify-center text-sm text-zinc-500"
+            className="border border-dashed p-6 h-48 flex items-center justify-center text-sm text-[#666666] rounded-[16px]"
             style={{ borderColor: accentBorder, backgroundColor: accentSoft }}
           >
             Architecture mock placeholder (data catalog → models → notebook → visualization)
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-10">
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
           <div
-            className="text-[10px] font-mono uppercase tracking-[0.35em]"
+            className="text-[11px] font-mono uppercase tracking-[1.5px]"
             style={{ color: accent }}
           >
             Section 04
           </div>
-          <h2 className="text-3xl font-serif text-zinc-900">Solutions</h2>
-          <div className="grid md:grid-cols-2 gap-6 text-sm">
-            <div>
-              <p className="font-medium text-zinc-800">Data catalog</p>
-              <p className="mt-2">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Solutions</h2>
+          <div className="grid md:grid-cols-2 gap-[24px] text-sm">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Data catalog</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">
                 Query, filter, and visualize datasets in one place; reduced setup from days to minutes.
               </p>
             </div>
-            <div>
-              <p className="font-medium text-zinc-800">Pre‑trained models</p>
-              <p className="mt-2">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Pre‑trained models</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">
                 Built‑in models for common tasks (cloud removal, NDVI, road extraction).
               </p>
             </div>
-            <div>
-              <p className="font-medium text-zinc-800">Interactive visualization</p>
-              <p className="mt-2">Integrated map widget for analysis and validation.</p>
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Interactive visualization</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">Integrated map widget for analysis and validation.</p>
             </div>
-            <div>
-              <p className="font-medium text-zinc-800">Notebook workflow</p>
-              <p className="mt-2">Deep‑work environment for custom pipelines and experiments.</p>
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+              <p className="font-medium text-[#1A1A1A]">Notebook workflow</p>
+              <p className="mt-2 text-[14px] font-sans text-[#666666] leading-[1.5]">Deep‑work environment for custom pipelines and experiments.</p>
             </div>
           </div>
         </section>

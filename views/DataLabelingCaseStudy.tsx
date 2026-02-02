@@ -8,30 +8,31 @@ const DataLabelingCaseStudy: React.FC = () => {
   const heroImageScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.03]);
 
   return (
-    <div className="min-h-screen bg-white py-24 md:py-28 px-8 md:px-20 lg:px-24 font-sans text-zinc-700">
-      <div className="max-w-5xl mx-auto space-y-24 [&_p:not(.font-mono)]:leading-7 [&_p:not(.font-mono)]:text-zinc-700">
+    <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-[80px] font-sans text-[#666666]">
+      <div className="max-w-[1440px] mx-auto space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
         <div className="flex items-center justify-between">
           <Link
             to="/"
-            className="text-[11px] font-mono text-zinc-400 uppercase tracking-[0.3em] hover:text-zinc-900 transition-colors"
+            className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
             ← Back to Portfolio
           </Link>
-          <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-[0.3em]">
+          <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
             Case Study // Annotation Platform
           </span>
         </div>
 
-        <section className="space-y-10">
+        <section className="space-y-[40px]">
           <div className="space-y-6">
             <div className="space-y-3">
-              <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.35em]">
+              <div className="inline-block px-4 py-2 border border-[#E5E5E5] rounded-[20px] bg-[#0D6E6E10] text-[#0D6E6E] text-[11px] font-mono font-semibold uppercase tracking-[1.5px] mb-6">
                 Case Study
-              </p>
+              </div>
               <motion.h1
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-5xl md:text-6xl font-serif text-zinc-900 tracking-tight"
+                className="text-[56px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
+                style={{ fontFamily: 'Newsreader, serif' }}
               >
                 Annotation Platform
               </motion.h1>
@@ -39,23 +40,23 @@ const DataLabelingCaseStudy: React.FC = () => {
 
             <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-16 items-start">
               <div className="space-y-3">
-                <p className="leading-8 text-zinc-700 pr-6 md:pr-10">
+                <p className="text-[18px] font-sans font-normal text-[#666666] leading-[1.5] pr-6 md:pr-10">
                   Led end‑to‑end design for SageMaker Ground Truth data labeling (image, video, text, 3D
                   point cloud) to meet the complex needs of clients like Torc and the NFL. Strategic
                   workflow redesigns accelerated ML model development, delivering an estimated 70%
                   reduction in manual labeling effort and a 65% reduction in annotation time.
                 </p>
               </div>
-              <div className="grid gap-3 text-sm">
+              <div className="grid gap-[24px] text-sm">
                 {[
                   ['Role', 'Lead Designer'],
                   ['Timeline', 'Mar 2019 – Feb 2021'],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex items-center justify-between border-b border-zinc-200 pb-3">
-                    <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.3em]">
+                  <div key={label} className="flex items-center justify-between border-b border-[#E5E5E5] pb-3">
+                    <p className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
                       {label}
                     </p>
-                    <p className="text-zinc-900">{value}</p>
+                    <p className="text-[#1A1A1A]">{value}</p>
                   </div>
                 ))}
               </div>
@@ -63,7 +64,7 @@ const DataLabelingCaseStudy: React.FC = () => {
           </div>
 
           <motion.div
-            className="mt-4 overflow-hidden rounded-[28px] border border-zinc-200 bg-white shadow-[0_30px_80px_-60px_rgba(15,23,42,0.18)]"
+            className="mt-4 overflow-hidden rounded-[16px] border border-[#E5E5E5] bg-white shadow-[0_30px_80px_-60px_rgba(15,23,42,0.18)]"
             style={{ y: heroImageY, scale: heroImageScale }}
           >
             <img
@@ -74,32 +75,32 @@ const DataLabelingCaseStudy: React.FC = () => {
           </motion.div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-12">
-          <h2 className="text-3xl font-serif text-zinc-900">My Role</h2>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>My Role</h2>
+          <div className="grid md:grid-cols-3 gap-[24px] text-sm">
             <div className="space-y-3">
-              <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.25em]">
+              <p className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
                 Research & Insights
               </p>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-700">
+              <ul className="list-disc pl-5 space-y-2 text-[#666666]">
                 <li>Conducted customer interviews and synthesized personas and journeys.</li>
                 <li>Partnered with PM to define requirements and scope.</li>
               </ul>
             </div>
             <div className="space-y-3">
-              <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.25em]">
+              <p className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
                 Design & Systems
               </p>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-700">
+              <ul className="list-disc pl-5 space-y-2 text-[#666666]">
                 <li>Led platform design from inception through launch and expansion.</li>
                 <li>Created a new design system with light/dark themes.</li>
               </ul>
             </div>
             <div className="space-y-3">
-              <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.25em]">
+              <p className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
                 Validation & Leadership
               </p>
-              <ul className="list-disc pl-5 space-y-2 text-zinc-700">
+              <ul className="list-disc pl-5 space-y-2 text-[#666666]">
                 <li>Ran usability studies and drove ongoing improvements.</li>
                 <li>Presented work to senior leadership and supported PRFAQ discussions.</li>
                 <li>Collaborated with science to build assistive labeling features.</li>
@@ -166,38 +167,38 @@ const DataLabelingCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-12">
-          <h2 className="text-3xl font-serif text-zinc-900">Define</h2>
-          <p>
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Define</h2>
+          <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
             Since most revenue comes from private or vendor labeling, we optimized for professional
             annotators while still supporting occasional workers. Two primary goals guided the design:
           </p>
-          <div className="grid md:grid-cols-2 gap-6 text-sm">
-            <div className="p-5 border border-zinc-200/80 bg-zinc-50/60 rounded-2xl shadow-sm space-y-2">
-              <p className="font-semibold text-zinc-900">Improve labeling efficiency</p>
-              <p className="text-zinc-600">Robust, user‑friendly tools optimized for throughput.</p>
+          <div className="grid md:grid-cols-2 gap-[24px] text-sm">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px] shadow-sm space-y-2">
+              <p className="font-semibold text-[#1A1A1A]">Improve labeling efficiency</p>
+              <p className="text-[14px] font-sans text-[#666666] leading-[1.5]">Robust, user‑friendly tools optimized for throughput.</p>
             </div>
-            <div className="p-5 border border-zinc-200/80 bg-zinc-50/60 rounded-2xl shadow-sm space-y-2">
-              <p className="font-semibold text-zinc-900">Improve labeling quality</p>
-              <p className="text-zinc-600">Reduce mistakes and support higher‑quality annotations.</p>
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px] shadow-sm space-y-2">
+              <p className="font-semibold text-[#1A1A1A]">Improve labeling quality</p>
+              <p className="text-[14px] font-sans text-[#666666] leading-[1.5]">Reduce mistakes and support higher‑quality annotations.</p>
             </div>
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-12">
-          <h2 className="text-3xl font-serif text-zinc-900">Challenge</h2>
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Challenge</h2>
           <div className="space-y-4 text-sm">
             <div className="space-y-3">
-              <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.25em]">
+              <p className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
                 Efficiency vs. Quality
               </p>
-              <h3 className="text-2xl font-serif text-zinc-900">Balancing speed and accuracy</h3>
-              <p className="text-zinc-700 leading-7">
+              <h3 className="text-[20px] font-serif font-medium text-[#1A1A1A]">Balancing speed and accuracy</h3>
+              <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                 I partnered with scientist team to create several labeling experiments to test the
                 annotation task UI. For the initial test, we revealed one major UI issue that leads to bad
                 annotation results: Default label category assignment.
               </p>
-              <p className="text-zinc-700 leading-7">
+              <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                 From the results we can see user assigned the first default label category to many objects,
                 this means that an unfamiliar or less attentive worker might draw a good annotation around
                 the object of interests but assign a wrong label.
@@ -208,12 +209,12 @@ const DataLabelingCaseStudy: React.FC = () => {
                 className="w-full max-h-[520px] object-contain max-w-4xl mx-auto"
               />
               <div className="space-y-3">
-                <p className="text-zinc-700 leading-7">
+                <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                   To address this problem, I redesigned to UI and ask user to make a deliberate selection
                   for each new object. The new approach (Version 2) increases the label quality by 33%,
                   however decrease the labeling speed dramatically.
                 </p>
-                <p className="text-zinc-700 leading-7">
+                <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                   Then I explored a third design option that keeps the default label category with an
                   in‑context pop over to remind user to review the label and provide required attributes.
                   The new approach works much better to help improve efficiency with good quality.
@@ -226,11 +227,11 @@ const DataLabelingCaseStudy: React.FC = () => {
               />
             </div>
             <div className="space-y-3">
-              <p className="mt-4 text-[11px] font-mono text-zinc-500 uppercase tracking-[0.25em]">
+              <p className="mt-4 text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
                 Assistive labeling
               </p>
-              <h3 className="text-2xl font-serif text-zinc-900">AI‑assisted workflows</h3>
-              <p className="text-zinc-700 leading-7">
+              <h3 className="text-[20px] font-serif font-medium text-[#1A1A1A]">AI‑assisted workflows</h3>
+              <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                 I partnered with the science team to deliver AI‑assistive features for time‑consuming tasks
                 such as video tracking, 3D point cloud labeling, and semantic segmentation.
               </p>
@@ -250,18 +251,18 @@ const DataLabelingCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-12">
-          <h2 className="text-3xl font-serif text-zinc-900">Usability Research</h2>
-          <p>
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Usability Research</h2>
+          <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
             I ran 60‑minute sessions with 20 annotators on Mechanical Turk across multiple regions. I
             observed how people actually worked, where they hesitated, and what slowed them down. The
             biggest opportunities were cutting context switches and making power‑user workflows faster
             without adding cognitive load.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 text-sm">
-            <div className="p-5 border border-zinc-200/80 bg-zinc-50/60 rounded-2xl shadow-sm space-y-3">
-              <p className="font-semibold text-zinc-900">Less cursor movement</p>
-              <p className="text-zinc-600">
+          <div className="grid md:grid-cols-3 gap-[24px] text-sm">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px] shadow-sm space-y-3">
+              <p className="font-semibold text-[#1A1A1A]">Less cursor movement</p>
+              <p className="text-[14px] font-sans text-[#666666] leading-[1.5]">
                 I kept seeing people jump to the right panel after every label. The in‑context pop‑over
                 keeps the question near the work, which saved time and kept focus.
               </p>
@@ -271,9 +272,9 @@ const DataLabelingCaseStudy: React.FC = () => {
                 className="w-full max-h-64 object-contain"
               />
             </div>
-            <div className="p-5 border border-zinc-200/80 bg-zinc-50/60 rounded-2xl shadow-sm space-y-3">
-              <p className="font-semibold text-zinc-900">Display hotkeys</p>
-              <p className="text-zinc-600">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px] shadow-sm space-y-3">
+              <p className="font-semibold text-[#1A1A1A]">Display hotkeys</p>
+              <p className="text-[14px] font-sans text-[#666666] leading-[1.5]">
                 Many annotators were keyboard‑driven but didn’t know the shortcuts. I surfaced the most
                 used hotkeys on screen so speed didn’t require memorization.
               </p>
@@ -285,9 +286,9 @@ const DataLabelingCaseStudy: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="p-5 border border-zinc-200/80 bg-zinc-50/60 rounded-2xl shadow-sm space-y-3">
-              <p className="font-semibold text-zinc-900">Instruction panel</p>
-              <p className="text-zinc-600">
+            <div className="p-8 border border-[#E5E5E5] bg-white rounded-[16px] shadow-sm space-y-3">
+              <p className="font-semibold text-[#1A1A1A]">Instruction panel</p>
+              <p className="text-[14px] font-sans text-[#666666] leading-[1.5]">
                 Instructions are critical for quality. I added a left panel so people could read guidance
                 in context instead of hunting for it in a separate view.
               </p>
@@ -300,43 +301,43 @@ const DataLabelingCaseStudy: React.FC = () => {
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-12">
-          <h2 className="text-3xl font-serif text-zinc-900">Launch & Voice of Customer</h2>
-          <p>
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Launch & Voice of Customer</h2>
+          <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
             In 2018, we launched an end‑to‑end annotation portal where private or vendor labeling
             workforces can log in and perform annotation tasks. I designed the annotation task overlays to
             be applied across all task UI modalities and created more than 20 annotation task UI templates
             for different types of labeling tasks, including 2D image, 3D point cloud, video, and text.
           </p>
-          <div className="grid md:grid-cols-2 gap-6 text-sm">
-            <div className="border border-zinc-200 bg-white p-2 rounded-2xl overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-[24px] text-sm">
+            <div className="border border-[#E5E5E5] bg-white p-2 rounded-[16px] overflow-hidden">
               <img
                 src="/semantic-segmentation_002620aa7ca6a9fd5de03247b18bb6f3ccbcb63a.avif"
                 alt="Semantic segmentation"
                 className="w-full h-56 object-cover"
               />
             </div>
-            <div className="border border-zinc-200 bg-white p-2 rounded-2xl overflow-hidden">
+            <div className="border border-[#E5E5E5] bg-white p-2 rounded-[16px] overflow-hidden">
               <img
                 src="/Video object tracking_ebf90993af897146d8fa1e33f4640ed5ef53e5ef.avif"
                 alt="Video object tracking"
                 className="w-full h-56 object-cover"
               />
             </div>
-            <div className="border border-zinc-200 bg-white p-2 rounded-2xl overflow-hidden">
+            <div className="border border-[#E5E5E5] bg-white p-2 rounded-[16px] overflow-hidden">
               <img src="/lidar.gif" alt="3D point cloud annotation" className="w-full h-56 object-cover" />
             </div>
-            <div className="border border-zinc-200 bg-white p-2 rounded-2xl overflow-hidden">
+            <div className="border border-[#E5E5E5] bg-white p-2 rounded-[16px] overflow-hidden">
               <img src="/launch image 1.avif" alt="Launch UI" className="w-full h-56 object-cover" />
             </div>
           </div>
         </section>
 
-        <section className="space-y-10 border-t border-zinc-200/70 pt-12">
-          <h2 className="text-3xl font-serif text-zinc-900">Impact</h2>
+        <section className="space-y-[40px] border-t border-[#E5E5E5] pt-12">
+          <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>Impact</h2>
           <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 items-start">
             <div className="space-y-6">
-              <p className="text-zinc-700 leading-7">
+              <p className="text-[16px] font-sans text-[#666666] leading-[1.6]">
                 I designed 15 annotation tools from scratch and supported 30+ tools overall. Reusable
                 components (instruction panel, shortcuts, toolbar, canvas) scaled across AWS services and
                 shortened delivery cycles for adjacent teams.
@@ -348,13 +349,13 @@ const DataLabelingCaseStudy: React.FC = () => {
                   ['6.5% → 0.3%', 'Prime Air error rate reduction'],
                   ['65%', 'Amazon Go labeling time reduced'],
                 ].map(([value, label]) => (
-                  <div key={label} className="p-4 border border-zinc-200 bg-white rounded-2xl">
-                    <p className="text-2xl font-serif text-zinc-900">{value}</p>
-                    <p className="text-xs uppercase tracking-[0.22em] text-zinc-500 mt-2">{label}</p>
+                  <div key={label} className="p-8 border border-[#E5E5E5] bg-white rounded-[16px]">
+                    <p className="text-2xl font-serif text-[#1A1A1A]">{value}</p>
+                    <p className="text-[11px] uppercase tracking-[1.5px] text-[#666666] mt-2 font-mono">{label}</p>
                   </div>
                 ))}
               </div>
-              <ul className="list-disc pl-5 space-y-2 text-sm text-zinc-700">
+              <ul className="list-disc pl-5 space-y-2 text-sm text-[#666666]">
                 <li>Adopted by AWS Custom Label and Lookout for Vision.</li>
                 <li>Enabled SageMaker Ground Truth Plus launch (2021 re:Invent).</li>
               </ul>

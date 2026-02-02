@@ -7,21 +7,26 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
           extend: {
             fontFamily: {
               sans: ['Inter', 'sans-serif'],
-              serif: ['Instrument Serif', 'serif'],
+              serif: ['Newsreader', 'Instrument Serif', 'serif'],
               mono: ['JetBrains Mono', 'monospace'],
               hand: ['Sacramento', 'cursive'],
             },
             colors: {
               accent: '#1A1A1A',
-              paper: '#FDFDFB',
+              paper: '#FAFAFA',
               ink: '#2A2A2A',
+              primary: '#0D6E6E',
+              secondary: '#E07B54',
+              textPrimary: '#1A1A1A',
+              textSecondary: '#666666',
+              border: '#E5E5E5',
             }
           }
         }
@@ -31,7 +36,7 @@
       body {
         margin: 0;
         font-family: 'Inter', sans-serif;
-        background-color: #F8F8F6; /* Slightly darker than paper for contrast */
+        background-color: #FAFAFA;
         color: #1A1A1A;
         overflow-x: hidden;
       }
