@@ -1,9 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 const ArtifactTemplateCaseStudy: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    resetScroll();
+    requestAnimationFrame(resetScroll);
+    setTimeout(resetScroll, 0);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -304,8 +316,8 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 I designed six core solutions to solve these problems:
               </p>
 
-              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[40px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden">
+              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
+                <div className="rounded-[16px] border border-[#E5E5E5] overflow-hidden h-[400px] lg:h-[480px]">
                   <img
                     src="/Artifact/smart%20suggestion.gif"
                     alt="Smart suggestion"
@@ -328,7 +340,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-[40px] space-y-8">
+              <div className="pt-[100px] space-y-8">
                 <h3 className="text-[22px] font-serif font-medium text-[#1A1A1A]">
                   2. Different workflows for different content types
                 </h3>
@@ -412,7 +424,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                         </button>
                       ))}
                     </div>
-                    <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden flex items-center justify-center">
+                    <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden flex items-center justify-center h-[400px] lg:h-[480px]">
                       <img
                         src={
                           activeFlow === 'documents'
@@ -433,7 +445,14 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[40px]">
+              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
+                <div className="rounded-[16px] border border-[#E5E5E5] overflow-hidden h-[400px] lg:h-[480px]">
+                  <img
+                    src="/Artifact/inline%20edit/Inline-edi.gif"
+                    alt="Inline edit"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div className="space-y-4">
                   <h3 className="text-[22px] font-serif font-medium text-[#1A1A1A]">
                     3. In-context editing experience
@@ -443,18 +462,11 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                     <li>Inline suggestions and quick fixes without leaving the flow</li>
                     <li>Keep context and structure visible while revising</li>
                   </ul>
-                  <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden">
-                    <img
-                      src="/Artifact/inline%20edit/Inline-edi.gif"
-                      alt="Inline edit"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
                 </div>
               </div>
 
-              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[40px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden">
+              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
+                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden h-[400px] lg:h-[480px]">
                   <img
                     src="/Artifact/Export%20style.png"
                     alt="Export styling preview"
@@ -473,12 +485,12 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[40px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden">
+              <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
+                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden h-[400px] lg:h-[480px]">
                   <img
                     src="/Artifact/Theme.png"
                     alt="Three-tier brand system"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain"
                   />
                 </div>
                 <div className="space-y-4">
@@ -498,7 +510,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 </div>
               </div>
 
-              <div className="grid gap-[40px] lg:gap-12 lg:grid-cols-[7fr_3fr] items-start pt-[40px]">
+              <div className="grid gap-[40px] lg:gap-12 lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#666666]">
                     {['Templates', 'Card hover'].map((label, index) => {
@@ -519,7 +531,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                       );
                     })}
                   </div>
-                  <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden">
+                  <div className="rounded-[16px] border border-[#E5E5E5] overflow-hidden h-[400px] lg:h-[480px] bg-transparent">
                     <img
                       src={
                         activeLibraryView === 1
@@ -535,29 +547,21 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                   <h3 className="text-[22px] font-serif font-medium text-[#1A1A1A]">
                     6. Artifact Library
                   </h3>
-                  <p>
+                  <p className="text-[14px] font-sans text-[#666666] leading-[1.5]">
                     After the initial launch, we saw a pattern: people created documents, downloaded them, and
-                    then lost track of what they had produced. The tool had no memory of past work.
-                  </p>
-                  <p>
-                    We needed to close the loop and make this a true end-to-end lifecycle, not a one-way
-                    creation tool.
+                    then lost track of what they had produced. The tool had no memory of past work. We needed
+                    to close the loop and make this a true end-to-end lifecycle, not a one-way creation tool.
+                    An Artifact Library that&apos;s not just storage, but an active workspace. Think of it as your
+                    personal knowledge hub where everything you&apos;ve created lives and can be reused.
                   </p>
 
                   <div className="space-y-4" />
-                </div>
-                <div className="space-y-3 border-t border-[#E5E5E5] pt-6 lg:col-span-2">
-                  <p>
-                    An <strong>Artifact Library</strong> that&apos;s not just storage, but an active workspace.
-                    Think of it as your personal knowledge hub where everything you&apos;ve created lives and can be
-                    reused.
-                  </p>
                 </div>
               </div>
 
               <div className="space-y-6 border-t border-[#E5E5E5] pt-10">
                 <h4 className="text-[20px] font-serif font-medium text-[#1A1A1A]">Lifecycle overview</h4>
-                <div className="rounded-[16px] border border-[#E5E5E5] bg-white p-8">
+                <div className="rounded-[16px] p-8">
                   <div className="grid gap-6 md:grid-cols-5 text-[14px] font-sans">
                     <div className="rounded-[12px] border border-[#E5E5E5] bg-white p-6 space-y-2">
                       <p className="font-medium text-[#1A1A1A]">Create</p>
@@ -596,79 +600,9 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
 
             <hr className="border-[#E5E5E5]" />
 
-            <section className="space-y-6" data-section="example">
-              <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]">
-                Design Screens Overview
-              </h2>
-              <div className="grid gap-[24px] lg:grid-cols-2">
-                <div className="min-h-[320px] rounded-2xl border border-dashed border-[#E5E5E5] bg-white p-8 text-[14px] font-sans text-[#666666] flex items-center justify-center">
-                  Example flow screen 1 (placeholder)
-                </div>
-                <div className="min-h-[320px] rounded-2xl border border-dashed border-[#E5E5E5] bg-white p-8 text-[14px] font-sans text-[#666666] flex items-center justify-center">
-                  Example flow screen 2 (placeholder)
-                </div>
-                <div className="min-h-[320px] rounded-2xl border border-dashed border-[#E5E5E5] bg-white p-8 text-[14px] font-sans text-[#666666] flex items-center justify-center">
-                  Example flow screen 3 (placeholder)
-                </div>
-                <div className="min-h-[320px] rounded-2xl border border-dashed border-[#E5E5E5] bg-white p-8 text-[14px] font-sans text-[#666666] flex items-center justify-center">
-                  Example flow screen 4 (placeholder)
-                </div>
-              </div>
-            </section>
+            {/* Design Screens Overview hidden per request */}
 
-            <hr className="border-[#E5E5E5]" />
-
-            <section className="space-y-6" data-section="impact">
-              <h2 className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]">What Happened</h2>
-              <p>After we rolled this out:</p>
-              <p>
-                <strong>Time savings were dramatic:</strong>
-              </p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Documents: 4-6 hours → 35 minutes (87% reduction)</li>
-                <li>Presentations: 3-4 hours → 50 minutes (79% reduction)</li>
-                <li>Overall: Each person saved 8-10 hours per month</li>
-              </ul>
-              <p>
-                <strong>Quality improved:</strong>
-              </p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Brand compliance: 60% → 94%</li>
-                <li>People actually using templates: 23% → 95%</li>
-                <li>Finishing what they started: 42% → 78%</li>
-              </ul>
-              <p>
-                <strong>In 3 months:</strong>
-              </p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>3,200 people actively using it</li>
-                <li>18,500 documents created</li>
-                <li>4.6/5 satisfaction rating</li>
-              </ul>
-              <p>
-                <strong>What users said:</strong>
-              </p>
-              <blockquote className="border-l-2 border-[#E5E5E5] pl-4 italic">
-                <p>
-                  &quot;I type &apos;Create weekly&apos; and everything is filled in. I just verify the dates and go.
-                  Saves me 5 minutes every single Monday.&quot; - Marketing Manager
-                </p>
-              </blockquote>
-              <blockquote className="border-l-2 border-[#E5E5E5] pl-4 italic">
-                <p>
-                  &quot;The pre-filled prompts taught me what details to include. Now I&apos;m better at creating any
-                  document type.&quot; - Product Manager
-                </p>
-              </blockquote>
-              <blockquote className="border-l-2 border-[#E5E5E5] pl-4 italic">
-                <p>
-                  &quot;I used to dread Monday reports. Now they&apos;re actually pleasant—the tool does the heavy
-                  lifting.&quot; - Engineering Lead
-                </p>
-              </blockquote>
-            </section>
-
-            <hr className="border-[#E5E5E5]" />
+            {/* What Happened section hidden per request */}
 
             <section className="space-y-[40px]" data-section="learnings">
               <div className="space-y-2">
@@ -767,22 +701,14 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 The system doesn&apos;t just save time. It makes starting easier, removes formatting friction,
                 and learns from what people do.
               </p>
-              <p>
-                75-80% time reduction. 94% brand compliance. 18,500 documents in 3 months. But more than
-                numbers—people actually <em>enjoy</em> creating content now.
-              </p>
+              {/* Closing impact line hidden per request */}
             </section>
 
             <hr className="border-[#E5E5E5]" />
 
             <section className="space-y-3" data-section="tools-status">
               <p>
-                <strong>Tools I used:</strong> Figma for design, Miro for workshops, UserTesting for research,
-                Amplitude for analytics
-              </p>
-              <p>
-                <strong>Current status:</strong> Specification complete, engineering team building MVP focused
-                on documents and presentations first
+                <strong>Current status:</strong> Engineering team building MVP.
               </p>
             </section>
           </article>

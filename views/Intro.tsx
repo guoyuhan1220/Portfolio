@@ -237,7 +237,7 @@ const Intro: React.FC = () => {
 
                 {/* Postal markings */}
                 <div className="absolute bottom-3 left-4 text-[8px] font-mono text-amber-900/20 uppercase tracking-wider">
-                  <p>Priority Mail</p>
+                  <p>10+ Years AI/ML</p>
                   <p>Seattle, WA</p>
                 </div>
               </div>
@@ -289,9 +289,9 @@ const Intro: React.FC = () => {
             <div className="absolute left-12 md:left-20 top-0 bottom-0 w-[1px] bg-red-400/10" />
 
             {/* Letter Content */}
-            <div className="p-6 md:p-10 lg:p-12">
+            <div className="p-5 md:p-8 lg:p-10">
               {/* Header */}
-              <div className="flex justify-between items-start border-b border-zinc-100 pb-5 mb-8">
+              <div className="flex justify-between items-start border-b border-zinc-100 pb-4 mb-6">
                 <div>
                   <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em]">Date</p>
                   <p className="text-sm font-mono text-zinc-600 mt-1">{formattedDate}</p>
@@ -304,15 +304,16 @@ const Intro: React.FC = () => {
               </div>
 
               {/* Letter Body */}
-              <div className="space-y-5 ml-4 md:ml-8">
-                <p className="text-2xl md:text-3xl font-serif italic text-zinc-400">
+              <div className="space-y-4 ml-4 md:ml-8">
+                <p className="text-xl md:text-2xl font-serif italic text-zinc-400">
                   Hello there,
                 </p>
                 
-                <div className="space-y-5 font-serif text-base md:text-lg leading-relaxed text-zinc-600">
+                <div className="space-y-4 font-serif text-base md:text-lg leading-relaxed text-zinc-600">
                   <p>
                     I’m <span className="text-zinc-900 font-medium">Yuhan Guo</span>, a
-                    <span className="text-zinc-900 font-medium"> Principal Product Designer</span> leading
+                    <span className="text-zinc-900 font-medium"> Principal Product Designer</span> with
+                    <span className="text-zinc-900 font-medium"> 10+ years in AI/ML</span>, leading
                     <span className="text-zinc-900 font-medium"> enterprise AI products at AWS</span>.
                   </p>
                   <p>
@@ -323,13 +324,13 @@ const Intro: React.FC = () => {
                   </p>
                 </div>
 
-                <p className="text-sm text-zinc-400 italic pt-3 font-serif">
+                <p className="text-sm text-zinc-400 italic pt-2 font-serif">
                   Scroll down to unpack my recent work.
                 </p>
               </div>
 
               {/* Signature */}
-              <div className="mt-10 pt-6 border-t border-zinc-100 ml-4 md:ml-8">
+              <div className="mt-8 pt-5 border-t border-zinc-100 ml-4 md:ml-8">
                 <p className="text-zinc-500 font-serif italic mb-4">Yours truly,</p>
                 <p className="text-4xl md:text-5xl font-hand text-zinc-900 -rotate-2 -ml-2">
                   Yuhan Guo

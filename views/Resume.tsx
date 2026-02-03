@@ -44,6 +44,14 @@ const experiences: Experience[] = [
     location: 'Seattle, WA',
     description: 'Created enterprise data labeling solutions'
   },
+  { 
+    company: 'Azuqua', 
+    role: 'User Experience Designer', 
+    period: '2015 — 2017',
+    year: '2015',
+    location: 'Seattle, WA',
+    description: 'Designed no-code workflow automation at Azuqua, supporting growth through its $52.5M acquisition by Okta.'
+  },
 ];
 
 const CareerRow: React.FC<{
@@ -77,7 +85,7 @@ const CareerRow: React.FC<{
           </div>
         </div>
 
-        <p className="mt-3 text-[13px] text-zinc-500 leading-relaxed line-clamp-1 group-hover:line-clamp-3 transition-all">
+        <p className="mt-3 text-[13px] text-zinc-500 leading-relaxed">
           {experience.description}
         </p>
       </div>

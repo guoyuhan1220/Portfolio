@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Lenis from 'lenis';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import FloatingNav from './components/FloatingNav';
@@ -16,39 +16,61 @@ import GenAIEvaluationCaseStudy from './views/GenAIEvaluationCaseStudy';
 import SageMakerGeospatialCaseStudy from './views/SageMakerGeospatialCaseStudy';
 import DataLabelingCaseStudy from './views/DataLabelingCaseStudy';
 
+if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+  window.history.scrollRestoration = 'manual';
+}
+
+const ScrollManager: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    resetScroll();
+    requestAnimationFrame(resetScroll);
+    setTimeout(resetScroll, 0);
+    setTimeout(resetScroll, 100);
+    setTimeout(resetScroll, 300);
+
+    if (location.pathname.startsWith('/case-study')) {
+      return;
+    }
+
+    const lenis = new Lenis({
+      duration: 0.9,
+      smoothWheel: true,
+      smoothTouch: false,
+      wheelMultiplier: 1,
+      normalizeWheel: true,
+    });
+
+    const raf = (time: number) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    };
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, [location.pathname]);
+
+  return <div key={location.pathname}>{children}</div>;
+};
+
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('intro');
-
-  const ScrollManager: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const location = useLocation();
-
-    useEffect(() => {
-      if (location.pathname.startsWith('/case-study')) {
-        return;
-      }
-
-      const lenis = new Lenis({
-        duration: 0.9,
-        smoothWheel: true,
-        smoothTouch: false,
-        wheelMultiplier: 1,
-        normalizeWheel: true,
-      });
-
-      const raf = (time: number) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
-
-      requestAnimationFrame(raf);
-
-      return () => {
-        lenis.destroy();
-      };
-    }, [location.pathname]);
-
-    return <>{children}</>;
-  };
 
   useEffect(() => {
     const handleScroll = () => {

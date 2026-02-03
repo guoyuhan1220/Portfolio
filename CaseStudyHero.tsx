@@ -28,13 +28,6 @@ export default function CaseStudyHero({
 }: CaseStudyHeroProps) {
   return (
     <section className="relative w-full h-[1080px] bg-[#fcf7e9] overflow-hidden">
-      {/* Caption */}
-      <p className="absolute top-20 left-[100px] w-[720px] 
-                    font-['Source_Sans_Pro'] font-semibold text-[28px] 
-                    text-[#16161d] opacity-50 uppercase tracking-wide">
-        {caption}
-      </p>
-
       {/* Main Title */}
       <div className="absolute left-[100px] top-1/2 -translate-y-[186px] w-[873px]">
         <h1 className="font-['Source_Serif_Pro'] text-[100px] leading-[1.2] text-black">
@@ -66,15 +59,17 @@ export default function CaseStudyHero({
       </div>
 
       {/* Illustration - Right Side */}
-      <Illustration />
+      <CaseStudyHeroIllustration />
     </section>
   );
 }
 
 // Separate illustration component for better organization
-function Illustration() {
+export function CaseStudyHeroIllustration({ className = '' }: { className?: string }) {
   return (
-    <div className="absolute left-[973px] top-[18px] w-[1147px] h-[982px]">
+    <div
+      className={`absolute right-[-120px] top-[-40px] w-[1147px] h-[982px] origin-top-right scale-[0.82] ${className}`.trim()}
+    >
       {/* Frame placeholder */}
       <div className="absolute left-[449px] top-0 w-[123.667px] h-[123.667px]" />
       

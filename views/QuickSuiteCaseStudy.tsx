@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -6,6 +6,18 @@ const QuickSuiteCaseStudy: React.FC = () => {
   const accent = '#3b5bfd';
   const accentSoft = '#eef2ff';
   const accentBorder = '#c7d2fe';
+
+  useLayoutEffect(() => {
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    resetScroll();
+    requestAnimationFrame(resetScroll);
+    setTimeout(resetScroll, 0);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-[80px] font-sans text-[#666666]">

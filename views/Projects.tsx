@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight, Play, Pause } from 'lucide-react';
@@ -19,7 +20,7 @@ export interface Project {
   impact: string;
 }
 
-const GEOSPATIAL_DEMO_URL = 'https://www.youtube.com/watch?v=TL2HtX-FmiQ&t=2450s';
+const GEOSPATIAL_DEMO_URL = 'https://youtube.com/watch?t=2450&v=TL2HtX-FmiQ&feature=youtu.be';
 
 const renderProjectDescription = (project: Project) => {
   if (project.id !== '006') {
@@ -35,7 +36,7 @@ const renderProjectDescription = (project: Project) => {
         rel="noreferrer"
         className="text-zinc-900 underline decoration-zinc-300 hover:decoration-zinc-600"
       >
-        Watch demo
+        View demo
       </a>
       .
     </>
@@ -65,9 +66,9 @@ export const projects: Project[] = [
     year: '2024',
     tags: ['Governance', 'Provenance', 'NDA'],
     description: 'End-to-end management of artifacts with provenance tracking, human-in-the-loop verification, and automated lifecycle policies. (Placeholder — visuals coming soon.)',
-    imageUrl: '/Artifact/library.png',
+    imageUrl: '/Artifact/galleryGrid.png',
     videoUrl: null,
-    thumbnailUrl: '/Artifact/library.png',
+    thumbnailUrl: '/Artifact/galleryGrid.png',
     rotation: -1,
     role: 'Senior Product Designer',
     impact: 'Policy-driven lifecycle • Audit-ready metadata'
@@ -120,7 +121,8 @@ export const projects: Project[] = [
     category: 'Industrial ML',
     year: '2022',
     tags: ['Mapping', 'ML Ops', 'Visualization'],
-    description: 'Founding platform for AWS Geospatial intelligence. Designed the visual interaction layers for satellite imagery processing and large-scale environmental monitoring.',
+    description:
+      'Founding designer for SageMaker Geospatial, transformed enterprise geospatial ML adoption from 3% to production-ready solution. Designed industry-first collaborative map visualization (patent filed 2023), delivered 600% cost savings for DataFarming, and scaled design to Earth on AWS Viewer serving 1,500+ organizations.',
     imageUrl: '/geospatial.png',
     videoUrl: null,
     thumbnailUrl: '/map.gif',
@@ -144,12 +146,12 @@ export const projects: Project[] = [
   },
   {
     id: '008',
-    title: 'Okta automation workflow',
+    title: 'Automation workflow',
     category: 'Identity Automation',
     year: '2017',
     tags: ['Okta', 'Automation', 'Provisioning'],
     description:
-      'Designed automated identity workflows to streamline provisioning, access changes, and audit readiness for enterprise teams.',
+      "Led the end-to-end design of Okta’s enterprise-grade no-code integration platform, empowering users to automate complex business processes without writing a single line of code. The solution centers on an intuitive drag-and-drop canvas where users can connect third-party applications to build robust, trigger-based workflows that execute automatically.",
     imageUrl: '/Okta.png',
     videoUrl: null,
     thumbnailUrl: '/Okta.png',
@@ -167,6 +169,7 @@ const ProjectPreview: React.FC<{
 }> = ({ project, onMediaError, isHovered = false, showOverlay = true }) => {
   const poster = project.imageUrl ?? undefined;
   const isGeospatial = project.id === '006';
+  const isArtifactLifecycle = project.id === '002';
   const isFtux = project.id === '003';
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -187,7 +190,13 @@ const ProjectPreview: React.FC<{
           <img
             src={project.thumbnailUrl}
             alt={project.title}
-            className={`w-full h-full ${isGeospatial ? 'object-contain bg-zinc-900' : 'object-cover'}`}
+            className={`w-full h-full ${
+              isGeospatial
+                ? 'object-contain bg-zinc-900'
+                : isArtifactLifecycle
+                  ? 'object-contain bg-white'
+                  : 'object-cover'
+            }`}
             onError={onMediaError}
           />
         ) : project.videoUrl ? (
@@ -271,31 +280,32 @@ export const MailCard: React.FC<{
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50, rotate: project.rotation }}
-      animate={{ opacity: 1, y: 0, rotate: project.rotation }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative"
-      style={{ 
-        zIndex: isHovered && isTilt ? 60 : (zIndexBase ?? 10 - index),
-        marginTop: index === 0 ? 0 : -stackOffset
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        if (isTilt) setTilt({ x: 0, y: 0 });
-      }}
-    >
+    <>
       <motion.div
+        initial={{ opacity: 0, y: 50, rotate: project.rotation }}
+        animate={{ opacity: 1, y: 0, rotate: project.rotation }}
+        transition={{ duration: 0.6, delay: index * 0.1 }}
+        className={`relative ${isFlipped ? 'opacity-0 pointer-events-none' : ''}`}
+        style={{
+          zIndex: isFlipped ? 100 : isHovered && isTilt ? 60 : (zIndexBase ?? 10 - index),
+          marginTop: index === 0 ? 0 : -stackOffset,
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          if (isTilt) setTilt({ x: 0, y: 0 });
+        }}
+      >
+        <motion.div
         animate={{ 
           y: isHovered ? (isTilt ? -12 : -20) : 0,
           rotate: isTilt ? project.rotation : (isHovered ? 0 : project.rotation),
-          scale: isHovered ? (isTilt ? 1.04 : 1.02) : 1,
+          scale: isFlipped ? 1.04 : isHovered ? (isTilt ? 1.04 : 1.02) : 1,
           rotateX: isTilt ? tilt.x : 0,
           rotateY: isTilt ? tilt.y : 0,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        className="relative w-full max-w-lg mx-auto cursor-pointer"
+        className={`relative w-full cursor-pointer ${isFlipped ? 'max-w-4xl' : 'max-w-lg'} mx-auto`}
         style={{ transformStyle: 'preserve-3d' }}
         onMouseMove={handleMouseMove}
         onClick={() => {
@@ -469,8 +479,123 @@ export const MailCard: React.FC<{
             style={{ opacity: isHovered ? 0.3 : 0.15 }}
           />
         )}
+        </motion.div>
       </motion.div>
-    </motion.div>
+
+      {isFlipped && typeof document !== 'undefined' &&
+        createPortal(
+          <div className="fixed inset-0 z-[1000] flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/40" onClick={() => setIsFlipped(false)} />
+            <motion.div
+              animate={{ scale: 1 }}
+              initial={{ scale: 0.98 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+              className="relative w-full max-w-4xl px-4"
+            >
+              <div className="relative w-full cursor-pointer mx-auto">
+                {/* Small postcard: two faces, flips on click (Chrome-safe) */}
+                <div
+                  className="relative w-full aspect-[4/3] rounded-sm overflow-hidden shadow-xl bg-white"
+                  style={{ perspective: '1400px', WebkitPerspective: '1400px' }}
+                  onClick={() => setIsFlipped(false)}
+                >
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      WebkitTransformStyle: 'preserve-3d',
+                    }}
+                  >
+                    {/* Front face (visual) */}
+                    <motion.div
+                      className="absolute inset-0"
+                      animate={{ rotateY: isFlipped ? 180 : 0, opacity: isFlipped ? 0 : 1 }}
+                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        transform: 'translateZ(0.1px)',
+                        WebkitTransform: 'translateZ(0.1px)',
+                        pointerEvents: isFlipped ? 'none' : 'auto',
+                        willChange: 'transform',
+                      }}
+                    >
+                      <ProjectPreview
+                        project={project}
+                        isHovered={isHovered}
+                        onMediaError={() => setThumbError(true)}
+                      />
+                    </motion.div>
+
+                    {/* Back face (text) */}
+                    <motion.div
+                      className="absolute inset-0"
+                      animate={{ rotateY: isFlipped ? 0 : -180, opacity: isFlipped ? 1 : 0 }}
+                      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                      style={{
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg) translateZ(0.1px)',
+                        WebkitTransform: 'rotateY(180deg) translateZ(0.1px)',
+                        pointerEvents: isFlipped ? 'auto' : 'none',
+                        willChange: 'transform',
+                      }}
+                    >
+                      <div className="absolute inset-0 bg-white">
+                        <div className="h-full p-6 flex flex-col">
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">
+                                {project.category}
+                              </p>
+                              <h3 className="text-2xl font-serif text-zinc-800 mt-1">{project.title}</h3>
+                              <p className="text-xs font-mono text-zinc-500 mt-1">{project.year}</p>
+                            </div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setIsFlipped(false);
+                              }}
+                              className="p-2 rounded-full hover:bg-zinc-100 transition-colors"
+                              aria-label="Close"
+                            >
+                              <X className="w-4 h-4 text-zinc-500" />
+                            </button>
+                          </div>
+
+                          <div className="flex flex-wrap gap-2">
+                            {project.tags.map((tag) => (
+                              <span
+                                key={tag}
+                                className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+
+                          <div className="prose prose-zinc max-w-none mt-4">
+                            <p className="text-base text-zinc-600 leading-relaxed">
+                              {renderProjectDescription(project)}
+                            </p>
+                          </div>
+
+                          <div className="mt-auto pt-6 border-t border-zinc-200/60 space-y-2">
+                            <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider">
+                              Impact: <span className="text-zinc-800">{project.impact}</span>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>,
+          document.body
+        )}
+    </>
   );
 };
 
@@ -676,11 +801,7 @@ export const ProjectModal: React.FC<{
                   </p>
                 </div>
 
-                <div className="pt-6 border-t border-zinc-200/60 space-y-3">
-                  <p className="text-[10px] font-mono text-zinc-500">
-                    Impact: <span className="text-zinc-800">{project.impact}</span>
-                  </p>
-                </div>
+                <div className="pt-2" />
 
                 <div className="pt-2">
                   {caseStudyRoute ? (
@@ -693,6 +814,24 @@ export const ProjectModal: React.FC<{
                     >
                       Open Case Study
                     </button>
+                  ) : project.id === '006' ? (
+                    <a
+                      href={GEOSPATIAL_DEMO_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center"
+                    >
+                      View Demo
+                    </a>
+                  ) : project.id === '008' ? (
+                    <a
+                      href="https://www.okta.com/products/workflows/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center"
+                    >
+                      Learn More
+                    </a>
                   ) : (
                     <button className="w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors">
                       Request Secure Briefing
@@ -717,7 +856,6 @@ const caseStudyRoutes: Record<string, string> = {
   '002': '/case-study/artifact-lifecycle',
   '004': '/case-study/q-business-action-connector',
   '005': '/case-study/genai-evaluation',
-  '006': '/case-study/sagemaker-geospatial',
   '007': '/case-study/data-labeling-ground-truth',
 };
 
@@ -739,6 +877,10 @@ const Projects: React.FC = () => {
     const route = caseStudyRoutes[project.id];
     if (route) {
       navigate(route);
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        setTimeout(() => window.scrollTo({ top: 0, left: 0, behavior: 'auto' }), 0);
+      });
       return;
     }
     setSelectedProject(project);
@@ -782,7 +924,9 @@ const Projects: React.FC = () => {
 
       {/* Stacked Mail Cards */}
       <div className="relative space-y-6">
-        {primaryProjects.map((project, i) => (
+        {primaryProjects.map((project, i) => {
+          const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
+          return (
           <MailCard
             key={project.id}
             project={project}
@@ -790,10 +934,10 @@ const Projects: React.FC = () => {
             onSelect={setSelectedProject}
             stackOffset={0}
             showShadow={false}
-            disableFlip={project.id === '002'}
-            onCardClick={project.id === '002' ? handleScatterClick : undefined}
+            disableFlip={hasCaseStudy}
+            onCardClick={hasCaseStudy ? handleScatterClick : undefined}
           />
-        ))}
+        )})}
       </div>
 
       {/* Workspace scatter */}
@@ -811,6 +955,8 @@ const Projects: React.FC = () => {
 
         {secondaryProjects.map((project, index) => {
           const layout = workspaceLayout[index % workspaceLayout.length];
+          const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
+          const allowFlip = false;
           return (
             <div
               key={project.id}
@@ -830,28 +976,16 @@ const Projects: React.FC = () => {
                 stackOffset={0}
                 hoverEffect="tilt"
                 zIndexBase={index + 20}
-                disableFlip
+                disableFlip={!allowFlip}
                 frontVariant="image-top"
-                onCardClick={handleScatterClick}
+                onCardClick={allowFlip || !hasCaseStudy ? undefined : handleScatterClick}
               />
             </div>
           );
         })}
       </div>
 
-      {/* Decorative footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="mt-16 text-center"
-      >
-        <div className="inline-flex items-center space-x-4 opacity-30">
-          <div className="w-12 h-px bg-zinc-400" />
-          <span className="text-[10px] font-mono uppercase tracking-[0.5em]">End of Correspondence</span>
-          <div className="w-12 h-px bg-zinc-400" />
-        </div>
-      </motion.div>
+      {/* Decorative footer removed */}
 
       {/* Project Detail Modal */}
       {selectedProject && (
