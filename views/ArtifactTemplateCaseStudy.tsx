@@ -317,11 +317,11 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
               </p>
 
               <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] overflow-hidden h-[400px] lg:h-[480px]">
+                <div className="rounded-[16px] overflow-hidden h-[400px] lg:h-[480px] flex items-center justify-center p-4">
                   <img
                     src="/Artifact/smart%20suggestion.gif"
                     alt="Smart suggestion"
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full w-auto h-auto object-contain"
                   />
                 </div>
                 <div className="space-y-4">
@@ -424,7 +424,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                         </button>
                       ))}
                     </div>
-                    <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden flex items-center justify-center h-[400px] lg:h-[480px]">
+                    <div className="rounded-[16px] overflow-hidden flex items-center justify-center h-[400px] lg:h-[480px] p-4">
                       <img
                         src={
                           activeFlow === 'documents'
@@ -438,7 +438,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                                   : '/Artifact/Artifact%20type%20flow/Audio.png'
                         }
                         alt="Artifact workflow variation"
-                        className="w-[92%] h-auto object-contain my-4"
+                        className="max-w-full max-h-full w-auto h-auto object-contain"
                       />
                     </div>
                   </div>
@@ -446,11 +446,11 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
               </div>
 
               <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] overflow-hidden h-[400px] lg:h-[480px]">
+                <div className="rounded-[16px] overflow-hidden h-[400px] lg:h-[480px] flex items-center justify-center p-4">
                   <img
                     src="/Artifact/inline%20edit/Inline-edi.gif"
                     alt="Inline edit"
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full w-auto h-auto object-contain"
                   />
                 </div>
                 <div className="space-y-4">
@@ -466,11 +466,11 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
               </div>
 
               <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden h-[400px] lg:h-[480px]">
+                <div className="rounded-[16px] overflow-hidden h-[400px] lg:h-[480px] flex items-center justify-center p-4">
                   <img
                     src="/Artifact/Export%20style.png"
                     alt="Export styling preview"
-                    className="w-full h-full object-cover"
+                    className="max-w-full max-h-full w-auto h-auto object-contain"
                   />
                 </div>
                 <div className="space-y-4">
@@ -486,11 +486,11 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
               </div>
 
               <div className="grid gap-[40px] lg:grid-cols-[7fr_3fr] items-start pt-[100px]">
-                <div className="rounded-[16px] border border-[#E5E5E5] bg-white overflow-hidden h-[400px] lg:h-[480px]">
+                <div className="rounded-[16px] overflow-hidden h-[400px] lg:h-[480px] flex items-center justify-center p-4">
                   <img
                     src="/Artifact/Theme.png"
                     alt="Three-tier brand system"
-                    className="w-full h-full object-contain"
+                    className="max-w-full max-h-full w-auto h-auto object-contain"
                   />
                 </div>
                 <div className="space-y-4">
@@ -531,7 +531,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                       );
                     })}
                   </div>
-                  <div className="rounded-[16px] border border-[#E5E5E5] overflow-hidden h-[400px] lg:h-[480px] bg-transparent">
+                  <div className="rounded-[16px] overflow-hidden h-[400px] lg:h-[480px] flex items-center justify-center p-4">
                     <img
                       src={
                         activeLibraryView === 1
@@ -539,7 +539,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                           : '/Artifact/Artifact%20hub/Card%20hover.jpg'
                       }
                       alt={activeLibraryView === 1 ? 'Artifact library templates' : 'Artifact library card hover'}
-                      className="w-full h-full object-cover"
+                      className="max-w-full max-h-full w-auto h-auto object-contain"
                     />
                   </div>
                 </div>
