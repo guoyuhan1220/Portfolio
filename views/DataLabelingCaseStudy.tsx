@@ -21,7 +21,7 @@ const DataLabelingCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-[80px] font-sans text-[#666666]">
-      <div className="max-w-[1440px] mx-auto space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
+      <div className="max-w-[1000px] mx-auto space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
         <div className="flex items-center justify-between">
           <Link
             to="/"

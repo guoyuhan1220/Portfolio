@@ -94,7 +94,7 @@ export const projects: Project[] = [
   {
     id: '004',
     title: 'From Insight to Action: Shipping Action Connectors',
-    category: 'Enterprise Intelligence',
+    category: 'Act on AI Insights',
     year: '2024',
     tags: ['Actions', 'Integration', 'Workflows'],
     description: 'Led the design of a scalable action-connector framework, streamlining MCP-based setup and integrating connectors into conversational flows so business users can act instantly, without leaving context.',
@@ -107,17 +107,17 @@ export const projects: Project[] = [
   },
   {
     id: '005',
-    title: 'Measuring AI quality at enterprise scale',
-    category: 'Model Strategy',
+    title: 'Unifying GenAI evaluation across AWS',
+    category: 'GenAI App Evaluation',
     year: '2023',
     tags: ['Evaluation', 'Benchmarking', 'Dashboards'],
-    description: 'Visual framework for evaluating enterprise GenAI deployments. Translated complex benchmarks into interpretable dashboards for technical leadership.',
+    description: 'Led the design vision that unified AWS\'s GenAI evaluation strategy across Bedrock and Q Business, aligning multiple teams under one framework — reshaping the 2024 roadmap and securing funding for a dedicated team of 12.',
     imageUrl: '/evaluation.png',
     videoUrl: null,
     thumbnailUrl: '/evaluation.png',
     rotation: 2,
-    role: 'Senior Product Designer',
-    impact: 'Recall rate verified • Drift detection active'
+    role: 'Lead Designer',
+    impact: 'Selected as top 3 Op1 idea • Secured funding for team of 12'
   },
   {
     id: '006',
@@ -308,7 +308,7 @@ export const MailCard: React.FC<{
           rotateY: isTilt ? tilt.y : 0,
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        className={`relative w-full cursor-pointer ${isFlipped ? 'max-w-4xl' : 'max-w-lg'} mx-auto`}
+        className={`relative w-full cursor-pointer ${isFlipped ? 'max-w-4xl' : ''} mx-auto`}
         style={{ transformStyle: 'preserve-3d' }}
         onMouseMove={handleMouseMove}
         onClick={() => {
@@ -365,12 +365,14 @@ export const MailCard: React.FC<{
                         showOverlay={false}
                       />
                     )}
-                    <div className="absolute inset-x-0 bottom-0 h-14 bg-[#f8f5f0]/95 border-t border-zinc-200/80" />
-                    <div className="absolute bottom-0 left-0 right-0 h-14 px-4 flex items-center justify-between">
-                      <p className="text-base font-serif text-zinc-900 truncate">{project.title}</p>
-                      <p className="text-[10px] font-mono uppercase tracking-[0.24em] text-zinc-500">
-                        {project.year}
-                      </p>
+                    <div className="absolute inset-x-0 bottom-0 bg-[#f8f5f0]/95 border-t border-zinc-200/80 px-4 py-3">
+                      <div className="flex items-start justify-between gap-2 mb-1">
+                        <p className="text-sm font-serif text-zinc-900 leading-snug line-clamp-1">{project.title}</p>
+                        <p className="text-[9px] font-mono uppercase tracking-[0.24em] text-zinc-500 shrink-0 mt-0.5">
+                          {project.year}
+                        </p>
+                      </div>
+                      <p className="text-[11px] text-zinc-500 leading-relaxed line-clamp-2">{project.description}</p>
                     </div>
                   </div>
                 </div>
@@ -955,7 +957,7 @@ const caseStudyRoutes: Record<string, string> = {
 // Impact highlights per project
 const impactHighlights: Record<string, string> = {
   '001': '639k users • 92.5% retention',
-  '002': 'End-to-end artifact governance',
+  '002': 'Document • Slide • Image • Podcast • Spreadsheet',
   '004': 'Enterprise connector platform',
   '003': 'Value in first 5 minutes',
   '005': 'Funded dedicated team of 12',
@@ -964,13 +966,18 @@ const impactHighlights: Record<string, string> = {
   '008': 'No-code enterprise automation',
 };
 
-// Featured project card — large, prominent, image-heavy
+// Paper texture for physical card feel
+const cardPaperTexture = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`;
+
+// Featured project card — physical card with tilt hover
 const FeaturedCard: React.FC<{
   project: Project;
   onClick: (project: Project) => void;
   index: number;
 }> = ({ project, onClick, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -983,152 +990,125 @@ const FeaturedCard: React.FC<{
     }
   }, [isHovered]);
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setTilt({
+      x: (-y / rect.height) * 8,
+      y: (x / rect.width) * 10,
+    });
+  };
+
   const impact = impactHighlights[project.id] ?? project.impact;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group cursor-pointer"
+      className="cursor-pointer"
+      style={{ perspective: '1200px' }}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={() => onClick(project)}
+      onMouseLeave={() => { setIsHovered(false); setTilt({ x: 0, y: 0 }); }}
     >
-      <div
-        className="relative bg-[#FFFDF9] border border-zinc-200/80 rounded-sm overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1"
-        style={{ boxShadow: '2px 4px 12px rgba(0,0,0,0.05)' }}
-      >
-        {/* Postcard header — perforated edge */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-dashed border-zinc-200/80">
-          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.25em]">
-            {project.category}
-          </span>
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] font-mono text-zinc-400">{project.year}</span>
-            <span className="text-[10px] font-mono text-zinc-300 uppercase tracking-wider">Case Study</span>
-          </div>
-        </div>
-
-        {/* Image area */}
-        <div className="relative overflow-hidden h-[260px] md:h-[300px]">
-          {project.videoUrl && project.id !== '003' ? (
-            <>
-              {project.thumbnailUrl && (
-                <img
-                  src={project.thumbnailUrl}
-                  alt={project.title}
-                  className={`absolute inset-0 w-full h-full object-cover object-left-top transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-                />
-              )}
-              <video
-                ref={videoRef}
-                src={project.videoUrl}
-                muted
-                loop
-                playsInline
-                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.02] ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-              />
-            </>
-          ) : project.thumbnailUrl ? (
-            <img
-              src={project.thumbnailUrl}
-              alt={project.title}
-              className="w-full h-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.02]"
-            />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200" />
-          )}
-          {/* View arrow */}
-          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-            <div className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center border border-zinc-200/60">
-              <ArrowUpRight className="w-4 h-4 text-zinc-800" />
-            </div>
-          </div>
-        </div>
-
-        {/* Content — postcard message area */}
-        <div className="px-5 py-4 border-t border-dashed border-zinc-200/80">
-          <h3 className="text-lg font-serif text-zinc-900 mb-2 leading-snug">{project.title}</h3>
-          <p className="text-[13px] text-zinc-500 leading-relaxed line-clamp-2 mb-3">{project.description}</p>
-          <div className="flex items-center justify-between pt-3 border-t border-zinc-100">
-            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">{impact}</span>
-            <span className="text-[10px] font-mono text-zinc-300 group-hover:text-zinc-500 transition-colors">Read case study →</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Postcard-style secondary project card
-const PostcardCard: React.FC<{
-  project: Project;
-  onClick: (project: Project) => void;
-  index: number;
-}> = ({ project, onClick, index }) => {
-  const impact = impactHighlights[project.id] ?? project.impact;
-  const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-30px' }}
-      transition={{ duration: 0.45, delay: index * 0.08 }}
-      className="group cursor-pointer"
-      onClick={() => onClick(project)}
-    >
-      <div
-        className="relative bg-[#FFFDF9] border border-zinc-200/80 rounded-sm overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1"
-        style={{
-          boxShadow: '2px 3px 8px rgba(0,0,0,0.04)',
+      <motion.div
+        ref={cardRef}
+        animate={{
+          y: isHovered ? -10 : 0,
+          scale: isHovered ? 1.02 : 1,
+          rotateX: tilt.x,
+          rotateY: tilt.y,
         }}
+        transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        onMouseMove={handleMouseMove}
+        onClick={() => onClick(project)}
+        className="relative"
+        style={{ transformStyle: 'preserve-3d' }}
       >
-        {/* Postcard top edge — perforated / stamp area */}
-        <div className="flex items-center justify-between px-4 py-2.5 border-b border-dashed border-zinc-200/80">
-          <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-[0.25em]">
-            {project.category}
-          </span>
-          <span className="text-[9px] font-mono text-zinc-400">{project.year}</span>
-        </div>
+        {/* Dynamic shadow */}
+        <motion.div
+          className="absolute left-3 right-3 -bottom-3 h-8 rounded-full -z-10"
+          animate={{
+            opacity: isHovered ? 0.2 : 0.08,
+            scaleX: 1 + Math.abs(tilt.y) * 0.015,
+            x: tilt.y * -1.5,
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, transparent 70%)',
+            filter: 'blur(10px)',
+          }}
+        />
 
-        {/* Two-column: image left, text right — like a real postcard */}
-        <div className="flex">
-          {/* Image side */}
-          <div className="w-[45%] shrink-0 relative overflow-hidden">
-            <div className="h-[200px]">
-              {project.thumbnailUrl ? (
-                <img
-                  src={project.thumbnailUrl}
-                  alt={project.title}
-                  className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.05] ${
-                    project.id === '006' ? 'object-contain bg-zinc-900' : project.id === '008' ? 'object-contain bg-[#F0EBE3]' : 'object-cover'
-                  }`}
+        <div
+          className="relative rounded-sm overflow-hidden"
+          style={{
+            background: 'linear-gradient(145deg, #f8f5f0 0%, #efe9e0 100%)',
+            boxShadow: isHovered
+              ? '0 25px 50px -12px rgba(0,0,0,0.15), 0 12px 24px -8px rgba(0,0,0,0.08)'
+              : '0 8px 24px -6px rgba(0,0,0,0.08), 0 4px 10px -4px rgba(0,0,0,0.04)',
+          }}
+        >
+          {/* Paper texture overlay — fades on hover so image is clean */}
+          <div
+            className="absolute inset-0 pointer-events-none mix-blend-multiply z-10 transition-opacity duration-300"
+            style={{ backgroundImage: cardPaperTexture, opacity: isHovered ? 0 : 0.3 }}
+          />
+
+          {/* Top edge — postal markings */}
+          <div className="relative z-20 flex items-center justify-between px-4 py-2.5 border-b border-amber-900/15">
+            <span className="text-[9px] font-mono text-amber-900/60 uppercase tracking-[0.25em]">
+              {project.category}
+            </span>
+            <span className="text-[9px] font-mono text-amber-900/55">{project.year}</span>
+          </div>
+
+          {/* Image area */}
+          <div className={`relative overflow-hidden h-[240px] md:h-[280px] z-0 ${project.id === '004' ? '' : project.id === '005' ? 'bg-[#F5F6F9]' : ''}`}>
+            {project.videoUrl && project.id !== '003' ? (
+              <>
+                {project.thumbnailUrl && (
+                  <img
+                    src={project.thumbnailUrl}
+                    alt={project.title}
+                    className={`absolute inset-0 w-full h-full object-cover object-left-top transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+                  />
+                )}
+                <video
+                  ref={videoRef}
+                  src={project.videoUrl}
+                  muted
+                  loop
+                  playsInline
+                  className={`w-full h-full object-cover ${isHovered ? 'opacity-100' : 'opacity-0'}`}
                 />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200" />
-              )}
+              </>
+            ) : project.thumbnailUrl ? (
+              <img
+                src={project.thumbnailUrl}
+                alt={project.title}
+                className={`w-full h-full ${project.id === '005' ? 'object-contain' : 'object-cover object-left-top'}`}
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200" />
+            )}
+          </div>
+
+          {/* Content area — message side of postcard */}
+          <div className="relative z-20 px-5 py-4 border-t border-amber-900/15">
+            <h3 className="text-[17px] font-serif text-zinc-800 mb-2 leading-snug">{project.title}</h3>
+            <p className="text-[12px] text-zinc-600 leading-relaxed line-clamp-2 mb-3">{project.description}</p>
+            <div className="flex items-center justify-between pt-2.5 border-t border-amber-900/12">
+              <span className="text-[9px] font-mono text-amber-900/60 uppercase tracking-wider">{impact}</span>
+              <span className="text-[9px] font-mono text-amber-900/45 italic">Read case study →</span>
             </div>
           </div>
 
-          {/* Text side — resembles handwritten postcard message */}
-          <div className="flex-1 p-4 flex flex-col justify-between border-l border-dashed border-zinc-200/80 min-h-[200px]">
-            <div>
-              <h3 className="text-lg font-serif text-zinc-900 mb-2 leading-snug">{project.title}</h3>
-              <p className="text-[12px] text-zinc-500 leading-relaxed line-clamp-3">{project.description}</p>
-            </div>
-            <div className="mt-3 pt-2 border-t border-zinc-100">
-              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider leading-relaxed">{impact}</p>
-              <div className="flex items-center gap-1 mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <span className="text-[10px] font-mono text-zinc-500">{hasCaseStudy ? 'Read case study' : 'View details'}</span>
-                <ArrowUpRight className="w-3 h-3 text-zinc-400" />
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -1200,13 +1180,13 @@ const Projects: React.FC = () => {
         ))}
       </div>
 
-      {/* Secondary: Postcard grid */}
-      <div className="mb-16">
+      {/* Secondary: Clean grid */}
+      <div className="mb-10">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center gap-4"
         >
           <div className="h-px flex-1 bg-zinc-200" />
           <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em] shrink-0">
@@ -1214,17 +1194,63 @@ const Projects: React.FC = () => {
           </span>
           <div className="h-px flex-1 bg-zinc-200" />
         </motion.div>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {secondaryProjects.map((project, i) => (
-            <PostcardCard
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {secondaryProjects.map((project, index) => {
+          const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
+          return (
+            <motion.div
               key={project.id}
-              project={project}
-              onClick={handleProjectClick}
-              index={i}
-            />
-          ))}
-        </div>
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              className="group cursor-pointer"
+              onClick={() => {
+                if (hasCaseStudy) handleProjectClick(project);
+                else setSelectedProject(project);
+              }}
+            >
+              <div className="relative rounded-lg overflow-hidden bg-zinc-100 border border-zinc-200/60 transition-all duration-300 hover:shadow-lg hover:border-zinc-300/80 hover:-translate-y-1">
+                {/* Image */}
+                <div className={`relative overflow-hidden h-[200px] sm:h-[240px] ${
+                  project.id === '008' ? 'bg-[#F0EBE3]' : ''
+                }`}>
+                  {project.thumbnailUrl && (
+                    <img
+                      src={project.thumbnailUrl}
+                      alt={project.title}
+                      className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.03] ${
+                        project.id === '008' ? 'object-contain p-4' : 'object-cover'
+                      }`}
+                    />
+                  )}
+                </div>
+                {/* Info */}
+                <div className="p-5 bg-white">
+                  <div className="flex items-start justify-between gap-3 mb-1.5">
+                    <h3 className="text-[15px] font-semibold text-zinc-900 leading-snug line-clamp-1">
+                      {project.title}
+                    </h3>
+                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider shrink-0 mt-0.5">
+                      {project.year}
+                    </span>
+                  </div>
+                  <p className="text-[13px] text-zinc-500 leading-relaxed line-clamp-2">
+                    {renderProjectDescription(project, true)}
+                  </p>
+                  <div className="flex items-center gap-1.5 mt-3 text-zinc-400 group-hover:text-zinc-900 transition-colors">
+                    <span className="text-[11px] font-medium">
+                      {hasCaseStudy ? 'View case study' : 'View details'}
+                    </span>
+                    <ArrowUpRight className="w-3 h-3" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       {/* Project Detail Modal */}

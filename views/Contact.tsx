@@ -11,7 +11,7 @@ const Contact: React.FC = () => {
         className="space-y-10"
       >
         <div className="inline-block p-4 bg-white border border-zinc-100 letter-shadow -rotate-2">
-           <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em]">End of Correspondence</span>
+           <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em]">Thanks for reading this far</span>
         </div>
         
         <h2 className="text-3xl md:text-4xl font-serif italic text-zinc-800 leading-tight">
@@ -32,11 +32,6 @@ const Contact: React.FC = () => {
           </div>
         </div>
 
-        <div className="pt-16">
-           <span className="text-[8px] font-mono text-zinc-200 uppercase tracking-[0.6em]">
-             Lead Product Design // AWS AI Platform // 2025
-           </span>
-        </div>
       </motion.div>
     </div>
   );

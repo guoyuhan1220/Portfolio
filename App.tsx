@@ -102,9 +102,9 @@ const App: React.FC = () => {
           <Projects />
         </section>
 
-        <section id="playground" className="bg-zinc-50/50">
+        {/* <section id="playground" className="bg-zinc-50/50">
           <SideProjects />
-        </section>
+        </section> */}
 
         <section id="resume">
           <Resume />

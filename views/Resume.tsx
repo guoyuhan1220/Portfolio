@@ -18,7 +18,7 @@ const experiences: Experience[] = [
     period: '2024 — Present',
     year: '2024',
     location: 'Seattle, WA',
-    description: 'Leading AI platform design strategy for enterprise workflows'
+    description: 'Unified five fragmented AI tools into one agentic platform serving 639k users with 92.5% weekly retention. Led design of artifact lifecycle, action connectors, and onboarding — shipping document, slide, image, podcast, and spreadsheet creation at enterprise scale.'
   },
   { 
     company: 'AWS GenAI Evaluation', 
@@ -26,7 +26,7 @@ const experiences: Experience[] = [
     period: '2023 — 2024',
     year: '2023',
     location: 'Seattle, WA',
-    description: 'Designed evaluation frameworks for generative AI models'
+    description: 'Led the design vision that unified AWS\'s GenAI evaluation strategy across Bedrock and Q Business. Work was selected as a top 3 Op1 idea, leading to a PRFAQ that secured funding for a dedicated team of 1 PM, 1 SDM, and 9 engineers.'
   },
   { 
     company: 'SageMaker Geospatial', 
@@ -34,7 +34,7 @@ const experiences: Experience[] = [
     period: '2021 — 2023',
     year: '2021',
     location: 'Seattle, WA',
-    description: 'Built geospatial ML tools processing 10TB+ daily'
+    description: 'Founding designer for SageMaker Geospatial. Designed industry-first collaborative map visualization (patent filed 2023), delivered 600% cost savings for DataFarming, and scaled design to Earth on AWS Viewer serving 1,500+ organizations.'
   },
   { 
     company: 'SageMaker Ground Truth', 
@@ -42,15 +42,15 @@ const experiences: Experience[] = [
     period: '2019 — 2021',
     year: '2019',
     location: 'Seattle, WA',
-    description: 'Created enterprise data labeling solutions'
+    description: 'Led end-to-end design for SageMaker Ground Truth data labeling across image, video, text, and 3D point cloud — delivering 70% reduction in manual labeling effort and 65% faster annotation time for clients like Torc and the NFL.'
   },
   { 
-    company: 'Azuqua', 
+    company: 'Azuqua (acquired by Okta)', 
     role: 'User Experience Designer', 
     period: '2015 — 2017',
     year: '2015',
     location: 'Seattle, WA',
-    description: 'Designed no-code workflow automation at Azuqua, supporting growth through its $52.5M acquisition by Okta.'
+    description: 'Led end-to-end design of a no-code integration platform with drag-and-drop workflow canvas, supporting growth through Azuqua\'s $52.5M acquisition by Okta.'
   },
 ];
 
@@ -62,8 +62,8 @@ const CareerRow: React.FC<{
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ delay: index * 0.06, duration: 0.45 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ delay: index * 0.04, duration: 0.4 }}
       whileHover={{ y: -2 }}
       className="group rounded-sm border border-zinc-100 bg-white/30 hover:bg-white/70 hover:border-zinc-200 transition-colors"
     >
@@ -107,9 +107,6 @@ const Resume: React.FC = () => {
           <span className="text-[10px] font-mono text-zinc-300 tracking-widest uppercase">Experience</span>
         </div>
 
-        <p className="text-zinc-500 font-serif italic max-w-2xl">
-          A compact record of roles and systems shipped.
-        </p>
       </div>
 
       {/* Compact list */}
@@ -119,26 +116,45 @@ const Resume: React.FC = () => {
         ))}
       </div>
 
-      {/* Education */}
+      {/* Education — own section header + card, mirroring Career Path */}
+      <div className="mt-16 mb-10">
+        <div className="flex items-center space-x-5 mb-8">
+          <div className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-[11px] font-mono font-bold text-zinc-500">
+            05
+          </div>
+          <h2 className="text-4xl font-serif text-zinc-800 tracking-tight">Education</h2>
+          <div className="h-px flex-1 bg-zinc-100 opacity-80" />
+          <span className="text-[10px] font-mono text-zinc-300 tracking-widest uppercase">Academic</span>
+        </div>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ delay: 0.15 }}
-        className="mt-8 pt-6 border-t border-zinc-100"
+        transition={{ delay: 0.1 }}
+        className="group rounded-sm border border-zinc-100 bg-white/30 hover:bg-white/70 hover:border-zinc-200 transition-colors"
       >
-        <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.25em] mb-3">
-          Education
-        </p>
-        <p className="font-serif italic text-xl text-zinc-900 leading-tight">
-          Master of Information Management
-        </p>
-        <p className="mt-2 font-mono text-[11px] text-zinc-500">
-          University of Washington
-        </p>
-        <p className="text-[10px] font-mono text-zinc-300 mt-1 uppercase tracking-tighter">
-          Class of 2013 // Seattle, WA
-        </p>
+        <div className="px-4 py-4 md:px-5 md:py-5">
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-6">
+            <div className="min-w-0">
+              <h3 className="text-[22px] md:text-[26px] leading-tight font-serif text-zinc-900">
+                University of Washington
+              </h3>
+              <p className="mt-1 text-[11px] font-mono text-zinc-600 uppercase tracking-[0.18em]">
+                Master of Information Management
+              </p>
+            </div>
+            <div className="md:text-right">
+              <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.22em] whitespace-nowrap">
+                2012 – 2015
+              </span>
+            </div>
+          </div>
+          <p className="mt-3 text-[13px] text-zinc-500 leading-relaxed">
+            Seattle, WA
+          </p>
+        </div>
       </motion.div>
 
     </div>

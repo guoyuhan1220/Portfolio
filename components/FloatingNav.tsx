@@ -2,9 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const navItems = [
-  { id: 'intro', label: 'Start' },
+  { id: 'intro', label: 'Intro' },
   { id: 'work', label: 'Works' },
-  { id: 'playground', label: 'Lab' },
   { id: 'resume', label: 'Career' },
   { id: 'contact', label: 'Reach' },
 ];
