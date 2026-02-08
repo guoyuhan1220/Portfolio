@@ -192,7 +192,7 @@ const QuickSuiteCaseStudy: React.FC = () => {
               {
                 number: '06',
                 title: '"Build with AI" pattern system',
-                description: 'I led the initiative to unify AI interaction patterns across Quick Suite. Established six core patterns (floating launcher, command bar, inline AI, smart cards, embedded widgets, side panel) that drive consistency across 20+ projects and guide 30+ designers.',
+                description: 'I led the initiative to unify AI interaction patterns across Quick Suite. Established over 30 patterns that drive consistency across 20+ projects and guide 30+ designers.',
               },
             ].map((solution, index) => (
               <motion.div
@@ -274,18 +274,20 @@ const QuickSuiteCaseStudy: React.FC = () => {
                     </div>
                   )}
                   {solution.number === '04' && (
-                    <div className="mt-6 grid grid-cols-2 gap-4">
-                      <div className="w-full h-[300px] border border-[#E5E5E5] rounded-lg bg-[#FAFAFA] flex items-center justify-center">
-                        <div className="text-center text-[#999999]">
-                          <div className="text-sm font-medium mb-1">Action connector resource picker</div>
-                          <div className="text-xs">Placeholder image</div>
-                        </div>
+                    <div className="mt-6 grid grid-cols-5 gap-4">
+                      <div className="col-span-2 w-full h-[300px] rounded-lg overflow-hidden flex items-center justify-center bg-transparent">
+                        <img
+                          src="/quick suite project/action awareness.png"
+                          alt="Action connector resource picker"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
-                      <div className="w-full h-[300px] border border-[#E5E5E5] rounded-lg bg-[#FAFAFA] flex items-center justify-center">
-                        <div className="text-center text-[#999999]">
-                          <div className="text-sm font-medium mb-1">Action form</div>
-                          <div className="text-xs">Placeholder image</div>
-                        </div>
+                      <div className="col-span-3 w-full h-[300px] rounded-lg overflow-hidden flex items-center justify-center bg-transparent">
+                        <img
+                          src="/quick suite project/action.png"
+                          alt="Action form"
+                          className="w-full h-full object-contain"
+                        />
                       </div>
                     </div>
                   )}
@@ -470,20 +472,12 @@ const QuickSuiteCaseStudy: React.FC = () => {
             <div className="text-[11px] font-mono uppercase tracking-[1.5px]" style={{ color: accent }}>
               The Impact
             </div>
-            <h2 className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>
-              73% of users now engage daily
+            <h2 className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>
+              639k users, 92.5% returning weekly
             </h2>
-            <p className="text-[20px] font-sans text-[#666666] leading-[1.6]">
-              Users stop asking "which tool should I use?" and start focusing on what they're trying to accomplish. The experience is simple to start but sticky—artifact creation and smart recommendations bring users back.
+            <p className="text-[20px] font-sans text-[#666666] leading-[1.6] mb-8">
+              Since launch, Quick Suite has grown +1151% with users averaging 3 days per week active and 92.8% chat adoption. Users stop asking "which tool should I use?" and start focusing on what they're trying to accomplish. The experience is simple to start but sticky—artifact creation and smart recommendations bring users back.
             </p>
-          </div>
-
-          {/* Impact Visual - Big */}
-          <div className="w-full h-[500px] border-2 border-[#E5E5E5] rounded-[24px] bg-gradient-to-br from-[#eef2ff] to-white flex items-center justify-center mb-16">
-            <div className="text-center text-[#999999]">
-              <div className="text-lg font-medium mb-2">Impact Visual</div>
-              <div className="text-sm">Metrics dashboard, user engagement charts, success stories</div>
-            </div>
           </div>
 
           <div className="max-w-[1000px] mx-auto">
