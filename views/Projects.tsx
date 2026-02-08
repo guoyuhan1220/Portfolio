@@ -1005,10 +1005,10 @@ const FeaturedCard: React.FC<{
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true, margin: '0px 0px -120px 0px', amount: 0.2 }}
+      transition={{ duration: 0.35, delay: index * 0.04 }}
       className="cursor-pointer"
       style={{ perspective: '1200px' }}
       onMouseEnter={() => setIsHovered(true)}
@@ -1143,7 +1143,7 @@ const Projects: React.FC = () => {
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           className="text-[11px] font-mono text-zinc-400 uppercase tracking-[0.3em] mb-4"
         >
           Selected Work
@@ -1151,7 +1151,7 @@ const Projects: React.FC = () => {
         <motion.h2
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ delay: 0.05 }}
           className="text-4xl md:text-5xl font-serif text-zinc-900 leading-[1.1] mb-4"
         >
@@ -1160,7 +1160,7 @@ const Projects: React.FC = () => {
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ delay: 0.1 }}
           className="text-lg text-zinc-500 max-w-[640px] mx-auto leading-relaxed"
         >
@@ -1185,7 +1185,7 @@ const Projects: React.FC = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           className="flex items-center gap-4"
         >
           <div className="h-px flex-1 bg-zinc-200" />
@@ -1204,8 +1204,8 @@ const Projects: React.FC = () => {
               key={project.id}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              viewport={{ once: true, margin: '0px 0px -80px 0px' }}
+              transition={{ duration: 0.35, delay: index * 0.04 }}
               className="group cursor-pointer"
               onClick={() => {
                 if (hasCaseStudy) handleProjectClick(project);

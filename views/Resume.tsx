@@ -54,17 +54,11 @@ const experiences: Experience[] = [
   },
 ];
 
-const CareerRow: React.FC<{
-  experience: Experience;
-  index: number;
-}> = ({ experience, index }) => {
+const CareerRow: React.FC<{ experience: Experience }> = ({ experience }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ delay: index * 0.04, duration: 0.4 }}
       whileHover={{ y: -2 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
       className="group rounded-sm border border-zinc-100 bg-white/30 hover:bg-white/70 hover:border-zinc-200 transition-colors"
     >
       <div className="px-4 py-4 md:px-5 md:py-5">
@@ -99,9 +93,6 @@ const Resume: React.FC = () => {
       {/* Section Header - compact */}
       <div className="mb-10">
         <div className="flex items-center space-x-5 mb-8">
-          <div className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-[11px] font-mono font-bold text-zinc-500">
-            04
-          </div>
           <h2 className="text-4xl font-serif text-zinc-800 tracking-tight">Career Path</h2>
           <div className="h-px flex-1 bg-zinc-100 opacity-80" />
           <span className="text-[10px] font-mono text-zinc-300 tracking-widest uppercase">Experience</span>
@@ -111,17 +102,14 @@ const Resume: React.FC = () => {
 
       {/* Compact list */}
       <div className="grid grid-cols-1 gap-3">
-        {experiences.map((exp, i) => (
-          <CareerRow key={exp.company} experience={exp} index={i} />
+        {experiences.map((exp) => (
+          <CareerRow key={exp.company} experience={exp} />
         ))}
       </div>
 
       {/* Education — own section header + card, mirroring Career Path */}
       <div className="mt-16 mb-10">
         <div className="flex items-center space-x-5 mb-8">
-          <div className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center text-[11px] font-mono font-bold text-zinc-500">
-            05
-          </div>
           <h2 className="text-4xl font-serif text-zinc-800 tracking-tight">Education</h2>
           <div className="h-px flex-1 bg-zinc-100 opacity-80" />
           <span className="text-[10px] font-mono text-zinc-300 tracking-widest uppercase">Academic</span>
@@ -129,10 +117,8 @@ const Resume: React.FC = () => {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
+        whileHover={{ y: -2 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         className="group rounded-sm border border-zinc-100 bg-white/30 hover:bg-white/70 hover:border-zinc-200 transition-colors"
       >
         <div className="px-4 py-4 md:px-5 md:py-5">
@@ -147,7 +133,7 @@ const Resume: React.FC = () => {
             </div>
             <div className="md:text-right">
               <span className="text-[11px] font-mono text-zinc-500 uppercase tracking-[0.22em] whitespace-nowrap">
-                2012 – 2015
+                2013 – 2015
               </span>
             </div>
           </div>

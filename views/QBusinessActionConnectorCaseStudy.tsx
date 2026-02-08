@@ -26,6 +26,12 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0F0F0F] font-sans text-[#A3A3A3]">
+      <Link
+        to="/#work"
+        className="fixed bottom-6 right-6 z-50 rounded-full border border-white/20 bg-[#1A1A1A]/90 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-white shadow-lg backdrop-blur-sm hover:border-white/40 transition-colors"
+      >
+        ← Back to Works
+      </Link>
       {/* Navigation */}
       <div className="sticky top-0 z-50 bg-[#0F0F0F]/90 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
@@ -299,18 +305,6 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
           </motion.div>
         </div>
       </article>
-
-      {/* Footer */}
-      <section className="py-[60px] px-[80px] bg-[#0F0F0F] border-t border-white/10">
-        <div className="max-w-[1440px] mx-auto text-center">
-          <Link
-            to="/#work"
-            className="text-[11px] font-mono text-[#A3A3A3] uppercase tracking-[1.5px] hover:text-white transition-colors"
-          >
-            ← Back to Works
-          </Link>
-        </div>
-      </section>
     </div>
   );
 };

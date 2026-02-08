@@ -8,7 +8,7 @@ const Intro: React.FC = () => {
   const envelopeRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
 
-  // Check if user has seen the envelope before
+  // Check if user has seen the envelope before (returning visitors skip closed envelope)
   const [hasSeenEnvelope] = useState(() => {
     try {
       return localStorage.getItem(ENVELOPE_SEEN_KEY) === 'true';
@@ -16,6 +16,16 @@ const Intro: React.FC = () => {
       return false;
     }
   });
+
+  // On first load, don't use scroll progress until after mount so closed envelope is visible
+  const useScrollForProgress = useMotionValue(hasSeenEnvelope ? 1 : 0);
+  useEffect(() => {
+    if (hasSeenEnvelope) return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => useScrollForProgress.set(1));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [hasSeenEnvelope, useScrollForProgress]);
   
   // Base isometric angle (viewing from slightly above)
   const baseRotateX = 8;
@@ -29,13 +39,16 @@ const Intro: React.FC = () => {
     offset: ["start start", "end start"]
   });
 
-  // Click-triggered progress
+  // Click-triggered progress (1 = opened for returning visitors, 0 = closed for first-time)
   const clickProgress = useMotionValue(hasSeenEnvelope ? 1 : 0);
 
-  // Combine scroll and click progress
+  // Combine scroll and click: first load shows closed envelope (ignore scroll until after mount)
   const combinedProgress = useTransform(
-    [scrollYProgress, clickProgress],
-    ([scroll, click]: number[]) => Math.max(scroll, click)
+    [scrollYProgress, clickProgress, useScrollForProgress],
+    ([scroll, click, useScroll]: number[]) => {
+      const effectiveScroll = useScroll > 0.5 ? scroll : 0;
+      return Math.max(effectiveScroll, click);
+    }
   );
 
   // Mark envelope as seen once user interacts
@@ -347,9 +360,21 @@ const Intro: React.FC = () => {
                   </p>
                 </div>
 
-                <p className="text-sm text-zinc-400 italic pt-2 font-serif">
+                <div className="flex flex-row items-center gap-2 pt-2">
+                <p className="text-sm text-zinc-400 italic font-serif">
                   Scroll down to unpack my recent work.
                 </p>
+                <button
+                  type="button"
+                  onClick={() => window.dispatchEvent(new CustomEvent('scroll-to-work'))}
+                  className="inline-flex items-center justify-center shrink-0 w-7 h-7 rounded-full border border-zinc-200 text-zinc-400 hover:border-zinc-400 hover:text-zinc-600 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-300 focus:ring-offset-2"
+                  aria-label="Scroll to work section"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
               </div>
 
               {/* Signature */}

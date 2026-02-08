@@ -21,6 +21,12 @@ const DataLabelingCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#666666]">
+      <Link
+        to="/#work"
+        className="fixed bottom-6 right-6 z-50 rounded-full border border-[#E5E5E5] bg-white/90 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#1A1A1A] shadow-[0_8px_24px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:border-[#1A1A1A] transition-colors"
+      >
+        ← Back to Works
+      </Link>
       {/* Sticky Navigation */}
       <div className="sticky top-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
         <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
@@ -421,18 +427,6 @@ const DataLabelingCaseStudy: React.FC = () => {
             product, led by GM, UX, and UX managers to review the tracker, research roadmap, and telemetry
             topics.
           </p>
-        </section>
-
-        {/* Footer */}
-        <section className="py-[60px] px-[80px] bg-[#F8F7F4] border-t border-[#E5E5E5]">
-          <div className="max-w-[1440px] mx-auto text-center">
-            <Link
-              to="/#work"
-              className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
-            >
-              ← Back to Works
-            </Link>
-          </div>
         </section>
       </div>
     </div>

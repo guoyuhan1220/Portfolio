@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 
 const Contact: React.FC = () => {
   return (
-    <div className="py-28 px-6 md:px-12 max-w-2xl mx-auto text-center">
+    <div className="pt-[60px] pb-28 px-6 md:px-12 max-w-2xl mx-auto text-center">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, amount: 0.15 }}
         className="space-y-10"
       >
         <div className="inline-block p-4 bg-white border border-zinc-100 letter-shadow -rotate-2">
@@ -28,7 +28,7 @@ const Contact: React.FC = () => {
           
           <div className="flex justify-center space-x-12 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">
             <a href="https://www.linkedin.com/in/yuhan-guo-33bba296/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-black transition-colors">Read.cv</a>
+            <a href="/Yuhan_CV.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">CV</a>
           </div>
         </div>
 

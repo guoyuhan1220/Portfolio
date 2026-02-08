@@ -763,18 +763,6 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
             </div>
           </div>
         </section>
-
-        {/* Footer */}
-        <section className="py-[60px] px-[80px] bg-[#FAFAFA] border-t border-[#E5E5E5]">
-          <div className="max-w-[1440px] mx-auto text-center">
-            <Link
-              to="/#work"
-              className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
-            >
-              ← Back to Works
-            </Link>
-          </div>
-        </section>
         </div>
       </div>
     </div>
