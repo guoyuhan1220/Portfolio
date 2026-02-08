@@ -36,11 +36,22 @@ const ScrollManager: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       document.body.scrollTop = 0;
     };
 
-    resetScroll();
-    requestAnimationFrame(resetScroll);
-    setTimeout(resetScroll, 0);
-    setTimeout(resetScroll, 100);
-    setTimeout(resetScroll, 300);
+    const isWorkHash = location.pathname === '/' && location.hash === '#work';
+    if (isWorkHash) {
+      // Scroll to works section after layout has rendered
+      const scrollToWork = () => {
+        const el = document.getElementById('work');
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+      requestAnimationFrame(() => requestAnimationFrame(scrollToWork));
+      setTimeout(scrollToWork, 100);
+    } else {
+      resetScroll();
+      requestAnimationFrame(resetScroll);
+      setTimeout(resetScroll, 0);
+      setTimeout(resetScroll, 100);
+      setTimeout(resetScroll, 300);
+    }
 
     if (location.pathname.startsWith('/case-study')) {
       return;
@@ -64,7 +75,7 @@ const ScrollManager: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     return () => {
       lenis.destroy();
     };
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   return <div key={location.pathname}>{children}</div>;
 };

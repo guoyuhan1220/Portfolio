@@ -39,16 +39,16 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#1A1A1A]">
-      {/* Fixed Navigation */}
-      <div className="fixed top-0 left-0 right-0 z-50 px-[80px] pt-[30px]">
+      {/* Sticky Navigation */}
+      <div className="sticky top-0 left-0 right-0 z-50 px-[80px] py-4 backdrop-blur-sm bg-[#FAFAFA]/90 border-b border-[#E5E5E5]">
         <div className="max-w-[1440px] mx-auto flex items-center justify-between">
           <Link
-            to="/"
-            className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors backdrop-blur-sm bg-white/80 px-3 py-1.5 rounded"
+            to="/#work"
+            className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
-            ← Back to Portfolio
+            ← Back to Works
           </Link>
-          <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] backdrop-blur-sm bg-white/80 px-3 py-1.5 rounded">
+          <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
             Case Study // Artifact Lifecycle
           </span>
         </div>
@@ -379,6 +379,18 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
               </div>
             </section>
           </article>
+
+          {/* Footer */}
+          <section className="py-[60px] px-[80px] bg-[#F8F7F4] border-t border-[#E5E5E5]">
+            <div className="max-w-[1440px] mx-auto text-center">
+              <Link
+                to="/#work"
+                className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
+              >
+                ← Back to Works
+              </Link>
+            </div>
+          </section>
         </div>
       </div>
     </div>

@@ -27,10 +27,10 @@ const QuickSuiteCaseStudy: React.FC = () => {
       <div className="sticky top-0 z-50 bg-[#F8F7F4]/80 backdrop-blur-sm border-b border-[#E5E5E5]">
         <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
           <Link
-            to="/"
+            to="/#work"
             className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
-            ← Back to Portfolio
+            ← Back to Works
           </Link>
           <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
             Case Study // Quick Suite
@@ -494,10 +494,10 @@ const QuickSuiteCaseStudy: React.FC = () => {
       <section className="py-[60px] px-[80px] bg-[#F5F4F1] border-t border-[#E5E5E5]">
         <div className="max-w-[1440px] mx-auto text-center">
           <Link
-            to="/"
+            to="/#work"
             className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
-            ← Back to Portfolio
+            ← Back to Works
           </Link>
         </div>
       </section>

@@ -20,20 +20,23 @@ const SageMakerGeospatialCaseStudy: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-[80px] font-sans text-[#666666]">
-      <div className="max-w-[1440px] mx-auto space-y-[40px]">
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#666666]">
+      {/* Sticky Navigation */}
+      <div className="sticky top-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
+        <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
           <Link
-            to="/"
+            to="/#work"
             className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
-            ← Back to Portfolio
+            ← Back to Works
           </Link>
           <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
             Case Study // SageMaker Geospatial
           </span>
         </div>
+      </div>
 
+      <div className="max-w-[1440px] mx-auto px-[80px] py-[60px] space-y-[40px]">
         <section className="space-y-[40px]">
           <div className="inline-block px-4 py-2 border border-[#E5E5E5] rounded-[20px] bg-[#0D6E6E10] text-[#0D6E6E] text-[11px] font-mono font-semibold uppercase tracking-[1.5px] mb-6">
             CASE STUDY
@@ -227,6 +230,18 @@ const SageMakerGeospatialCaseStudy: React.FC = () => {
           </div>
           <div className="pl-4 border-l-2 text-sm" style={{ borderColor: accent }}>
             “We improved efficiency by almost 50% and cut costs by 600%.” — Customer impact quote
+          </div>
+        </section>
+
+        {/* Footer */}
+        <section className="py-[60px] px-[80px] bg-[#F8F7F4] border-t border-[#E5E5E5]">
+          <div className="max-w-[1440px] mx-auto text-center">
+            <Link
+              to="/#work"
+              className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
+            >
+              ← Back to Works
+            </Link>
           </div>
         </section>
       </div>

@@ -67,21 +67,20 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
         to="/#work"
         className="fixed bottom-6 right-6 z-50 rounded-full border border-[#E5E5E5] bg-white/90 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#1A1A1A] shadow-[0_8px_24px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:border-[#1A1A1A] transition-colors"
       >
-        Back to Work
+        ← Back to Works
       </Link>
-      <div className="py-[60px] px-[80px]">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="flex items-center justify-between">
-            <Link
-              to="/"
-              className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
-            >
-              ← Back to Portfolio
-            </Link>
-            <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
-              Case Study // GenAI Evaluation
-            </span>
-          </div>
+      {/* Sticky Navigation */}
+      <div className="sticky top-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
+        <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
+          <Link
+            to="/#work"
+            className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
+          >
+            ← Back to Works
+          </Link>
+          <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
+            Case Study // GenAI Evaluation
+          </span>
         </div>
       </div>
 
@@ -762,6 +761,18 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <section className="py-[60px] px-[80px] bg-[#FAFAFA] border-t border-[#E5E5E5]">
+          <div className="max-w-[1440px] mx-auto text-center">
+            <Link
+              to="/#work"
+              className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
+            >
+              ← Back to Works
+            </Link>
           </div>
         </section>
         </div>

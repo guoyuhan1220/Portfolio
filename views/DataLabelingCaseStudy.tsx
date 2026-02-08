@@ -20,20 +20,23 @@ const DataLabelingCaseStudy: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] py-[60px] px-[80px] font-sans text-[#666666]">
-      <div className="max-w-[1000px] mx-auto space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
-        <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#666666]">
+      {/* Sticky Navigation */}
+      <div className="sticky top-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
+        <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
           <Link
-            to="/"
+            to="/#work"
             className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
           >
-            ← Back to Portfolio
+            ← Back to Works
           </Link>
           <span className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px]">
             Case Study // Annotation Platform
           </span>
         </div>
+      </div>
 
+      <div className="max-w-[1000px] mx-auto px-[80px] py-[60px] space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
         <section className="space-y-[40px]">
           <div className="space-y-6">
             <div className="space-y-3">
@@ -418,6 +421,18 @@ const DataLabelingCaseStudy: React.FC = () => {
             product, led by GM, UX, and UX managers to review the tracker, research roadmap, and telemetry
             topics.
           </p>
+        </section>
+
+        {/* Footer */}
+        <section className="py-[60px] px-[80px] bg-[#F8F7F4] border-t border-[#E5E5E5]">
+          <div className="max-w-[1440px] mx-auto text-center">
+            <Link
+              to="/#work"
+              className="text-[11px] font-mono text-[#666666] uppercase tracking-[1.5px] hover:text-[#1A1A1A] transition-colors"
+            >
+              ← Back to Works
+            </Link>
+          </div>
         </section>
       </div>
     </div>

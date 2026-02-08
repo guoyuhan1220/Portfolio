@@ -98,9 +98,9 @@ export const projects: Project[] = [
     year: '2024',
     tags: ['Actions', 'Integration', 'Workflows'],
     description: 'Led the design of a scalable action-connector framework, streamlining MCP-based setup and integrating connectors into conversational flows so business users can act instantly, without leaving context.',
-    imageUrl: '/action new.png',
+    imageUrl: '/Q business action connector/Integration.png',
     videoUrl: null,
-    thumbnailUrl: '/action new.png',
+    thumbnailUrl: '/Q business action connector/Integration.png',
     rotation: -2,
     role: 'Senior Product Designer',
     impact: 'Enterprise throughput • Precision 94.2%'
