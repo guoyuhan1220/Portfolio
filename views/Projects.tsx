@@ -22,8 +22,12 @@ export interface Project {
 
 const GEOSPATIAL_DEMO_URL = 'https://youtube.com/watch?t=2450&v=TL2HtX-FmiQ&feature=youtu.be';
 
-const renderProjectDescription = (project: Project) => {
+const renderProjectDescription = (project: Project, includeLink: boolean = true) => {
   if (project.id !== '006') {
+    return project.description;
+  }
+
+  if (!includeLink) {
     return project.description;
   }
 
@@ -66,9 +70,9 @@ export const projects: Project[] = [
     year: '2024',
     tags: ['Governance', 'Provenance', 'NDA'],
     description: 'End-to-end management of artifacts with provenance tracking, human-in-the-loop verification, and automated lifecycle policies. (Placeholder — visuals coming soon.)',
-    imageUrl: '/Artifact/galleryGrid.png',
+    imageUrl: '/Artifact/Artifact%20hub/Featured.jpg',
     videoUrl: null,
-    thumbnailUrl: '/Artifact/galleryGrid.png',
+    thumbnailUrl: '/Artifact/Artifact%20hub/Featured.jpg',
     rotation: -1,
     role: 'Senior Product Designer',
     impact: 'Policy-driven lifecycle • Audit-ready metadata'
@@ -223,7 +227,6 @@ const ProjectPreview: React.FC<{
             <div className="absolute inset-0 bg-gradient-to-t from-white/45 via-white/5 to-transparent" />
             <div className="absolute bottom-4 left-4 max-w-[80%]">
               <div className="inline-block bg-black/40 backdrop-blur-sm px-3 py-2 rounded-sm border border-white/10">
-                <p className="text-[10px] font-mono uppercase tracking-widest text-white/80">Project</p>
                 <p className="text-xl font-serif italic text-white leading-tight">{project.title}</p>
                 <p className="text-[10px] font-mono uppercase tracking-widest text-white/70 mt-1">
                   {project.category}
@@ -609,6 +612,7 @@ export const ProjectModal: React.FC<{
   const caseStudyRoute = project ? caseStudyRoutes[project.id] : undefined;
 
   const isFtux = project.id === '003';
+  const isGeospatialModal = project.id === '006';
   const ftuxModalVideo = '/FTUX short.mp4';
   const ftuxModalPoster = '/FTUX video cover.png';
   const ftuxVideoRef = useRef<HTMLVideoElement>(null);
@@ -648,7 +652,7 @@ export const ProjectModal: React.FC<{
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.96, opacity: 0, y: 18 }}
           transition={{ type: 'spring', damping: 24, stiffness: 240 }}
-          className={`relative w-full ${isFtux ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
+          className={`relative w-full ${isFtux || isGeospatialModal ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -770,6 +774,50 @@ export const ProjectModal: React.FC<{
                       Impact: <span className="text-zinc-800">{project.impact}</span>
                     </p>
                   </div>
+                </div>
+              </div>
+            ) : isGeospatialModal ? (
+              <div className="grid md:grid-cols-[1fr_1fr] gap-8 items-start">
+                <div className="space-y-4">
+                  <div className="relative overflow-hidden rounded-sm border border-zinc-200 bg-zinc-900">
+                    <img
+                      src="/Geospatial/map.gif"
+                      alt={project.title}
+                      className="w-full h-full object-contain bg-zinc-900"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
+                      Project #{project.id}
+                    </p>
+                    <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
+                    <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+                      {project.category} • {project.year}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-base text-zinc-600 leading-relaxed">
+                    {renderProjectDescription(project, false)}
+                  </p>
+                  <a
+                    href={GEOSPATIAL_DEMO_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center"
+                  >
+                    View Demo
+                  </a>
                 </div>
               </div>
             ) : (
@@ -911,15 +959,6 @@ const Projects: React.FC = () => {
           Postcards from Projects
         </motion.h2>
         
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="text-zinc-500 font-serif italic text-base max-w-xl mx-auto"
-        >
-          Flip each card to read the story behind the work. Click the stamp to dive deeper.
-        </motion.p>
       </div>
 
       {/* Stacked Mail Cards */}
