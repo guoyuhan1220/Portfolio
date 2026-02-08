@@ -86,8 +86,9 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
       </div>
 
       <section className="relative overflow-hidden bg-[#fcf7e9] rounded-[32px] mx-[80px] my-[40px] px-12 md:px-16 py-16 md:py-20">
-        <div className="relative z-10 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
-          <div className="space-y-6">
+        <div className="relative z-10 max-w-[1440px] mx-auto">
+          <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
+            <div className="space-y-6">
             <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#9ca3af]">Overview</p>
             <h1 className="text-[48px] md:text-[64px] font-serif font-medium text-[#16161d] leading-[1.05]">
               Envisioning unified GenAI application evaluation
@@ -119,11 +120,12 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
             />
           </div>
         </div>
+        </div>
       </section>
 
       <div className="py-[60px] px-[80px]">
         <div className="max-w-[1440px] mx-auto space-y-[64px]">
-          <section className="space-y-8 border-t border-[#E5E5E5] pt-12">
+          <section className="space-y-8 border-t border-[#E5E5E5] pt-12 max-w-[1000px] mx-auto">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#9ca3af]">
                 Problem
@@ -200,18 +202,20 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
           </section>
 
           <section className="relative left-1/2 right-1/2 w-screen -mx-[50vw] bg-[#fcf7e9] px-[80px] py-12 text-center md:py-16">
-            <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#9ca3af]">
-              Goal
-            </p>
-            <h4
-              className="mt-6 max-w-[1000px] mx-auto text-[32px] md:text-[44px] lg:text-[60px] font-serif font-normal text-[#e77625] leading-[1.2]"
-              style={{ fontFamily: 'Newsreader, serif' }}
-            >
-              Design a unified GenAI application evaluation framework that serves multiple AWS teams.
-            </h4>
+            <div className="max-w-[1440px] mx-auto">
+              <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#9ca3af]">
+                Goal
+              </p>
+              <h4
+                className="mt-6 max-w-[1000px] mx-auto text-[32px] md:text-[44px] lg:text-[60px] font-serif font-normal text-[#e77625] leading-[1.2]"
+                style={{ fontFamily: 'Newsreader, serif' }}
+              >
+                Design a unified GenAI application evaluation framework that serves multiple AWS teams.
+              </h4>
+            </div>
           </section>
 
-          <section className="space-y-10 border-t border-zinc-200/70 pt-10">
+          <section className="space-y-10 border-t border-zinc-200/70 pt-10 max-w-[1000px] mx-auto">
           <div className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#9ca3af]">
             Research
           </div>
@@ -360,17 +364,18 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
         </section>
 
           <section className="relative left-1/2 right-1/2 w-screen -mx-[50vw] bg-[#fcf7e9] px-[80px] py-16 md:py-20 min-h-[480px] text-left">
-            <div className="max-w-[1440px] mx-auto space-y-10 flex flex-col justify-center items-start min-h-[480px]">
-              <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
-                Research outcome
-              </p>
-              <h2
-                className="text-[24px] md:text-[30px] lg:text-[36px] font-serif font-normal text-[#16161d] tracking-[-0.02em] leading-[1.4]"
-                style={{ fontFamily: 'Newsreader, serif' }}
-              >
-                Key insights: The four pillars of GenAI app evaluation
-              </h2>
-              <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+            <div className="max-w-[1440px] mx-auto">
+              <div className="max-w-[1000px] mx-auto space-y-10 flex flex-col justify-center items-start min-h-[480px]">
+                <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
+                  Research outcome
+                </p>
+                <h2
+                  className="text-[24px] md:text-[30px] lg:text-[36px] font-serif font-normal text-[#16161d] tracking-[-0.02em] leading-[1.4]"
+                  style={{ fontFamily: 'Newsreader, serif' }}
+                >
+                  Key insights: The four pillars of GenAI app evaluation
+                </h2>
+                <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
                 <div className="space-y-4">
                   <svg
                     width="24"
@@ -511,13 +516,14 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
                     Analyze live user feedback and app responses to refine testing prompts and app configs.
                   </p>
                 </div>
+                </div>
               </div>
             </div>
           </section>
 
           <section className="relative left-1/2 right-1/2 w-screen -mx-[50vw] px-[80px] py-16 md:py-20">
             <div className="max-w-[1440px] mx-auto space-y-12">
-              <div className="space-y-4">
+              <div className="space-y-4 max-w-[1000px] mx-auto">
                 <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
                   Solution
                 </p>
@@ -528,7 +534,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
                   A unified evaluation system built around four pillars
                 </h2>
               </div>
-              <div className="space-y-16">
+              <div className="space-y-16 max-w-[1000px] mx-auto">
                 {pillarSteps.map((step, index) => (
                   <div
                     key={step.title}
@@ -575,7 +581,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
 
         <section className="relative left-1/2 right-1/2 w-screen -mx-[50vw] px-[80px] py-16 md:py-20">
           <div className="max-w-[1440px] mx-auto space-y-[100px] pb-[60px]">
-            <div className="space-y-4">
+            <div className="space-y-4 max-w-[1000px] mx-auto">
               <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
                 Impact
               </p>
@@ -620,7 +626,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-[1000px] mx-auto">
               <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
                 Cross-team alignment
               </p>
@@ -648,7 +654,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-[1000px] mx-auto">
               <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
                 Impact
               </p>
@@ -658,7 +664,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
               >
                 Force‑multiplier
               </h2>
-              <p className="text-[18px] text-[#1A1A1A] leading-[1.6] max-w-[980px]">
+              <p className="text-[18px] text-[#1A1A1A] leading-[1.6]">
                 Influenced delivery of 4 Tier 2 projects and 3 Tier 2 roadmap items across Bedrock and Q
                 Business teams.
               </p>
@@ -669,7 +675,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
               />
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-6 max-w-[1000px] mx-auto">
               <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
                 Impact
               </p>
@@ -679,7 +685,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
               >
                 Pattern scalability
               </h2>
-              <p className="text-[18px] text-[#1A1A1A] leading-[1.6] max-w-[980px]">
+              <p className="text-[18px] text-[#1A1A1A] leading-[1.6]">
                 <span className="text-[#e77625]">Traceability design pattern</span> was adopted by Bedrock, Q
                 Business and CloudWatch team for tracing features.
               </p>
@@ -699,7 +705,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
               </div>
             </div>
 
-            <div className="space-y-8">
+            <div className="space-y-8 max-w-[1000px] mx-auto">
               <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#16161d]/50">
                 Quote
               </p>

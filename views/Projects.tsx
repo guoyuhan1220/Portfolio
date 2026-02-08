@@ -156,9 +156,9 @@ export const projects: Project[] = [
     tags: ['Okta', 'Automation', 'Provisioning'],
     description:
       "Led the end-to-end design of Okta’s enterprise-grade no-code integration platform, empowering users to automate complex business processes without writing a single line of code. The solution centers on an intuitive drag-and-drop canvas where users can connect third-party applications to build robust, trigger-based workflows that execute automatically.",
-    imageUrl: '/Okta.png',
+    imageUrl: '/Okta/Okta.png',
     videoUrl: null,
-    thumbnailUrl: '/Okta.png',
+    thumbnailUrl: '/Okta/Okta.png',
     rotation: -2,
     role: 'Senior Product Designer',
     impact: 'Faster access changes • Reduced admin overhead'
@@ -613,6 +613,7 @@ export const ProjectModal: React.FC<{
 
   const isFtux = project.id === '003';
   const isGeospatialModal = project.id === '006';
+  const isAutomationWorkflow = project.id === '008';
   const ftuxModalVideo = '/FTUX short.mp4';
   const ftuxModalPoster = '/FTUX video cover.png';
   const ftuxVideoRef = useRef<HTMLVideoElement>(null);
@@ -652,7 +653,7 @@ export const ProjectModal: React.FC<{
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.96, opacity: 0, y: 18 }}
           transition={{ type: 'spring', damping: 24, stiffness: 240 }}
-          className={`relative w-full ${isFtux || isGeospatialModal ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
+          className={`relative w-full ${isFtux || isGeospatialModal || isAutomationWorkflow ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -817,6 +818,50 @@ export const ProjectModal: React.FC<{
                     className="inline-block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center"
                   >
                     View Demo
+                  </a>
+                </div>
+              </div>
+            ) : isAutomationWorkflow ? (
+              <div className="grid md:grid-cols-[1fr_1fr] gap-8 items-start">
+                <div className="space-y-4">
+                  <div className="relative overflow-hidden rounded-sm border border-zinc-200 bg-transparent">
+                    <img
+                      src="/Okta/cover.png"
+                      alt={project.title}
+                      className="w-full h-full object-contain bg-transparent"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
+                      Project #{project.id}
+                    </p>
+                    <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
+                    <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+                      {project.category} • {project.year}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-base text-zinc-600 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <a
+                    href="https://www.okta.com/products/workflows/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center"
+                  >
+                    Learn More
                   </a>
                 </div>
               </div>
