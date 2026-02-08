@@ -1,10 +1,21 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { motion, useScroll, useTransform, useMotionValue, animate } from 'framer-motion';
+
+const ENVELOPE_SEEN_KEY = 'envelope-opened';
 
 const Intro: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const envelopeRef = useRef<HTMLDivElement>(null);
   const [isClicked, setIsClicked] = useState(false);
+
+  // Check if user has seen the envelope before
+  const [hasSeenEnvelope] = useState(() => {
+    try {
+      return localStorage.getItem(ENVELOPE_SEEN_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  });
   
   // Base isometric angle (viewing from slightly above)
   const baseRotateX = 8;
@@ -19,13 +30,25 @@ const Intro: React.FC = () => {
   });
 
   // Click-triggered progress
-  const clickProgress = useMotionValue(0);
+  const clickProgress = useMotionValue(hasSeenEnvelope ? 1 : 0);
 
   // Combine scroll and click progress
   const combinedProgress = useTransform(
     [scrollYProgress, clickProgress],
     ([scroll, click]: number[]) => Math.max(scroll, click)
   );
+
+  // Mark envelope as seen once user interacts
+  useEffect(() => {
+    const unsubscribe = combinedProgress.on('change', (v) => {
+      if (v > 0.2) {
+        try {
+          localStorage.setItem(ENVELOPE_SEEN_KEY, 'true');
+        } catch { /* ignore */ }
+      }
+    });
+    return unsubscribe;
+  }, [combinedProgress]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!envelopeRef.current || isClicked) return;
@@ -87,7 +110,7 @@ const Intro: React.FC = () => {
   const paperTexture = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)'/%3E%3C/svg%3E")`;
 
   return (
-    <div ref={containerRef} className="min-h-[150vh] relative">
+    <div ref={containerRef} className={`${hasSeenEnvelope ? 'min-h-screen' : 'min-h-[150vh]'} relative`}>
       {/* Sticky container */}
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden" style={{ perspective: '1200px' }}>
         

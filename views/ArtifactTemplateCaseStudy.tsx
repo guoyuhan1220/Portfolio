@@ -124,19 +124,19 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 </h2>
                 <div className="space-y-4 text-[16px] font-sans text-[#666666] leading-[1.7]">
                   <p>
-                    I joined the team to tackle a frustrating problem: our users were creating documents, presentations, and reports constantly, but the tools weren't helping them. I watched people struggle with three specific issues that were wasting hours of their time.
+                    Users were creating documents, presentations, and reports constantly — but the tools weren't helping them. Three issues kept surfacing:
                   </p>
                   <p>
-                    First, blank pages with no direction. Users would open the tool and just stare. "What sections do I need? How should I organize this? Am I forgetting something?" There was no guidance, no scaffolding. Just a blinking cursor waiting for them to figure it out on their own.
+                    <strong className="text-[#1A1A1A]">No guidance.</strong> Users opened to a blank page with no structure, no scaffolding — just a blinking cursor.
                   </p>
                   <p>
-                    Second, formatting that broke their flow. Generated documents only delivered content—users had to leave the tool to manually apply brand styles, then return and continue writing. That constant context switch broke focus and had to be repeated every time they created something new. A marketing manager told me: "After I finish writing, I have to stop and go apply our brand theme. It completely breaks my flow. And next week? I'll do this exact same setup again."
+                    <strong className="text-[#1A1A1A]">Broken flow.</strong> Generated content had no styling. Users had to leave the tool to apply brand themes, then come back — every single time.
                   </p>
                   <p>
-                    Third, starting from scratch every time. The most frustrating thing I saw: a marketing manager creating her 6th weekly report, manually typing out the same structure she'd used the previous 5 weeks. The tool had no memory. It learned nothing. Users were recreating the same work patterns week after week, and the system never got smarter.
+                    <strong className="text-[#1A1A1A]">No memory.</strong> The same report, the same structure, rebuilt from scratch every week. The tool never learned from past work.
                   </p>
                   <p>
-                    This wasn't about small friction—people were wasting hours on setup instead of doing their actual work. The tool was supposed to help them create faster, but it was actually making things slower.
+                    People were wasting hours on setup instead of doing their actual work.
                   </p>
                 </div>
               </div>
@@ -157,16 +157,13 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                 </h2>
                 <div className="space-y-4 text-[16px] font-sans text-[#666666] leading-[1.7]">
                   <p>
-                    I started by analyzing over 2,000 documents that users had generated with the current tool. I wanted to understand the patterns—what worked, what didn't, and where people got stuck. The data revealed something important: users were already telling us what they wanted, but we weren't listening carefully enough.
+                    I analyzed over 2,000 user-generated documents to find patterns. The data revealed that users were already signaling what they wanted — phrases like "Create a brief PRD" carry clear intent the system should act on automatically.
                   </p>
                   <p>
-                    When someone says "Create a brief PRD" or "Quick deck for executives," those phrases carry clear intent. The system should map these signals automatically. When the prompt is vague, we should ask one clarification question before generating, not present a long configuration form that kills momentum.
+                    <strong className="text-[#1A1A1A]">Template means two things.</strong> Sometimes structure ("What sections should a PRD have?"), sometimes styling ("Make this look executive-appropriate"). These needed separate solutions.
                   </p>
                   <p>
-                    I also discovered that "template" meant two completely different things to users. Sometimes they meant structure—"What sections should be in a PRD?" Other times they meant styling—"Make this look executive-appropriate." I realized these were two separate problems that needed separate solutions.
-                  </p>
-                  <p>
-                    Most importantly, I learned that different content types need fundamentally different approaches. Documents aren't presentations. Presentations aren't spreadsheets. When I tested a "one size fits all" workflow, it failed. But when I designed different flows for each type—respecting how people actually work with each format—completion rates jumped 34%.
+                    <strong className="text-[#1A1A1A]">Content types need different flows.</strong> Documents aren't presentations. A "one size fits all" workflow failed — but type-specific flows boosted completion rates by 34%.
                   </p>
                 </div>
               </div>
@@ -175,7 +172,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
             <hr className="border-[#E5E5E5]" />
 
             <section className="space-y-[40px]" data-section="solution">
-              <div className="max-w-[800px] mx-auto">
+              <div className="max-w-[1100px] mx-auto">
                 <h2
                   className="text-[32px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
                   style={{ fontFamily: 'Newsreader, serif' }}
@@ -354,25 +351,18 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                   What I Learned
                 </h2>
 
-                <div className="space-y-8 text-[16px] font-sans text-[#666666] leading-[1.7]">
+                <div className="space-y-6 text-[16px] font-sans text-[#666666] leading-[1.7]">
                   <p>
-                    When I started this project, I almost made a critical mistake: I was going to build one unified workflow for all artifact types. It seemed logical—one system, one pattern, easier to maintain. But when I tested that approach, it failed. Documents aren't presentations. Presentations aren't spreadsheets. Each type has fundamentally different needs, and respecting those differences led to 34% higher completion rates.
+                    <strong className="text-[#1A1A1A]">One workflow doesn't fit all.</strong> I almost built a single unified flow for every artifact type. Testing proved it wrong — type-specific workflows drove 34% higher completion.
                   </p>
-
                   <p>
-                    The biggest surprise was how much users loved smart suggestions. Pre-filling 70% of the prompt based on their history eliminated so much friction that it became the most-loved feature. The key insight here: people already have patterns—the tool just needs to recognize them. A marketing manager creating her weekly report doesn't want to start from scratch every time. She wants the system to remember that she uses Google Analytics, focuses on these specific metrics, and needs it formatted for executives.
+                    <strong className="text-[#1A1A1A]">Users already have patterns.</strong> Pre-filling 70% of the prompt from history became the most-loved feature. The tool just needed to remember what users kept repeating.
                   </p>
-
                   <p>
-                    The three-tier brand system solved what seemed like an impossible problem. Brand teams wanted control and compliance. Users wanted freedom and flexibility. By creating layers—company brand (automatic), team brand kit (suggested), personal style (full control)—I gave both groups what they needed. We achieved 94% brand compliance with high user satisfaction. Previously, these seemed incompatible.
+                    <strong className="text-[#1A1A1A]">Brand control and user freedom can coexist.</strong> A three-tier system — company (automatic), team (suggested), personal (full control) — hit 94% brand compliance without sacrificing satisfaction.
                   </p>
-
                   <p>
-                    Export became a design moment, not just a technical step. I initially thought export was just "choose a format." But I realized: this is when people finally see the full styled output. Making this a moment to explore alternative styles added value without adding complexity earlier in the flow. Users could focus on writing first, then explore styling options when they were ready.
-                  </p>
-
-                  <p>
-                    If I were to do this again, I'd test edge cases earlier—100-page documents, multi-format exports, collaboration scenarios. I'd also instrument granular analytics from day one to understand exactly where people get stuck. But the core lesson remains: the best solutions come from deeply understanding the specific problem, not from applying generic patterns.
+                    <strong className="text-[#1A1A1A]">Export is a design moment.</strong> Users focus on writing first, then explore styling at export. Separating these steps added value without adding friction.
                   </p>
                 </div>
               </div>

@@ -328,37 +328,28 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
             }
           `}</style>
           <div className="relative overflow-hidden">
-            <div className="quote-marquee flex w-max gap-4">
-              <img
-                src="/Evaluation/Research/workshop/quote 1.png"
-                alt="Workshop quote 1"
-                className="h-[180px] w-[360px] flex-none rounded-[12px] object-contain"
-              />
-              <img
-                src="/Evaluation/Research/workshop/quote 2.png"
-                alt="Workshop quote 2"
-                className="h-[180px] w-[360px] flex-none rounded-[12px] object-contain"
-              />
-              <img
-                src="/Evaluation/Research/workshop/quote 3.png"
-                alt="Workshop quote 3"
-                className="h-[180px] w-[360px] flex-none rounded-[12px] object-contain"
-              />
-              <img
-                src="/Evaluation/Research/workshop/quote 1.png"
-                alt="Workshop quote 1 duplicate"
-                className="h-[180px] w-[360px] flex-none rounded-[12px] object-contain"
-              />
-              <img
-                src="/Evaluation/Research/workshop/quote 2.png"
-                alt="Workshop quote 2 duplicate"
-                className="h-[180px] w-[360px] flex-none rounded-[12px] object-contain"
-              />
-              <img
-                src="/Evaluation/Research/workshop/quote 3.png"
-                alt="Workshop quote 3 duplicate"
-                className="h-[180px] w-[360px] flex-none rounded-[12px] object-contain"
-              />
+            <div className="quote-marquee flex w-max gap-5">
+              {[
+                { quote: "Thanks for hosting this workshop. I\u2019ve learned a lot during those two days. My knowledge of GenAI evaluation raised from 10 to 80.", role: "DevOps Engineer" },
+                { quote: "Your presentation was stellar \u2014 the session was incredibly informative, thank you for bringing us together.", role: "Senior Research Engineer" },
+                { quote: "I truly learned a lot about how this feature impacts multiple users from a real-world perspective. Having worked with many designers, your ability to connect user needs with technical solutions is top notch.", role: "Sr. Applied Scientist" },
+                { quote: "Thanks for hosting this workshop. I\u2019ve learned a lot during those two days. My knowledge of GenAI evaluation raised from 10 to 80.", role: "DevOps Engineer" },
+                { quote: "Your presentation was stellar \u2014 the session was incredibly informative, thank you for bringing us together.", role: "Senior Research Engineer" },
+                { quote: "I truly learned a lot about how this feature impacts multiple users from a real-world perspective. Having worked with many designers, your ability to connect user needs with technical solutions is top notch.", role: "Sr. Applied Scientist" },
+              ].map((item, i) => (
+                <div key={i} className="w-[380px] flex-none">
+                  <div className="relative bg-white rounded-[16px] rounded-bl-[4px] border border-[#E8E8E8] shadow-[0_1px_3px_rgba(0,0,0,0.04)] px-5 py-4">
+                    <p className="text-[14px] text-[#3a3a42] leading-[1.65]">
+                      &ldquo;{item.quote}&rdquo;
+                    </p>
+                    <div className="absolute -bottom-[8px] left-[20px] w-0 h-0 border-l-[8px] border-l-transparent border-t-[8px] border-t-white border-r-[8px] border-r-transparent" />
+                    <div className="absolute -bottom-[10px] left-[19px] w-0 h-0 border-l-[9px] border-l-transparent border-t-[9px] border-t-[#E8E8E8] border-r-[9px] border-r-transparent -z-10" />
+                  </div>
+                  <p className="mt-3 ml-5 text-[11px] font-mono text-[#999] uppercase tracking-[0.1em]">
+                    {item.role}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

@@ -50,14 +50,14 @@ const renderProjectDescription = (project: Project, includeLink: boolean = true)
 export const projects: Project[] = [
   {
     id: '001',
-    title: 'Quick chat assistant',
+    title: 'Amazon Quick Suite: Leading the Design of an Enterprise AI Platform',
     category: 'Conversational AI',
     year: '2025',
     tags: ['Agents', 'LLM UX', 'Orchestration'],
-    description: 'The centralized agentic interface for AWS. Engineered the interaction model for multi-agent synthesis, allowing seamless transitions between natural language queries and complex cloud infrastructure tasks.',
-    imageUrl: '/quick-chat-thumb.svg',
+    description: 'Designed the centralized agentic interface unifying five fragmented tools into one conversational experience, serving 639k users with 92.5% weekly retention.',
+    imageUrl: '/quick%20suite%20project/redesign.png',
     videoUrl: '/Quick%20chat.mp4',
-    thumbnailUrl: null,
+    thumbnailUrl: '/quick%20suite%20project/redesign.png',
     rotation: 2,
     span: 2,
     role: 'Principal Product Designer',
@@ -65,11 +65,11 @@ export const projects: Project[] = [
   },
   {
     id: '002',
-    title: 'Artifact lifecycle',
+    title: 'AI-Powered Document Creation and Management for Business Teams',
     category: 'Asset Governance',
     year: '2024',
     tags: ['Governance', 'Provenance', 'NDA'],
-    description: 'End-to-end management of artifacts with provenance tracking, human-in-the-loop verification, and automated lifecycle policies. (Placeholder — visuals coming soon.)',
+    description: 'Led the design of an AI artifact lifecycle that helps business users turn generated content into trusted, reusable documents—improving clarity, collaboration, and downstream execution at scale.',
     imageUrl: '/Artifact/Artifact%20hub/Featured.jpg',
     videoUrl: null,
     thumbnailUrl: '/Artifact/Artifact%20hub/Featured.jpg',
@@ -79,7 +79,7 @@ export const projects: Project[] = [
   },
   {
     id: '003',
-    title: 'First time UX',
+    title: 'Onboarding that delivers value in 5 minutes',
     category: 'Onboarding',
     year: '2024',
     tags: ['FTUX', 'Onboarding', 'Guidance'],
@@ -93,11 +93,11 @@ export const projects: Project[] = [
   },
   {
     id: '004',
-    title: 'Q Business action connector',
+    title: 'From Insight to Action: Shipping Action Connectors',
     category: 'Enterprise Intelligence',
     year: '2024',
     tags: ['Actions', 'Integration', 'Workflows'],
-    description: 'Strategic integration of conversational AI with business application ecosystems. Enabling automated workflows across Slack, Teams, and standard enterprise toolkits.',
+    description: 'Led the design of a scalable action-connector framework, streamlining MCP-based setup and integrating connectors into conversational flows so business users can act instantly, without leaving context.',
     imageUrl: '/action new.png',
     videoUrl: null,
     thumbnailUrl: '/action new.png',
@@ -107,7 +107,7 @@ export const projects: Project[] = [
   },
   {
     id: '005',
-    title: 'GenAI Evaluation',
+    title: 'Measuring AI quality at enterprise scale',
     category: 'Model Strategy',
     year: '2023',
     tags: ['Evaluation', 'Benchmarking', 'Dashboards'],
@@ -121,22 +121,22 @@ export const projects: Project[] = [
   },
   {
     id: '006',
-    title: 'SageMaker Geospatial',
+    title: 'Geospatial ML for 1,500+ organizations',
     category: 'Industrial ML',
     year: '2022',
     tags: ['Mapping', 'ML Ops', 'Visualization'],
     description:
       'Founding designer for SageMaker Geospatial, transformed enterprise geospatial ML adoption from 3% to production-ready solution. Designed industry-first collaborative map visualization (patent filed 2023), delivered 600% cost savings for DataFarming, and scaled design to Earth on AWS Viewer serving 1,500+ organizations.',
-    imageUrl: '/geospatial.png',
+    imageUrl: '/Geospatial/map.gif',
     videoUrl: null,
-    thumbnailUrl: '/map.gif',
+    thumbnailUrl: '/Geospatial/map.gif',
     rotation: -1,
     role: 'Senior Product Designer',
     impact: 'Petabyte scale • Sub-meter resolution'
   },
   {
     id: '007',
-    title: 'Data labeling ground truth',
+    title: 'Scalable data labeling for ML training',
     category: 'Data Operations',
     year: '2021',
     tags: ['Labeling', 'Quality', 'Workflow'],
@@ -150,7 +150,7 @@ export const projects: Project[] = [
   },
   {
     id: '008',
-    title: 'Automation workflow',
+    title: 'No-code workflow automation platform',
     category: 'Identity Automation',
     year: '2017',
     tags: ['Okta', 'Automation', 'Provisioning'],
@@ -952,21 +952,193 @@ const caseStudyRoutes: Record<string, string> = {
   '007': '/case-study/data-labeling-ground-truth',
 };
 
+// Impact highlights per project
+const impactHighlights: Record<string, string> = {
+  '001': '639k users • 92.5% retention',
+  '002': 'End-to-end artifact governance',
+  '004': 'Enterprise connector platform',
+  '003': 'Value in first 5 minutes',
+  '005': 'Funded dedicated team of 12',
+  '006': '600% cost savings • Patent filed',
+  '007': 'Higher label quality at scale',
+  '008': 'No-code enterprise automation',
+};
+
+// Featured project card — large, prominent, image-heavy
+const FeaturedCard: React.FC<{
+  project: Project;
+  onClick: (project: Project) => void;
+  index: number;
+}> = ({ project, onClick, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!videoRef.current) return;
+    if (isHovered) {
+      videoRef.current.play().catch(() => undefined);
+    } else {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  }, [isHovered]);
+
+  const impact = impactHighlights[project.id] ?? project.impact;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="group cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => onClick(project)}
+    >
+      <div
+        className="relative bg-[#FFFDF9] border border-zinc-200/80 rounded-sm overflow-hidden transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1"
+        style={{ boxShadow: '2px 4px 12px rgba(0,0,0,0.05)' }}
+      >
+        {/* Postcard header — perforated edge */}
+        <div className="flex items-center justify-between px-5 py-3 border-b border-dashed border-zinc-200/80">
+          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.25em]">
+            {project.category}
+          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] font-mono text-zinc-400">{project.year}</span>
+            <span className="text-[10px] font-mono text-zinc-300 uppercase tracking-wider">Case Study</span>
+          </div>
+        </div>
+
+        {/* Image area */}
+        <div className="relative overflow-hidden h-[260px] md:h-[300px]">
+          {project.videoUrl && project.id !== '003' ? (
+            <>
+              {project.thumbnailUrl && (
+                <img
+                  src={project.thumbnailUrl}
+                  alt={project.title}
+                  className={`absolute inset-0 w-full h-full object-cover object-left-top transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+                />
+              )}
+              <video
+                ref={videoRef}
+                src={project.videoUrl}
+                muted
+                loop
+                playsInline
+                className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-[1.02] ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+              />
+            </>
+          ) : project.thumbnailUrl ? (
+            <img
+              src={project.thumbnailUrl}
+              alt={project.title}
+              className="w-full h-full object-cover object-left-top transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200" />
+          )}
+          {/* View arrow */}
+          <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+            <div className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center border border-zinc-200/60">
+              <ArrowUpRight className="w-4 h-4 text-zinc-800" />
+            </div>
+          </div>
+        </div>
+
+        {/* Content — postcard message area */}
+        <div className="px-5 py-4 border-t border-dashed border-zinc-200/80">
+          <h3 className="text-lg font-serif text-zinc-900 mb-2 leading-snug">{project.title}</h3>
+          <p className="text-[13px] text-zinc-500 leading-relaxed line-clamp-2 mb-3">{project.description}</p>
+          <div className="flex items-center justify-between pt-3 border-t border-zinc-100">
+            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider">{impact}</span>
+            <span className="text-[10px] font-mono text-zinc-300 group-hover:text-zinc-500 transition-colors">Read case study →</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Postcard-style secondary project card
+const PostcardCard: React.FC<{
+  project: Project;
+  onClick: (project: Project) => void;
+  index: number;
+}> = ({ project, onClick, index }) => {
+  const impact = impactHighlights[project.id] ?? project.impact;
+  const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-30px' }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      className="group cursor-pointer"
+      onClick={() => onClick(project)}
+    >
+      <div
+        className="relative bg-[#FFFDF9] border border-zinc-200/80 rounded-sm overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1"
+        style={{
+          boxShadow: '2px 3px 8px rgba(0,0,0,0.04)',
+        }}
+      >
+        {/* Postcard top edge — perforated / stamp area */}
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-dashed border-zinc-200/80">
+          <span className="text-[9px] font-mono text-zinc-400 uppercase tracking-[0.25em]">
+            {project.category}
+          </span>
+          <span className="text-[9px] font-mono text-zinc-400">{project.year}</span>
+        </div>
+
+        {/* Two-column: image left, text right — like a real postcard */}
+        <div className="flex">
+          {/* Image side */}
+          <div className="w-[45%] shrink-0 relative overflow-hidden">
+            <div className="h-[200px]">
+              {project.thumbnailUrl ? (
+                <img
+                  src={project.thumbnailUrl}
+                  alt={project.title}
+                  className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.05] ${
+                    project.id === '006' ? 'object-contain bg-zinc-900' : project.id === '008' ? 'object-contain bg-[#F0EBE3]' : 'object-cover'
+                  }`}
+                />
+              ) : (
+                <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200" />
+              )}
+            </div>
+          </div>
+
+          {/* Text side — resembles handwritten postcard message */}
+          <div className="flex-1 p-4 flex flex-col justify-between border-l border-dashed border-zinc-200/80 min-h-[200px]">
+            <div>
+              <h3 className="text-lg font-serif text-zinc-900 mb-2 leading-snug">{project.title}</h3>
+              <p className="text-[12px] text-zinc-500 leading-relaxed line-clamp-3">{project.description}</p>
+            </div>
+            <div className="mt-3 pt-2 border-t border-zinc-100">
+              <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider leading-relaxed">{impact}</p>
+              <div className="flex items-center gap-1 mt-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-[10px] font-mono text-zinc-500">{hasCaseStudy ? 'Read case study' : 'View details'}</span>
+                <ArrowUpRight className="w-3 h-3 text-zinc-400" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const Projects: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const primaryIds = new Set(['001', '002', '004']);
-  const primaryProjects = projects.filter((project) => primaryIds.has(project.id));
-  const secondaryProjects = projects.filter((project) => !primaryIds.has(project.id));
-  const workspaceLayout = [
-    { top: '8%', left: '2%', width: '28%', rotate: -8 },
-    { top: '6%', left: '30%', width: '34%', rotate: 3 },
-    { top: '10%', left: '62%', width: '26%', rotate: -5 },
-    { top: '40%', left: '12%', width: '32%', rotate: 5 },
-    { top: '44%', left: '54%', width: '30%', rotate: -3 },
-  ];
-  const handleScatterClick = (project: Project) => {
+
+  const handleProjectClick = (project: Project) => {
     const route = caseStudyRoutes[project.id];
     if (route) {
       navigate(route);
@@ -979,97 +1151,81 @@ const Projects: React.FC = () => {
     setSelectedProject(project);
   };
 
+  // Primary: the 4 case studies you want prominent
+  const primaryIds = new Set(['001', '002', '004', '005']);
+  const primaryProjects = projects.filter((p) => primaryIds.has(p.id));
+  const secondaryProjects = projects.filter((p) => !primaryIds.has(p.id));
+
   return (
-    <div className="py-16 px-6 md:px-12 max-w-5xl mx-auto" ref={containerRef}>
+    <div className="py-20 px-6 md:px-12 lg:px-16 max-w-[1200px] mx-auto" ref={containerRef}>
       {/* Section Header */}
-      <div className="text-center mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      <div className="mb-16 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="inline-block px-4 py-2 border border-zinc-200 rounded-sm mb-6"
+          className="text-[11px] font-mono text-zinc-400 uppercase tracking-[0.3em] mb-4"
         >
-          <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-[0.3em]">
-            Portfolio • Mail Collection
-          </span>
-        </motion.div>
-        
+          Selected Work
+        </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.05 }}
+          className="text-4xl md:text-5xl font-serif text-zinc-900 leading-[1.1] mb-4"
+        >
+          Designing AI products at scale
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="text-4xl font-serif text-zinc-800 mb-3"
+          className="text-lg text-zinc-500 max-w-[640px] mx-auto leading-relaxed"
         >
-          Postcards from Projects
-        </motion.h2>
-        
+          From conversational AI to enterprise automation — designing how millions interact with intelligent systems.
+        </motion.p>
       </div>
 
-      {/* Stacked Mail Cards */}
-      <div className="relative space-y-6">
-        {primaryProjects.map((project, i) => {
-          const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
-          return (
-          <MailCard
+      {/* Primary: Featured project cards — 2-column grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+        {primaryProjects.map((project, i) => (
+          <FeaturedCard
             key={project.id}
             project={project}
+            onClick={handleProjectClick}
             index={i}
-            onSelect={setSelectedProject}
-            stackOffset={0}
-            showShadow={false}
-            disableFlip={hasCaseStudy}
-            onCardClick={hasCaseStudy ? handleScatterClick : undefined}
           />
-        )})}
+        ))}
       </div>
 
-      {/* Workspace scatter */}
-      <div
-        className="relative mt-[60px] min-h-[740px] p-[40px]"
-        style={{ perspective: '1600px' }}
-      >
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            transform: 'rotateX(10deg)',
-            transformOrigin: 'top center',
-          }}
-        />
+      {/* Secondary: Postcard grid */}
+      <div className="mb-16">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex items-center gap-4 mb-8"
+        >
+          <div className="h-px flex-1 bg-zinc-200" />
+          <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.3em] shrink-0">
+            More Projects
+          </span>
+          <div className="h-px flex-1 bg-zinc-200" />
+        </motion.div>
 
-        {secondaryProjects.map((project, index) => {
-          const layout = workspaceLayout[index % workspaceLayout.length];
-          const hasCaseStudy = Boolean(caseStudyRoutes[project.id]);
-          const allowFlip = false;
-          return (
-            <div
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {secondaryProjects.map((project, i) => (
+            <PostcardCard
               key={project.id}
-              className="absolute"
-              style={{
-                top: layout.top,
-                left: layout.left,
-                width: layout.width,
-                transform: 'rotateX(10deg)',
-                transformOrigin: 'top center',
-              }}
-            >
-              <MailCard
-                project={{ ...project, rotation: layout.rotate }}
-                index={index}
-                onSelect={setSelectedProject}
-                stackOffset={0}
-                hoverEffect="tilt"
-                zIndexBase={index + 20}
-                disableFlip={!allowFlip}
-                frontVariant="image-top"
-                onCardClick={allowFlip || !hasCaseStudy ? undefined : handleScatterClick}
-              />
-            </div>
-          );
-        })}
+              project={project}
+              onClick={handleProjectClick}
+              index={i}
+            />
+          ))}
+        </div>
       </div>
-
-      {/* Decorative footer removed */}
 
       {/* Project Detail Modal */}
       {selectedProject && (
