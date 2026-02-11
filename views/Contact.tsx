@@ -28,7 +28,7 @@ const Contact: React.FC = () => {
           
           <div className="flex justify-center space-x-12 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">
             <a href="https://www.linkedin.com/in/yuhan-guo-33bba296/" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">LinkedIn</a>
-            <a href="/Yuhan_CV.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">CV</a>
+            <a href="/Yuhan_CV_compressed.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors" title="Click to view CV">CV</a>
           </div>
         </div>
 
