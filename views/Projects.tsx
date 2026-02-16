@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowUpRight, Play, Pause } from 'lucide-react';
+import { X, ArrowUpRight, Play, Pause, Maximize, Minimize } from 'lucide-react';
 
 export interface Project {
   id: string;
@@ -162,6 +162,21 @@ export const projects: Project[] = [
     rotation: -2,
     role: 'Senior Product Designer',
     impact: 'Faster access changes • Reduced admin overhead'
+  },
+  {
+    id: '009',
+    title: 'When work follows you: AI, agents, and real people',
+    category: 'Vision',
+    year: '2026',
+    tags: ['Autonomous agents', 'Habit', 'Cross-device', 'Vision'],
+    description:
+      'A product vision that helps people form the habit to show up—on phone, desktop, web app, in meetings, on the go. Simple and always with you, designed around how work happens with autonomous agents and real people together.',
+    imageUrl: null,
+    videoUrl: '/New%20vision.mp4',
+    thumbnailUrl: '/morning%20brief.png?v=1',
+    rotation: 1,
+    role: 'Design vision / Exploration',
+    impact: 'Follows you everywhere • Agents + people'
   },
 ];
 
@@ -614,14 +629,21 @@ export const ProjectModal: React.FC<{
   const caseStudyRoute = project ? caseStudyRoutes[project.id] : undefined;
 
   const isFtux = project.id === '003';
+  const isVisionModal = project.id === '009';
   const isGeospatialModal = project.id === '006';
   const isAutomationWorkflow = project.id === '008';
   const ftuxModalVideo = '/FTUX short.mp4';
   const ftuxModalPoster = '/FTUX video cover.png';
+  const visionModalVideo = '/New%20vision.mp4';
   const ftuxVideoRef = useRef<HTMLVideoElement>(null);
+  const visionVideoRef = useRef<HTMLVideoElement>(null);
+  const visionVideoContainerRef = useRef<HTMLDivElement>(null);
   const [ftuxPlaying, setFtuxPlaying] = useState(false);
   const [ftuxProgress, setFtuxProgress] = useState(0);
   const [ftuxDuration, setFtuxDuration] = useState(0);
+  const [visionPlaying, setVisionPlaying] = useState(false);
+  const [visionProgress, setVisionProgress] = useState(0);
+  const [visionDuration, setVisionDuration] = useState(0);
 
   const toggleFtuxPlayback = () => {
     const video = ftuxVideoRef.current;
@@ -632,6 +654,33 @@ export const ProjectModal: React.FC<{
       video.pause();
     }
   };
+
+  const toggleVisionPlayback = () => {
+    const video = visionVideoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => undefined);
+    } else {
+      video.pause();
+    }
+  };
+
+  const [visionFullscreen, setVisionFullscreen] = useState(false);
+  const toggleVisionFullscreen = () => {
+    const container = visionVideoContainerRef.current;
+    if (!container) return;
+    if (!document.fullscreenElement) {
+      container.requestFullscreen().then(() => setVisionFullscreen(true)).catch(() => {});
+    } else {
+      document.exitFullscreen().then(() => setVisionFullscreen(false)).catch(() => {});
+    }
+  };
+
+  useEffect(() => {
+    const handler = () => setVisionFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', handler);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, []);
 
   return (
     <AnimatePresence>
@@ -655,7 +704,7 @@ export const ProjectModal: React.FC<{
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.96, opacity: 0, y: 18 }}
           transition={{ type: 'spring', damping: 24, stiffness: 240 }}
-          className={`relative w-full ${isFtux || isGeospatialModal || isAutomationWorkflow ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
+          className={`relative w-full ${isFtux || isVisionModal || isGeospatialModal || isAutomationWorkflow ? 'max-w-5xl' : 'max-w-3xl'} max-h-[95vh] bg-[#f8f5f0] rounded-sm shadow-2xl overflow-hidden border border-zinc-200/60`}
           onClick={(e) => e.stopPropagation()}
         >
           <button
@@ -675,7 +724,126 @@ export const ProjectModal: React.FC<{
           />
 
           <div className="relative p-7 md:p-10 space-y-8 overflow-y-auto max-h-[95vh]">
-            {isFtux ? (
+            {isVisionModal ? (
+              <div className="grid md:grid-cols-[1.25fr_0.75fr] gap-8 items-start">
+                <div className="space-y-4">
+                  <div
+                    ref={visionVideoContainerRef}
+                    className="flex flex-col rounded-sm border border-zinc-200 bg-zinc-900 overflow-hidden"
+                  >
+                    <div className="relative overflow-hidden min-h-[340px] md:min-h-[420px] flex-1">
+                      <video
+                        ref={visionVideoRef}
+                        src={visionModalVideo}
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-contain bg-zinc-900"
+                        onLoadedMetadata={(event) => {
+                          const target = event.currentTarget;
+                          setVisionDuration(target.duration || 0);
+                        }}
+                        onTimeUpdate={(event) => setVisionProgress(event.currentTarget.currentTime)}
+                        onPlay={() => setVisionPlaying(true)}
+                        onPause={() => setVisionPlaying(false)}
+                      />
+                      <button
+                        type="button"
+                        onClick={toggleVisionPlayback}
+                        className={`absolute inset-0 flex items-center justify-center transition-opacity ${
+                          visionPlaying ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                        }`}
+                        aria-label={visionPlaying ? 'Pause' : 'Play'}
+                      >
+                        <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/90 text-zinc-900 shadow-md border border-white/70">
+                          <Play className="w-5 h-5 ml-0.5" />
+                        </span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); toggleVisionFullscreen(); }}
+                        className="absolute top-3 right-3 p-2 rounded-md bg-black/50 hover:bg-black/70 text-white transition-colors z-10"
+                        aria-label={visionFullscreen ? 'Exit full screen' : 'Full screen'}
+                      >
+                        {visionFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-none border-t border-zinc-600 bg-zinc-900/95 px-3 py-2.5 text-xs text-zinc-300">
+                      <button
+                        type="button"
+                        onClick={toggleVisionPlayback}
+                        className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors shrink-0"
+                        aria-label={visionPlaying ? 'Pause' : 'Play'}
+                      >
+                        {visionPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
+                      </button>
+                      <input
+                        type="range"
+                        min={0}
+                        max={visionDuration || 0}
+                        step={0.1}
+                        value={visionProgress}
+                        onChange={(event) => {
+                          const value = Number(event.target.value);
+                          setVisionProgress(value);
+                          if (visionVideoRef.current) {
+                            visionVideoRef.current.currentTime = value;
+                          }
+                        }}
+                        className="flex-1 accent-zinc-400 min-w-0"
+                      />
+                      <span className="tabular-nums text-[11px] text-zinc-400 shrink-0">
+                        {Math.floor(visionProgress / 60)
+                          .toString()
+                          .padStart(2, '0')}
+                        :
+                        {Math.floor(visionProgress % 60)
+                          .toString()
+                          .padStart(2, '0')}
+                        /{' '}
+                        {Math.floor(visionDuration / 60)
+                          .toString()
+                          .padStart(2, '0')}
+                        :
+                        {Math.floor(visionDuration % 60)
+                          .toString()
+                          .padStart(2, '0')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
+                    <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
+                      {project.category} • {project.year}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[9px] font-mono text-zinc-600 uppercase tracking-wider px-2 py-1 bg-white/60 border border-zinc-200/60 rounded-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <p className="text-base text-zinc-600 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="pt-4 border-t border-zinc-200/60 space-y-2">
+                    <p className="text-[10px] font-mono text-zinc-500">
+                      Impact: <span className="text-zinc-800">{project.impact}</span>
+                    </p>
+                  </div>
+                  <a
+                    href={`mailto:guoyuhan1220@gmail.com?subject=${encodeURIComponent(`Interest: ${project.title}`)}&body=${encodeURIComponent(`Hi Yuhan,\n\nI'm interested in learning more about "${project.title}".\n\n`)}`}
+                    className="block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center mt-4"
+                  >
+                    Request Secure Briefing
+                  </a>
+                </div>
+              </div>
+            ) : isFtux ? (
               <div className="grid md:grid-cols-[1.25fr_0.75fr] gap-8 items-start">
                 <div className="space-y-4">
                   <div className="relative overflow-hidden rounded-sm border border-zinc-200 bg-zinc-900">
@@ -870,9 +1038,11 @@ export const ProjectModal: React.FC<{
             ) : (
               <>
                 <div className="space-y-2">
-                  <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
-                    Project #{project.id}
-                  </p>
+                  {project.id !== '009' && (
+                    <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-[0.22em]">
+                      Project #{project.id}
+                    </p>
+                  )}
                   <h2 className="text-3xl font-serif text-zinc-900">{project.title}</h2>
                   <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider">
                     {project.category} • {project.year}
@@ -928,9 +1098,12 @@ export const ProjectModal: React.FC<{
                       Learn More
                     </a>
                   ) : (
-                    <button className="w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors">
+                    <a
+                      href={`mailto:guoyuhan1220@gmail.com?subject=${encodeURIComponent(`Interest: ${project.title}`)}&body=${encodeURIComponent(`Hi Yuhan,\n\nI'm interested in learning more about "${project.title}".\n\n`)}`}
+                      className="block w-full py-4 bg-zinc-900 text-white text-[11px] font-mono uppercase tracking-[0.3em] rounded-sm hover:bg-zinc-800 transition-colors text-center"
+                    >
                       Request Secure Briefing
-                    </button>
+                    </a>
                   )}
                   <p className="text-[9px] font-mono text-center text-zinc-300 uppercase tracking-[0.4em] leading-relaxed mt-4">
                     Archive Registry: AWS-AI-{project.id}<br/>
@@ -964,6 +1137,7 @@ const impactHighlights: Record<string, string> = {
   '006': '600% cost savings • Patent filed',
   '007': 'Higher label quality at scale',
   '008': 'No-code enterprise automation',
+  '009': 'Follows you everywhere • Agents + people',
 };
 
 // Paper texture for physical card feel
@@ -977,16 +1151,20 @@ const FeaturedCard: React.FC<{
 }> = ({ project, onClick, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [visionVideoReady, setVisionVideoReady] = useState(false);
+  const [visionVideoError, setVisionVideoError] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (!videoRef.current) return;
+    const video = videoRef.current;
+    if (!video) return;
     if (isHovered) {
-      videoRef.current.play().catch(() => undefined);
+      const playWhenReady = () => video.play().catch(() => undefined);
+      requestAnimationFrame(() => requestAnimationFrame(playWhenReady));
     } else {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+      video.pause();
+      video.currentTime = 0;
     }
   }, [isHovered]);
 
@@ -1067,24 +1245,56 @@ const FeaturedCard: React.FC<{
           </div>
 
           {/* Image area */}
-          <div className={`relative overflow-hidden h-[240px] md:h-[280px] z-0 ${project.id === '004' ? '' : project.id === '005' ? 'bg-[#F5F6F9]' : ''}`}>
-            {project.videoUrl && project.id !== '003' ? (
+          <div className={`relative overflow-hidden h-[240px] md:h-[280px] z-0 ${project.id === '004' ? '' : project.id === '005' ? 'bg-[#F5F6F9]' : project.id === '009' ? 'bg-zinc-900' : ''}`}>
+            {project.videoUrl && project.id !== '003' && project.id !== '009' ? (
               <>
-                {project.thumbnailUrl && (
-                  <img
-                    src={project.thumbnailUrl}
-                    alt={project.title}
-                    className={`absolute inset-0 w-full h-full object-cover object-left-top transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-                  />
+                {project.thumbnailUrl ? (
+                  <>
+                    <img
+                      src={project.thumbnailUrl}
+                      alt={project.title}
+                      className={`absolute inset-0 w-full h-full object-cover object-left-top transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
+                    />
+                    <video
+                      ref={videoRef}
+                      src={project.videoUrl}
+                      preload="auto"
+                      muted
+                      loop
+                      playsInline
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+                    />
+                  </>
+                ) : (
+                  <>
+                    {/* Fallback until video loads or on error (avoids black screen) */}
+                    <div
+                      className={`absolute inset-0 w-full h-full flex items-center justify-center transition-opacity duration-300 ${
+                        project.id === '009' && (visionVideoError || !visionVideoReady)
+                          ? 'opacity-100 bg-gradient-to-br from-zinc-100 to-zinc-200'
+                          : 'opacity-0 pointer-events-none'
+                      }`}
+                    >
+                      {project.id === '009' && (
+                        <span className="text-sm font-mono text-zinc-400/70 uppercase tracking-[0.3em]">Vision</span>
+                      )}
+                    </div>
+                    <video
+                      ref={videoRef}
+                      src={project.videoUrl}
+                      preload="metadata"
+                      muted
+                      loop
+                      playsInline
+                      className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-300 ${
+                        project.id === '009' && (visionVideoError || !visionVideoReady) ? 'opacity-0' : 'opacity-100'
+                      }`}
+                      onLoadedData={() => project.id === '009' && setVisionVideoReady(true)}
+                      onCanPlay={() => project.id === '009' && setVisionVideoReady(true)}
+                      onError={() => project.id === '009' && setVisionVideoError(true)}
+                    />
+                  </>
                 )}
-                <video
-                  ref={videoRef}
-                  src={project.videoUrl}
-                  muted
-                  loop
-                  playsInline
-                  className={`w-full h-full object-cover ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-                />
               </>
             ) : project.thumbnailUrl ? (
               <img
@@ -1093,7 +1303,11 @@ const FeaturedCard: React.FC<{
                 className={`w-full h-full ${project.id === '005' ? 'object-contain' : 'object-cover object-left-top'}`}
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200" />
+              <div className="w-full h-full bg-gradient-to-br from-zinc-100 to-zinc-200 flex items-center justify-center">
+                {project.id === '009' && (
+                  <span className="text-sm font-mono text-zinc-400/70 uppercase tracking-[0.3em]">Vision</span>
+                )}
+              </div>
             )}
           </div>
 
@@ -1131,9 +1345,11 @@ const Projects: React.FC = () => {
     setSelectedProject(project);
   };
 
-  // Primary: the 4 case studies you want prominent
-  const primaryIds = new Set(['001', '002', '004', '005']);
-  const primaryProjects = projects.filter((p) => primaryIds.has(p.id));
+  // Primary: vision card first, then featured case studies
+  const primaryOrder = ['009', '001', '002', '004', '005'];
+  const primaryIds = new Set(primaryOrder);
+  const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));
+  const primaryProjects = primaryOrder.map((id) => projectById[id]).filter(Boolean);
   const secondaryProjects = projects.filter((p) => !primaryIds.has(p.id));
 
   return (
