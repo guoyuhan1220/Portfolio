@@ -729,14 +729,14 @@ export const ProjectModal: React.FC<{
                 <div className="space-y-4">
                   <div
                     ref={visionVideoContainerRef}
-                    className="flex flex-col rounded-sm border border-zinc-200 bg-zinc-900 overflow-hidden"
+                    className="flex flex-col rounded-sm border border-zinc-200 bg-[#f8f5f0] overflow-hidden"
                   >
-                    <div className="relative overflow-hidden min-h-[340px] md:min-h-[420px] flex-1">
+                    <div className="relative overflow-hidden min-h-[340px] md:min-h-[420px] flex-1 bg-[#f8f5f0]">
                       <video
                         ref={visionVideoRef}
                         src={visionModalVideo}
                         playsInline
-                        className="absolute inset-0 w-full h-full object-contain bg-zinc-900"
+                        className="absolute inset-0 w-full h-full object-contain bg-[#f8f5f0]"
                         onLoadedMetadata={(event) => {
                           const target = event.currentTarget;
                           setVisionDuration(target.duration || 0);
@@ -753,7 +753,7 @@ export const ProjectModal: React.FC<{
                         }`}
                         aria-label={visionPlaying ? 'Pause' : 'Play'}
                       >
-                        <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/90 text-zinc-900 shadow-md border border-white/70">
+                        <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-zinc-900 text-white shadow-md border border-zinc-700">
                           <Play className="w-5 h-5 ml-0.5" />
                         </span>
                       </button>
@@ -766,11 +766,11 @@ export const ProjectModal: React.FC<{
                         {visionFullscreen ? <Minimize className="w-4 h-4" /> : <Maximize className="w-4 h-4" />}
                       </button>
                     </div>
-                    <div className="flex items-center gap-3 rounded-none border-t border-zinc-600 bg-zinc-900/95 px-3 py-2.5 text-xs text-zinc-300">
+                    <div className="flex items-center gap-3 rounded-none border-t border-zinc-200 bg-[#f8f5f0] px-3 py-2.5 text-xs text-zinc-600">
                       <button
                         type="button"
                         onClick={toggleVisionPlayback}
-                        className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors shrink-0"
+                        className="w-8 h-8 rounded-full bg-zinc-900 hover:bg-zinc-800 flex items-center justify-center text-white transition-colors shrink-0"
                         aria-label={visionPlaying ? 'Pause' : 'Play'}
                       >
                         {visionPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 ml-0.5" />}
