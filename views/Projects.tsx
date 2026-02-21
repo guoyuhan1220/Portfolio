@@ -209,6 +209,8 @@ const ProjectPreview: React.FC<{
           <img
             src={project.thumbnailUrl}
             alt={project.title}
+            loading="lazy"
+            decoding="async"
             className={`w-full h-full ${
               isGeospatial
                 ? 'object-contain bg-zinc-900'
@@ -1253,6 +1255,9 @@ const FeaturedCard: React.FC<{
                     <img
                       src={project.thumbnailUrl}
                       alt={project.title}
+                      loading={index < 2 ? 'eager' : 'lazy'}
+                      decoding="async"
+                      fetchPriority={index < 2 ? 'high' : undefined}
                       className={`absolute inset-0 w-full h-full object-cover object-left-top transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
                     />
                     <video
@@ -1300,6 +1305,9 @@ const FeaturedCard: React.FC<{
               <img
                 src={project.thumbnailUrl}
                 alt={project.title}
+                loading={index < 2 ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchPriority={index < 2 ? 'high' : undefined}
                 className={`w-full h-full ${project.id === '005' ? 'object-contain' : 'object-cover object-left-top'}`}
               />
             ) : (
@@ -1346,7 +1354,7 @@ const Projects: React.FC = () => {
   };
 
   // Primary: vision card first, then featured case studies
-  const primaryOrder = ['009', '001', '002', '004', '005'];
+  const primaryOrder = ['001', '009', '002', '004', '005'];
   const primaryIds = new Set(primaryOrder);
   const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));
   const primaryProjects = primaryOrder.map((id) => projectById[id]).filter(Boolean);
@@ -1437,6 +1445,8 @@ const Projects: React.FC = () => {
                     <img
                       src={project.thumbnailUrl}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
                       className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.03] ${
                         project.id === '008' ? 'object-contain p-4' : 'object-cover'
                       }`}
