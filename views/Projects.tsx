@@ -49,6 +49,21 @@ const renderProjectDescription = (project: Project, includeLink: boolean = true)
 
 export const projects: Project[] = [
   {
+    id: '009',
+    title: 'My AI Design Playbook',
+    category: 'AI Workflow + Process',
+    year: '2026',
+    tags: ['AI Workflow', 'Critique Agents', 'Context Files', 'Kiro', 'Vibe Coding'],
+    description:
+      'The exact workflow — context files, critique agents, custom skills, and decision tracking — I use to go from product vision to near-production prototype in hours, not weeks.',
+    imageUrl: null,
+    videoUrl: '/New%20vision.mp4',
+    thumbnailUrl: '/morning%20brief.png?v=1',
+    rotation: 1,
+    role: 'Lead Principal Designer',
+    impact: 'Zero to near-production in hours'
+  },
+  {
     id: '001',
     title: 'Amazon Quick Suite: Leading the Design of an Enterprise AI Platform',
     category: 'Conversational AI',
@@ -162,21 +177,6 @@ export const projects: Project[] = [
     rotation: -2,
     role: 'Senior Product Designer',
     impact: 'Faster access changes • Reduced admin overhead'
-  },
-  {
-    id: '009',
-    title: 'When work follows you: AI, agents, and real people',
-    category: 'Vision',
-    year: '2026',
-    tags: ['Autonomous agents', 'Habit', 'Cross-device', 'Vision'],
-    description:
-      'A product vision that helps people form the habit to show up—on phone, desktop, web app, in meetings, on the go. Simple and always with you, designed around how work happens with autonomous agents and real people together.',
-    imageUrl: null,
-    videoUrl: '/New%20vision.mp4',
-    thumbnailUrl: '/morning%20brief.png?v=1',
-    rotation: 1,
-    role: 'Design vision / Exploration',
-    impact: 'Follows you everywhere • Agents + people'
   },
 ];
 
@@ -1127,6 +1127,7 @@ const caseStudyRoutes: Record<string, string> = {
   '004': '/case-study/q-business-action-connector',
   '005': '/case-study/genai-evaluation',
   '007': '/case-study/data-labeling-ground-truth',
+  '009': '/case-study/vibe-coding-playbook',
 };
 
 // Impact highlights per project
@@ -1139,7 +1140,7 @@ const impactHighlights: Record<string, string> = {
   '006': '600% cost savings • Patent filed',
   '007': 'Higher label quality at scale',
   '008': 'No-code enterprise automation',
-  '009': 'Follows you everywhere • Agents + people',
+  '009': 'Zero to near-production in hours',
 };
 
 // Paper texture for physical card feel
@@ -1354,7 +1355,7 @@ const Projects: React.FC = () => {
   };
 
   // Primary: vision card first, then featured case studies
-  const primaryOrder = ['001', '009', '002', '004', '005'];
+  const primaryOrder = ['009', '001', '002', '004', '005'];
   const primaryIds = new Set(primaryOrder);
   const projectById = Object.fromEntries(projects.map((p) => [p.id, p]));
   const primaryProjects = primaryOrder.map((id) => projectById[id]).filter(Boolean);

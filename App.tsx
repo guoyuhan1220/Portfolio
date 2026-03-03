@@ -15,6 +15,7 @@ import QBusinessActionConnectorCaseStudy from './views/QBusinessActionConnectorC
 import GenAIEvaluationCaseStudy from './views/GenAIEvaluationCaseStudy';
 import SageMakerGeospatialCaseStudy from './views/SageMakerGeospatialCaseStudy';
 import DataLabelingCaseStudy from './views/DataLabelingCaseStudy';
+import VibeCodingCaseStudy from './views/VibeCodingCaseStudy';
 
 if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
   window.history.scrollRestoration = 'manual';
@@ -194,6 +195,7 @@ const App: React.FC = () => {
           <Route path="/case-study/genai-evaluation" element={<GenAIEvaluationCaseStudy />} />
           <Route path="/case-study/sagemaker-geospatial" element={<SageMakerGeospatialCaseStudy />} />
           <Route path="/case-study/data-labeling-ground-truth" element={<DataLabelingCaseStudy />} />
+          <Route path="/case-study/vibe-coding-playbook" element={<VibeCodingCaseStudy />} />
         </Routes>
       </ScrollManager>
     </BrowserRouter>
