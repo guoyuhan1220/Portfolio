@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Lenis from 'lenis';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import FloatingNav from './components/FloatingNav';
 import Intro from './views/Intro';
 import Projects from './views/Projects';
@@ -198,6 +199,7 @@ const App: React.FC = () => {
           <Route path="/case-study/vibe-coding-playbook" element={<VibeCodingCaseStudy />} />
         </Routes>
       </ScrollManager>
+      <SpeedInsights />
     </BrowserRouter>
   );
 };
