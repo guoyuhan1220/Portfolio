@@ -42,7 +42,7 @@ const DataLabelingCaseStudy: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-[1000px] mx-auto px-[80px] py-[60px] space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
+      <div className="max-w-[1440px] mx-auto px-[80px] py-[80px] space-y-[40px] [&_p:not(.font-mono)]:leading-[1.6] [&_p:not(.font-mono)]:text-[#666666]">
         <section className="space-y-[40px]">
           <div className="space-y-6">
             <div className="space-y-3">
@@ -88,10 +88,13 @@ const DataLabelingCaseStudy: React.FC = () => {
             className="mt-4 overflow-hidden rounded-[16px] border border-[#E5E5E5] bg-white shadow-[0_30px_80px_-60px_rgba(15,23,42,0.18)]"
             style={{ y: heroImageY, scale: heroImageScale }}
           >
-            <img
-              src="/ground truth cover.gif"
-              alt="Annotation platform hero"
-              className="w-full h-[520px] object-cover"
+            <video
+              src="/lidar%20new.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-auto"
             />
           </motion.div>
         </section>

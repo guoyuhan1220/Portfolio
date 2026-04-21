@@ -63,12 +63,12 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
       {/* Full Screen Hero Section */}
       <div
         ref={heroRef}
-        className="relative w-full overflow-hidden flex flex-col items-center justify-start pt-[140px] pb-[24px]"
+        className="relative w-full overflow-hidden flex flex-col items-center justify-start pt-[100px] pb-[24px]"
       >
         {/* Header */}
         <div className="text-center px-[80px] max-w-[1200px] mb-8 mt-0">
           <h1
-            className="text-[56px] md:text-[72px] font-serif font-medium text-[#1A1A1A] leading-[1.1] mb-4"
+            className="text-[56px] font-serif font-medium text-[#1A1A1A] leading-[1.1] mb-4"
             style={{ fontFamily: 'Newsreader, serif' }}
           >
             Designing the Complete Document Lifecycle
@@ -114,7 +114,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
       </div>
 
       {/* Content Section */}
-      <div className="relative bg-[#FAFAFA] py-[60px] px-[80px]">
+      <div className="relative bg-[#FAFAFA] py-[80px] px-[80px]">
         <div className="max-w-[1440px] mx-auto">
           <article className="space-y-[40px]" data-page="artifact-case-study">
             <section className="space-y-6" data-section="problem">
@@ -123,7 +123,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                   The Challenge
                 </div>
                 <h2
-                  className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
+                  className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
                   style={{ fontFamily: 'Newsreader, serif' }}
                 >
                   Documents disappeared when conversations ended.
@@ -156,7 +156,7 @@ const ArtifactTemplateCaseStudy: React.FC = () => {
                   How I Approached It
                 </div>
                 <h2
-                  className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
+                  className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
                   style={{ fontFamily: 'Newsreader, serif' }}
                 >
                   Analyzing patterns to understand what users really need.

@@ -48,7 +48,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-[#1A1A1A] to-[#2D2D2D] text-white py-[120px] px-[80px]">
+      <section className="relative bg-[#0F0F0F] text-white py-[100px] px-[80px]">
         <div className="max-w-[1440px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -59,7 +59,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
             <div className="inline-block px-4 py-2 border border-white/20 rounded-[20px] bg-white/10 text-[11px] font-mono font-semibold uppercase tracking-[1.5px]">
               CASE STUDY
             </div>
-            <h1 className="text-[72px] font-serif font-medium leading-[1.1]" style={{ fontFamily: 'Newsreader, serif' }}>
+            <h1 className="text-[56px] font-serif font-medium leading-[1.1]" style={{ fontFamily: 'Newsreader, serif' }}>
               Q Business Action Connectors
             </h1>
             <p className="text-[24px] font-sans font-normal text-white/80 leading-[1.5] max-w-[800px]">
@@ -93,7 +93,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
       {/* Article: scannable structure — Problem → What I did → 4 phases → Design → Impact */}
       <article className="py-[80px] px-[80px]">
         {/* 1. What I did (TL;DR so readers get it fast) */}
-        <div className="max-w-[720px] mx-auto mb-20">
+        <div className="max-w-[800px] mx-auto mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
         </div>
 
         {/* 2. The problem */}
-        <div className="max-w-[720px] mx-auto">
+        <div className="max-w-[800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -128,10 +128,10 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
           </motion.div>
         </div>
 
-        <div className="my-16 h-px bg-white/10 max-w-[720px] mx-auto" />
+        <div className="my-16 h-px bg-white/10 max-w-[800px] mx-auto" />
 
         {/* 3. My approach — 4 phases (overview) */}
-        <div className="max-w-[720px] mx-auto">
+        <div className="max-w-[800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -163,7 +163,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
         </div>
 
         {/* 4. Phase 1: Align */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[0.2em] mb-2" style={{ color: accent }}>Phase 1</p>
             <h3 className="text-[24px] font-serif font-medium text-white leading-[1.3] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>Align</h3>
@@ -177,7 +177,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
         </div>
 
         {/* 5. Phase 2: Define */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[0.2em] mb-2" style={{ color: accent }}>Phase 2</p>
             <h3 className="text-[24px] font-serif font-medium text-white leading-[1.3] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>Define strategy</h3>
@@ -191,7 +191,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
         </div>
 
         {/* 6. Phase 3: Detail */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[0.2em] mb-2" style={{ color: accent }}>Phase 3</p>
             <h3 className="text-[24px] font-serif font-medium text-white leading-[1.3] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>Pivot & detail</h3>
@@ -205,7 +205,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
         </div>
 
         {/* 7. Phase 4: Scale */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[0.2em] mb-2" style={{ color: accent }}>Phase 4</p>
             <h3 className="text-[24px] font-serif font-medium text-white leading-[1.3] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>Scale the system</h3>
@@ -218,10 +218,10 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
           </motion.div>
         </div>
 
-        <div className="my-16 h-px bg-white/10 max-w-[720px] mx-auto" />
+        <div className="my-16 h-px bg-white/10 max-w-[800px] mx-auto" />
 
         {/* 8. Design that scaled */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[1.5px] mb-6" style={{ color: accent }}>Design that scaled</p>
             <h2 className="text-[36px] font-serif font-medium text-white leading-[1.2] mb-6" style={{ fontFamily: 'Newsreader, serif' }}>One framework, fifty connectors</h2>
@@ -235,7 +235,7 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
         </div>
 
         {/* 9. Making setup invisible */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[1.5px] mb-6" style={{ color: accent }}>Making setup invisible</p>
             <h2 className="text-[36px] font-serif font-medium text-white leading-[1.2] mb-6" style={{ fontFamily: 'Newsreader, serif' }}>Two-tier auth, one-click connect</h2>
@@ -245,10 +245,10 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
           </motion.div>
         </div>
 
-        <div className="my-16 h-px bg-white/10 max-w-[720px] mx-auto" />
+        <div className="my-16 h-px bg-white/10 max-w-[800px] mx-auto" />
 
         {/* 10. The experience */}
-        <div className="max-w-[720px] mx-auto mb-16">
+        <div className="max-w-[800px] mx-auto mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[1.5px] mb-6" style={{ color: accent }}>The experience</p>
             <h2 className="text-[36px] font-serif font-medium text-white leading-[1.2] mb-6" style={{ fontFamily: 'Newsreader, serif' }}>Actions inside the conversation</h2>
@@ -269,10 +269,10 @@ const QBusinessActionConnectorCaseStudy: React.FC = () => {
           </motion.div>
         </div>
 
-        <div className="my-16 h-px bg-white/10 max-w-[720px] mx-auto" />
+        <div className="my-16 h-px bg-white/10 max-w-[800px] mx-auto" />
 
         {/* 11. Impact */}
-        <div className="max-w-[720px] mx-auto">
+        <div className="max-w-[800px] mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
             <p className="text-[11px] font-mono uppercase tracking-[1.5px] mb-6" style={{ color: accent }}>Impact</p>
             <h2 className="text-[36px] font-serif font-medium text-white leading-[1.2] mb-6" style={{ fontFamily: 'Newsreader, serif' }}>Shipped at re:Invent, featured in CEO keynote</h2>

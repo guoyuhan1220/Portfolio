@@ -58,7 +58,7 @@ export const projects: Project[] = [
       'The exact workflow — context files, critique agents, custom skills, and decision tracking — I use to go from product vision to near-production prototype in hours, not weeks.',
     imageUrl: null,
     videoUrl: '/New%20vision.mp4',
-    thumbnailUrl: '/morning%20brief.png?v=1',
+    thumbnailUrl: '/design%20skill.png',
     rotation: 1,
     role: 'Lead Principal Designer',
     impact: 'Zero to near-production in hours'
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     description: 'Designed the centralized agentic interface unifying five fragmented tools into one conversational experience, serving 639k users with 92.5% weekly retention.',
     imageUrl: '/quick%20suite%20project/redesign.png',
     videoUrl: '/Quick%20chat.mp4',
-    thumbnailUrl: '/quick%20suite%20project/redesign.png',
+    thumbnailUrl: '/Quick.png',
     rotation: 2,
     span: 2,
     role: 'Principal Product Designer',
@@ -144,7 +144,7 @@ export const projects: Project[] = [
       'Founding designer for SageMaker Geospatial, transformed enterprise geospatial ML adoption from 3% to production-ready solution. Designed industry-first collaborative map visualization (patent filed 2023), delivered 600% cost savings for DataFarming, and scaled design to Earth on AWS Viewer serving 1,500+ organizations.',
     imageUrl: '/Geospatial/map.gif',
     videoUrl: null,
-    thumbnailUrl: '/Geospatial/map.gif',
+    thumbnailUrl: '/geospatial%202.mp4',
     rotation: -1,
     role: 'Senior Product Designer',
     impact: 'Petabyte scale • Sub-meter resolution'
@@ -205,7 +205,20 @@ const ProjectPreview: React.FC<{
   return (
     <div className="absolute inset-0 bg-white p-2">
       <div className="relative w-full h-full bg-zinc-100 overflow-hidden">
-        {project.thumbnailUrl ? (
+        {project.thumbnailUrl?.endsWith('.mp4') ? (
+          <video
+            src={project.thumbnailUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className={`w-full h-full ${
+              isGeospatial
+                ? 'object-cover'
+                : 'object-cover'
+            }`}
+          />
+        ) : project.thumbnailUrl ? (
           <img
             src={project.thumbnailUrl}
             alt={project.title}
@@ -213,7 +226,7 @@ const ProjectPreview: React.FC<{
             decoding="async"
             className={`w-full h-full ${
               isGeospatial
-                ? 'object-contain bg-zinc-900'
+                ? 'object-cover'
                 : isArtifactLifecycle
                   ? 'object-contain bg-white'
                   : 'object-cover'
@@ -230,7 +243,7 @@ const ProjectPreview: React.FC<{
             loop
             muted
             playsInline
-            className={`w-full h-full ${isGeospatial ? 'object-contain bg-zinc-900' : 'object-cover'}`}
+            className={`w-full h-full ${isGeospatial ? 'object-cover' : 'object-cover'}`}
             onError={onMediaError}
           />
         ) : (
@@ -1143,10 +1156,7 @@ const impactHighlights: Record<string, string> = {
   '009': 'Zero to near-production in hours',
 };
 
-// Paper texture for physical card feel
-const cardPaperTexture = `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`;
-
-// Featured project card — physical card with tilt hover
+// Featured project card — clean, high-res
 const FeaturedCard: React.FC<{
   project: Project;
   onClick: (project: Project) => void;
@@ -1233,19 +1243,7 @@ const FeaturedCard: React.FC<{
               : '0 8px 24px -6px rgba(0,0,0,0.08), 0 4px 10px -4px rgba(0,0,0,0.04)',
           }}
         >
-          {/* Paper texture overlay — fades on hover so image is clean */}
-          <div
-            className="absolute inset-0 pointer-events-none mix-blend-multiply z-10 transition-opacity duration-300"
-            style={{ backgroundImage: cardPaperTexture, opacity: isHovered ? 0 : 0.3 }}
-          />
-
-          {/* Top edge — postal markings */}
-          <div className="relative z-20 flex items-center justify-between px-4 py-2.5 border-b border-amber-900/15">
-            <span className="text-[9px] font-mono text-amber-900/60 uppercase tracking-[0.25em]">
-              {project.category}
-            </span>
-            <span className="text-[9px] font-mono text-amber-900/55">{project.year}</span>
-          </div>
+          {/* Clean — no grain overlay */}
 
           {/* Image area */}
           <div className={`relative overflow-hidden h-[240px] md:h-[280px] z-0 ${project.id === '004' ? '' : project.id === '005' ? 'bg-[#F5F6F9]' : project.id === '009' ? 'bg-zinc-900' : ''}`}>
@@ -1302,6 +1300,15 @@ const FeaturedCard: React.FC<{
                   </>
                 )}
               </>
+            ) : project.thumbnailUrl?.endsWith('.mp4') ? (
+              <video
+                src={project.thumbnailUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className={`w-full h-full ${project.id === '006' ? 'object-cover' : 'object-cover object-left-top'}`}
+              />
             ) : project.thumbnailUrl ? (
               <img
                 src={project.thumbnailUrl}
@@ -1320,14 +1327,10 @@ const FeaturedCard: React.FC<{
             )}
           </div>
 
-          {/* Content area — message side of postcard */}
+          {/* Content area */}
           <div className="relative z-20 px-5 py-4 border-t border-amber-900/15">
             <h3 className="text-[17px] font-serif text-zinc-800 mb-2 leading-snug">{project.title}</h3>
-            <p className="text-[12px] text-zinc-600 leading-relaxed line-clamp-2 mb-3">{project.description}</p>
-            <div className="flex items-center justify-between pt-2.5 border-t border-amber-900/12">
-              <span className="text-[9px] font-mono text-amber-900/60 uppercase tracking-wider">{impact}</span>
-              <span className="text-[9px] font-mono text-amber-900/45 italic">Read case study →</span>
-            </div>
+            <p className="text-[12px] text-zinc-600 leading-relaxed line-clamp-2">{project.description}</p>
           </div>
 
         </div>
@@ -1442,7 +1445,18 @@ const Projects: React.FC = () => {
                 <div className={`relative overflow-hidden h-[200px] sm:h-[240px] ${
                   project.id === '008' ? 'bg-[#F0EBE3]' : ''
                 }`}>
-                  {project.thumbnailUrl && (
+                  {project.thumbnailUrl?.endsWith('.mp4') ? (
+                    <video
+                      src={project.thumbnailUrl}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className={`w-full h-full transition-transform duration-500 group-hover:scale-[1.03] ${
+                        project.id === '006' ? 'object-cover' : 'object-cover'
+                      }`}
+                    />
+                  ) : project.thumbnailUrl && (
                     <img
                       src={project.thumbnailUrl}
                       alt={project.title}

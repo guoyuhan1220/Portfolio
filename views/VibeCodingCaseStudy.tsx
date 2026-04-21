@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Play, Pause } from 'lucide-react';
 
-const accent = '#0D6E6E';
+const accent = '#E07B54';
 
 const VibeCodingCaseStudy: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -32,7 +32,7 @@ const VibeCodingCaseStudy: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8F7F4] font-sans text-[#666666]">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#666666]">
       <Link
         to="/#work"
         className="fixed bottom-6 right-6 z-50 rounded-full border border-[#E5E5E5] bg-white/90 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#1A1A1A] shadow-[0_8px_24px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:border-[#1A1A1A] transition-colors"
@@ -41,7 +41,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </Link>
 
       {/* Navigation */}
-      <div className="sticky top-0 z-50 bg-[#F8F7F4]/80 backdrop-blur-sm border-b border-[#E5E5E5]">
+      <div className="sticky top-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
         <div className="max-w-[1440px] mx-auto px-6 md:px-[80px] py-4 flex items-center justify-between">
           <Link
             to="/#work"
@@ -56,7 +56,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </div>
 
       {/* Hero */}
-      <section className="relative bg-gradient-to-b from-[#1A1A1A] to-[#2D2D2D] text-white py-[120px] px-6 md:px-[80px]">
+      <section className="relative bg-[#FAFAFA] text-[#1A1A1A] py-[80px] px-[80px]">
         <div className="max-w-[1440px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -64,48 +64,48 @@ const VibeCodingCaseStudy: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="inline-block px-4 py-2 border border-white/20 rounded-[20px] bg-white/10 text-[11px] font-mono font-semibold uppercase tracking-[1.5px]">
+            <div className="inline-block px-4 py-2 border border-[#1A1A1A]/20 rounded-[20px] bg-[#1A1A1A]/5 text-[11px] font-mono font-semibold uppercase tracking-[1.5px] text-[#666666]">
               CASE STUDY
             </div>
             <h1
-              className="text-[48px] md:text-[72px] font-serif font-medium leading-[1.1]"
+              className="text-[56px] font-serif font-medium leading-[1.1]"
               style={{ fontFamily: 'Newsreader, serif' }}
             >
               My AI Design Playbook
             </h1>
-            <p className="text-[20px] md:text-[24px] font-sans font-normal text-white/80 leading-[1.5] max-w-[800px]">
+            <p className="text-[20px] md:text-[24px] font-sans font-normal text-[#666666] leading-[1.5] max-w-[800px]">
               The exact workflow — context files, critique agents, custom skills, and decision tracking — I use to go from product vision to near-production prototype in hours, not weeks.
             </p>
             <div className="flex gap-6 pt-8">
               <div className="text-sm">
-                <div className="text-white/60 text-[11px] font-mono uppercase tracking-[1.5px] mb-2">
+                <div className="text-[#999999] text-[11px] font-mono uppercase tracking-[1.5px] mb-2">
                   Role
                 </div>
-                <div className="text-white">Lead Principal Designer</div>
+                <div className="text-[#1A1A1A]">Lead Principal Designer</div>
               </div>
               <div className="text-sm">
-                <div className="text-white/60 text-[11px] font-mono uppercase tracking-[1.5px] mb-2">
+                <div className="text-[#999999] text-[11px] font-mono uppercase tracking-[1.5px] mb-2">
                   Timeline
                 </div>
-                <div className="text-white">2026</div>
+                <div className="text-[#1A1A1A]">2026</div>
               </div>
               <div className="text-sm">
-                <div className="text-white/60 text-[11px] font-mono uppercase tracking-[1.5px] mb-2">
+                <div className="text-[#999999] text-[11px] font-mono uppercase tracking-[1.5px] mb-2">
                   Tools
                 </div>
-                <div className="text-white">Kiro, Claude Code, Custom Agents</div>
+                <div className="text-[#1A1A1A]">Kiro, Claude Code, Custom Agents</div>
               </div>
             </div>
           </motion.div>
         </div>
 
         {/* Demo Video */}
-        <div className="max-w-[1440px] mx-auto mt-16">
+        <div className="max-w-[900px] mx-auto mt-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="w-full rounded-[24px] overflow-hidden bg-white/5 relative cursor-pointer group"
+            className="w-full rounded-[24px] overflow-hidden relative cursor-pointer group"
             onClick={toggleVideo}
           >
             <video
@@ -131,55 +131,99 @@ const VibeCodingCaseStudy: React.FC = () => {
               </div>
             </div>
           </motion.div>
-          <p className="text-center text-white/40 text-[12px] font-mono uppercase tracking-[1.5px] mt-4">
+          <p className="text-center text-[#999999] text-[12px] font-mono uppercase tracking-[1.5px] mt-4">
             The vision prototype — built in a few hours with the workflow below
           </p>
         </div>
       </section>
 
-      {/* The Setup */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F8F7F4]">
-        <div className="max-w-[800px] mx-auto space-y-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div
-              className="text-[11px] font-mono uppercase tracking-[1.5px] mb-4"
-              style={{ color: accent }}
-            >
-              The Setup
+      {/* Four Moves */}
+      <section className="py-[80px] px-[80px] bg-[#F5F5F5]">
+        <div className="max-w-[1440px] mx-auto">
+          <div className="max-w-[800px] mx-auto text-center space-y-6 mb-16">
+            <div className="text-[11px] font-mono uppercase tracking-[1.5px]" style={{ color: accent }}>
+              My AI Playbook
             </div>
             <h2
-              className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+              className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2]"
               style={{ fontFamily: 'Newsreader, serif' }}
             >
-              The interesting part isn't the output
+              Four moves. Idea to prototype in hours.
             </h2>
-            <p className="text-[18px] font-sans text-[#666666] leading-[1.7] mb-5">
-              The demo above is a product vision for AI that follows you everywhere — on phone, desktop,
-              in meetings, on the go. It's designed around how work actually happens when autonomous agents
-              and real people collaborate together. Simple, always with you, habit-forming.
-            </p>
-            <p className="text-[18px] font-sans text-[#666666] leading-[1.7] mb-5">
-              Most of the conversation around AI in design right now is about what it can generate. I'm
-              more interested in what happens before generation — the thinking, the framing, the setup
-              that determines whether the output is useful or just impressive-looking.
-            </p>
-            <p className="text-[18px] font-sans text-[#666666] leading-[1.7]">
-              I've been building a workflow over the past few months that treats AI less like a tool I
-              operate and more like a collaborator I brief. The difference matters. When I brief well, I
-              get output I can actually use. When I don't, I get polished garbage that takes longer to
-              fix than it would've taken to build from scratch.
+          </div>
+
+          <div className="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              {
+                number: '1',
+                title: 'Think like a PM',
+                desc: 'PM thinking coach agent — shapes the storyline, defines product features. Output: a spec.',
+                keywords: ['spec'],
+              },
+              {
+                number: '2',
+                title: 'Load context',
+                desc: 'Global Yuhan.md, design system MCP, project steering doc QuickSuite.md — prompt with who I am, not what I want.',
+                keywords: ['Yuhan.md', 'design system MCP', 'QuickSuite.md'],
+              },
+              {
+                number: '3',
+                title: 'Tight loop',
+                desc: 'Critique agent — 3-persona review with AI slop detection & UX critique. Enhance-prompt skill turns vague language into structured briefs. Build, critique, refine.',
+                keywords: ['Critique agent', 'Enhance-prompt'],
+              },
+              {
+                number: '4',
+                title: 'Track as I go',
+                desc: 'Decision logs, failure logs, learning logs. Next session starts warm, not cold.',
+                keywords: ['decision logs', 'failure logs', 'learning logs'],
+              },
+            ].map((move, i) => (
+              <motion.div
+                key={move.number}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="space-y-4"
+              >
+                <div className="border-t-2 border-[#E07B54] pt-4">
+                  <span className="text-[24px] font-serif font-medium" style={{ color: '#E07B54', fontFamily: 'Newsreader, serif' }}>
+                    {move.number}
+                  </span>
+                </div>
+                <h3 className="text-[18px] font-serif font-medium text-[#1A1A1A]" style={{ fontFamily: 'Newsreader, serif' }}>
+                  {move.title}
+                </h3>
+                <p className="text-[14px] text-[#666666] leading-[1.6]">
+                  {move.desc.split(/(\b(?:spec|Yuhan\.md|design system MCP|QuickSuite\.md|Critique agent|Enhance-prompt|decision logs|failure logs|learning logs)\b)/g).map((part, pi) =>
+                    move.keywords.some(k => k === part) ? (
+                      <span key={pi} className="font-semibold text-[#1A1A1A]">{part}</span>
+                    ) : (
+                      <span key={pi}>{part}</span>
+                    )
+                  )}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="max-w-[800px] mx-auto mt-16 text-center"
+          >
+            <p className="text-[18px] font-serif text-[#1A1A1A] leading-[1.6]" style={{ fontFamily: 'Newsreader, serif' }}>
+              The whole setup ports. Yuhan.md becomes Team.md. My skills become shared skills. Any designer picks it up and runs.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* 01 — Conversation First */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F5F4F1]">
+      <section className="py-[100px] px-6 md:px-[80px] bg-[#F5F5F5]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto space-y-6 mb-16">
             <motion.div
@@ -195,7 +239,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                 01 — Start with a conversation
               </div>
               <h2
-                className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+                className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
                 style={{ fontFamily: 'Newsreader, serif' }}
               >
                 Start with a conversation, not a file
@@ -244,7 +288,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </section>
 
       {/* 02 — Critique Before Building */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F8F7F4]">
+      <section className="py-[100px] px-6 md:px-[80px] bg-[#FAFAFA]">
         <div className="max-w-[800px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -260,14 +304,14 @@ const VibeCodingCaseStudy: React.FC = () => {
               02 — Critique before you build
             </div>
             <h2
-              className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+              className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
               style={{ fontFamily: 'Newsreader, serif' }}
             >
               Run a critique before you build anything
             </h2>
             <p className="text-[18px] font-sans text-[#666666] leading-[1.7] mb-5">
               Before I touched any UI, I ran a critique agent on the story. I created a custom agent
-              called <span className="font-mono text-[15px] text-[#1A1A1A] bg-[#F5F4F1] px-1.5 py-0.5 rounded">design-critic</span> that
+              called <span className="font-mono text-[15px] text-[#1A1A1A] bg-[#F5F5F5] px-1.5 py-0.5 rounded">design-critic</span> that
               thinks like three people at once:
             </p>
             <div className="space-y-3 mb-8">
@@ -329,7 +373,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </section>
 
       {/* 03 — The Context Stack */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F5F4F1]">
+      <section className="py-[100px] px-6 md:px-[80px] bg-[#F5F5F5]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto space-y-6 mb-16">
             <motion.div
@@ -345,7 +389,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                 03 — Load the context
               </div>
               <h2
-                className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+                className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
                 style={{ fontFamily: 'Newsreader, serif' }}
               >
                 Three files changed everything
@@ -370,7 +414,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                 name: 'Yuhan.md',
                 label: 'Personality file',
                 desc: 'How I think, how I want AI to work with me, my voice, my design judgment priority order.',
-                color: '#0D6E6E',
+                color: '#E07B54',
                 image: '/Yuhan%20steering%20doc.png',
                 caption: 'Inside Yuhan.md — the personality file that shapes every AI interaction',
               },
@@ -466,7 +510,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </section>
 
       {/* 04 — The Loop */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F8F7F4]">
+      <section className="py-[100px] px-6 md:px-[80px] bg-[#FAFAFA]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto space-y-6 mb-16">
             <motion.div
@@ -482,7 +526,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                 04 — The iteration loop
               </div>
               <h2
-                className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+                className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
                 style={{ fontFamily: 'Newsreader, serif' }}
               >
                 Prompt, build, critique, refine
@@ -558,7 +602,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                     >
                       {skill.name}
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded bg-[#F5F4F1] text-[#666666] font-mono">
+                    <span className="text-[10px] px-2 py-0.5 rounded bg-[#F5F5F5] text-[#666666] font-mono">
                       {skill.trigger}
                     </span>
                   </div>
@@ -571,7 +615,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </section>
 
       {/* 05 — Tracking */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F5F4F1]">
+      <section className="py-[100px] px-6 md:px-[80px] bg-[#F5F5F5]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto space-y-6 mb-16">
             <motion.div
@@ -587,7 +631,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                 05 — Track as you go
               </div>
               <h2
-                className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+                className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
                 style={{ fontFamily: 'Newsreader, serif' }}
               >
                 The piece easiest to skip when you're in flow
@@ -659,7 +703,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                   <p className="text-[13px] text-[#666666] leading-relaxed mb-4">{log.desc}</p>
                   <div className="space-y-3">
                     {log.entries.map((entry, ei) => (
-                      <div key={ei} className="rounded-[8px] bg-[#F5F4F1] p-3">
+                      <div key={ei} className="rounded-[8px] bg-[#F5F5F5] p-3">
                         <p className="text-[13px] font-medium text-[#1A1A1A] leading-snug">
                           {entry.decision}
                         </p>
@@ -693,7 +737,7 @@ const VibeCodingCaseStudy: React.FC = () => {
       </section>
 
       {/* Closing */}
-      <section className="py-[100px] px-6 md:px-[80px] bg-[#F8F7F4]">
+      <section className="py-[100px] px-6 md:px-[80px] bg-[#FAFAFA]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto">
             <motion.div
@@ -710,7 +754,7 @@ const VibeCodingCaseStudy: React.FC = () => {
                 Reflection
               </div>
               <h2
-                className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
+                className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-6"
                 style={{ fontFamily: 'Newsreader, serif' }}
               >
                 The whole thing took a few hours
@@ -737,7 +781,7 @@ const VibeCodingCaseStudy: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-16 bg-[#F5F4F1] rounded-[24px] p-12 border border-[#E5E5E5]"
+              className="mt-16 bg-[#F5F5F5] rounded-[24px] p-12 border border-[#E5E5E5]"
             >
               <p
                 className="text-[20px] font-serif italic text-[#1A1A1A] leading-[1.6] text-center"

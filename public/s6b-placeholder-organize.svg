@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#f6f3ee"/>
+  <rect x="1" y="1" width="798" height="498" fill="none" stroke="rgba(17,16,16,0.12)" stroke-width="2" stroke-dasharray="12 8"/>
+  <text x="400" y="240" text-anchor="middle" font-family="ui-monospace, monospace" font-size="13" letter-spacing="0.12em" fill="rgba(17,16,16,0.35)">PLACEHOLDER</text>
+  <text x="400" y="268" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="rgba(17,16,16,0.28)">Replace: s6b-organize.png</text>
+</svg>

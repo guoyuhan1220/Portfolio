@@ -42,7 +42,7 @@ const SageMakerGeospatialCaseStudy: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-[1440px] mx-auto px-[80px] py-[60px] space-y-[40px]">
+      <div className="max-w-[1440px] mx-auto px-[80px] py-[80px] space-y-[40px]">
         <section className="space-y-[40px]">
           <div className="inline-block px-4 py-2 border border-[#E5E5E5] rounded-[20px] bg-[#0D6E6E10] text-[#0D6E6E] text-[11px] font-mono font-semibold uppercase tracking-[1.5px] mb-6">
             CASE STUDY

@@ -89,7 +89,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
           <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
             <div className="space-y-6">
             <p className="text-[12px] font-mono uppercase tracking-[0.25em] text-[#9ca3af]">Overview</p>
-            <h1 className="text-[48px] md:text-[64px] font-serif font-medium text-[#16161d] leading-[1.05]">
+            <h1 className="text-[56px] font-serif font-medium text-[#16161d] leading-[1.05]">
               Envisioning unified GenAI application evaluation
             </h1>
             <p className="text-[18px] md:text-[20px] font-sans text-[#4b4b54] leading-[1.6] max-w-[720px]">
@@ -122,7 +122,7 @@ const GenAIEvaluationCaseStudy: React.FC = () => {
         </div>
       </section>
 
-      <div className="py-[60px] px-[80px]">
+      <div className="py-[80px] px-[80px]">
         <div className="max-w-[1440px] mx-auto space-y-[64px]">
           <section className="space-y-8 border-t border-[#E5E5E5] pt-12 max-w-[1000px] mx-auto">
             <div className="flex flex-wrap items-center justify-between gap-3">

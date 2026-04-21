@@ -1,13 +1,93 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { GitBranch, HelpCircle, TrendingDown, ArrowUpRight, Play } from 'lucide-react';
+import { GitBranch, HelpCircle, TrendingDown, ArrowUpRight } from 'lucide-react';
+
+const BeforeAfterSlider: React.FC<{ beforeSrc: string; afterSrc: string }> = ({ beforeSrc, afterSrc }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const isVideo = afterSrc.endsWith('.mp4');
+
+  const updatePosition = useCallback((clientX: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    setPosition((x / rect.width) * 100);
+  }, []);
+
+  const handlePointerDown = useCallback((e: React.PointerEvent) => {
+    setIsDragging(true);
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    updatePosition(e.clientX);
+  }, [updatePosition]);
+
+  const handlePointerMove = useCallback((e: React.PointerEvent) => {
+    if (!isDragging) return;
+    updatePosition(e.clientX);
+  }, [isDragging, updatePosition]);
+
+  const handlePointerUp = useCallback(() => {
+    setIsDragging(false);
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative w-full max-w-[900px] mx-auto rounded-[24px] overflow-hidden select-none cursor-col-resize"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      style={{ touchAction: 'none' }}
+    >
+      {/* After layer (full width behind) */}
+      <div className="relative w-full">
+        {isVideo ? (
+          <video src={afterSrc} autoPlay muted loop playsInline className="w-full h-auto block" />
+        ) : (
+          <img src={afterSrc} alt="After" className="w-full h-auto block" />
+        )}
+      </div>
+
+      {/* Before layer (clipped) */}
+      <div
+        className="absolute inset-0"
+        style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+      >
+        <img src={beforeSrc} alt="Before" className="w-full h-auto block" />
+      </div>
+
+      {/* Divider line */}
+      <div
+        className="absolute top-0 bottom-0 w-[3px] bg-white z-10 pointer-events-none shadow-[0_0_8px_rgba(0,0,0,0.3)]"
+        style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+      />
+
+      {/* Handle */}
+      <div
+        className="absolute top-1/2 z-20 -translate-y-1/2 pointer-events-none"
+        style={{ left: `${position}%`, transform: 'translate(-50%, -50%)' }}
+      >
+        <div className="w-12 h-12 rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.25)] flex items-center justify-center border border-black/10">
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+            <path d="M5 3L2 8L5 13" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M11 3L14 8L11 13" stroke="#1A1A1A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      {/* Labels */}
+      <div className="absolute top-4 left-4 z-10 px-3 py-1.5 bg-black/50 backdrop-blur-sm rounded-full text-[11px] font-mono text-white uppercase tracking-[0.15em]">Before</div>
+      <div className="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/50 backdrop-blur-sm rounded-full text-[11px] font-mono text-white uppercase tracking-[0.15em]">After</div>
+    </div>
+  );
+};
 
 const QuickSuiteCaseStudy: React.FC = () => {
   const accent = '#8B5CF6'; // Purple
   const accentSoft = '#F3E8FF';
   const accentBorder = '#DDD6FE';
-  const [showVideo, setShowVideo] = useState(false);
 
   useLayoutEffect(() => {
     const resetScroll = () => {
@@ -22,7 +102,7 @@ const QuickSuiteCaseStudy: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F8F7F4] font-sans text-[#666666]">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans text-[#666666]">
       <Link
         to="/#work"
         className="fixed bottom-6 right-6 z-50 rounded-full border border-[#E5E5E5] bg-white/90 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.2em] text-[#1A1A1A] shadow-[0_8px_24px_rgba(15,23,42,0.12)] backdrop-blur-sm hover:border-[#1A1A1A] transition-colors"
@@ -30,7 +110,7 @@ const QuickSuiteCaseStudy: React.FC = () => {
         ← Back to Works
       </Link>
       {/* Navigation */}
-      <div className="sticky top-0 z-50 bg-[#F8F7F4]/80 backdrop-blur-sm border-b border-[#E5E5E5]">
+      <div className="sticky top-0 z-50 bg-[#FAFAFA]/90 backdrop-blur-sm border-b border-[#E5E5E5]">
         <div className="max-w-[1440px] mx-auto px-[80px] py-4 flex items-center justify-between">
           <Link
             to="/#work"
@@ -44,8 +124,8 @@ const QuickSuiteCaseStudy: React.FC = () => {
         </div>
       </div>
 
-      {/* Hero Section - Big Visual */}
-      <section className="relative bg-gradient-to-b from-[#1A1A1A] to-[#2D2D2D] text-white py-[120px] px-[80px]">
+      {/* Hero Section */}
+      <section className="relative bg-[#FAFAFA] text-[#1A1A1A] py-[100px] px-[80px]">
         <div className="max-w-[1440px] mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -53,117 +133,65 @@ const QuickSuiteCaseStudy: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="inline-block px-4 py-2 border border-white/20 rounded-[20px] bg-white/10 text-[11px] font-mono font-semibold uppercase tracking-[1.5px]">
+            <div className="inline-block px-4 py-2 border border-[#1A1A1A]/20 rounded-[20px] bg-[#1A1A1A]/5 text-[11px] font-mono font-semibold uppercase tracking-[1.5px] text-[#666666]">
               CASE STUDY
             </div>
-            <h1 className="text-[72px] font-serif font-medium leading-[1.1]" style={{ fontFamily: 'Newsreader, serif' }}>
+            <h1 className="text-[56px] font-serif font-medium leading-[1.1]" style={{ fontFamily: 'Newsreader, serif' }}>
               Amazon Quick Suite
             </h1>
-            <p className="text-[24px] font-sans font-normal text-white/80 leading-[1.5] max-w-[800px]">
+            <p className="text-[24px] font-sans font-normal text-[#666666] leading-[1.5] max-w-[800px]">
               From complicated to coherent. Transforming five overlapping AI tools into one seamless, conversation-first experience.
             </p>
             <div className="flex gap-6 pt-8">
               <div className="text-sm">
-                <div className="text-white/60 text-[11px] font-mono uppercase tracking-[1.5px] mb-2">Role</div>
-                <div className="text-white">Lead Principal Designer</div>
+                <div className="text-[#999999] text-[11px] font-mono uppercase tracking-[1.5px] mb-2">Role</div>
+                <div className="text-[#1A1A1A]">Lead Principal Designer</div>
               </div>
               <div className="text-sm">
-                <div className="text-white/60 text-[11px] font-mono uppercase tracking-[1.5px] mb-2">Timeline</div>
-                <div className="text-white">2024.09 – Present</div>
+                <div className="text-[#999999] text-[11px] font-mono uppercase tracking-[1.5px] mb-2">Timeline</div>
+                <div className="text-[#1A1A1A]">2024.09 – Present</div>
               </div>
             </div>
           </motion.div>
         </div>
         
-        {/* Hero Visual - YouTube Video with Thumbnail */}
+        {/* Hero Visual */}
         <div className="max-w-[1440px] mx-auto mt-16">
-          <div className="w-full h-[600px] rounded-[24px] overflow-hidden bg-white/5 relative">
-            {!showVideo ? (
-              <div 
-                className="w-full h-full cursor-pointer relative group"
-                onClick={() => setShowVideo(true)}
-              >
-                {/* Thumbnail Image */}
-                <img
-                  src="/quick suite project/thumbnail.png"
-                  alt="Quick Suite Home Redesign Video Thumbnail"
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Play Button Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors">
-                  <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all border border-[#E5E5E5]">
-                    <Play className="w-7 h-7 text-[#1A1A1A] ml-0.5" strokeWidth={2} fill="currentColor" />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <iframe
-                src="https://www.youtube.com/embed/duccb_K1seQ?autoplay=1"
-                title="Quick Suite home redesign - unified interface"
-                className="w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* The Problem */}
-      <section className="py-[100px] px-[80px] bg-[#F5F4F1]">
-        <div className="max-w-[1440px] mx-auto">
-          <div className="max-w-[800px] mx-auto text-center space-y-6 mb-16">
-            <div className="text-[11px] font-mono uppercase tracking-[1.5px]" style={{ color: accent }}>
-              The Challenge
-            </div>
-            <h2 className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>
-              "It's too complicated. I can't figure out where to start."
-            </h2>
-            <p className="text-[20px] font-sans text-[#666666] leading-[1.6]">
-              Amazon Quick Suite had five AI tools with overlapping features. Users had to learn five different tools and figure out which one to use before they could accomplish anything. The complexity was driving people away.
-            </p>
-          </div>
-
-          {/* Problem Visual */}
-          <div className="w-full min-h-[400px] md:h-[500px] rounded-[24px] overflow-hidden mb-16 relative flex items-center justify-center">
+          <div className="w-full rounded-[24px] overflow-hidden">
             <img
-              src="/quick suite project/issue.png"
-              alt="Five fragmented tools showing user confusion and complexity"
-              className="w-full h-full object-contain"
-              key={`issue-${Date.now()}`}
+              src="/Quick.png"
+              alt="Quick Suite"
+              className="w-full h-auto object-contain"
             />
           </div>
         </div>
       </section>
 
-      {/* The Solution - Big Visual */}
-      <section className="py-[100px] px-[80px] bg-[#F8F7F4]">
+      {/* Before / After */}
+      <section className="py-[80px] px-[80px] bg-[#F5F5F5]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto text-center space-y-6 mb-16">
             <div className="text-[11px] font-mono uppercase tracking-[1.5px]" style={{ color: accent }}>
-              The Solution
+              Before &amp; After
             </div>
-            <h2 className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>
-              From features to flows
+            <h2 className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2]" style={{ fontFamily: 'Newsreader, serif' }}>
+              From complicated to coherent
             </h2>
             <p className="text-[20px] font-sans text-[#666666] leading-[1.6]">
-              I transformed Quick Suite from a collection of features into one seamless, conversation-first experience that keeps users engaged.
+              Five overlapping AI tools became one seamless, conversation-first experience.
             </p>
           </div>
 
-          {/* Solution Visual */}
-          <div className="w-full mb-20">
-            <div className="w-full">
-              <div className="flex items-center justify-center overflow-hidden">
-                <img
-                  src="/quick suite project/redesign.png"
-                  alt="Unified interface redesign"
-                  className="w-full max-w-[90%] h-auto object-contain"
-                />
-              </div>
-            </div>
-          </div>
+          <BeforeAfterSlider
+            beforeSrc="/before%20home.png"
+            afterSrc="/After%20home.mp4"
+          />
+        </div>
+      </section>
+
+      {/* Key Solutions */}
+      <section className="py-[80px] px-[80px] bg-[#FAFAFA]">
+        <div className="max-w-[1440px] mx-auto">
 
           {/* Five Key Solutions */}
           <div className="space-y-12 max-w-[1000px] mx-auto">
@@ -209,7 +237,7 @@ const QuickSuiteCaseStudy: React.FC = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="flex gap-8 items-start"
               >
-                <div className="text-[48px] font-serif font-medium text-[#1A1A1A]/20" style={{ fontFamily: 'Newsreader, serif' }}>
+                <div className="text-[36px] font-serif font-medium text-[#1A1A1A]/20" style={{ fontFamily: 'Newsreader, serif' }}>
                   {solution.number}
                 </div>
                 <div className="flex-1">
@@ -472,13 +500,13 @@ const QuickSuiteCaseStudy: React.FC = () => {
 
 
       {/* Impact - Big Visual */}
-      <section className="py-[100px] px-[80px] bg-[#F8F7F4]">
+      <section className="py-[80px] px-[80px] bg-[#FAFAFA]">
         <div className="max-w-[1440px] mx-auto">
           <div className="max-w-[800px] mx-auto text-center space-y-6 mb-16">
             <div className="text-[11px] font-mono uppercase tracking-[1.5px]" style={{ color: accent }}>
               The Impact
             </div>
-            <h2 className="text-[48px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>
+            <h2 className="text-[36px] font-serif font-medium text-[#1A1A1A] leading-[1.2] mb-4" style={{ fontFamily: 'Newsreader, serif' }}>
               639k users, 92.5% returning weekly
             </h2>
             <p className="text-[20px] font-sans text-[#666666] leading-[1.6] mb-8">
@@ -487,7 +515,7 @@ const QuickSuiteCaseStudy: React.FC = () => {
           </div>
 
           <div className="max-w-[1000px] mx-auto">
-            <div className="bg-[#F5F4F1] rounded-[24px] p-12 border border-[#E5E5E5]">
+            <div className="bg-[#F5F5F5] rounded-[24px] p-12 border border-[#E5E5E5]">
               <p className="text-[20px] font-serif italic text-[#1A1A1A] leading-[1.6] text-center" style={{ fontFamily: 'Newsreader, serif' }}>
                 "I unified the conversational AI experience, established the design system that drives consistency across all our AI products, and transformed complexity into coherence. Quick Suite now feels like one intelligent assistant, not five competing tools."
               </p>
