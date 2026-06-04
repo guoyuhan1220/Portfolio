@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Lenis from 'lenis';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import FloatingNav from './components/FloatingNav';
 import Intro from './views/Intro';
 import Projects from './views/Projects';
@@ -197,6 +198,7 @@ const App: React.FC = () => {
           <Route path="/case-study/data-labeling-ground-truth" element={<DataLabelingCaseStudy />} />
           <Route path="/case-study/vibe-coding-playbook" element={<VibeCodingCaseStudy />} />
         </Routes>
+        <Analytics />
       </ScrollManager>
     </BrowserRouter>
   );
